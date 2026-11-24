@@ -10,7 +10,7 @@ window.CAREER = [
   { y:"1996", label:"1996", type:"album", title:"Aquarelle",
     text:"Debuutalbum met Stefan Bracaval op Lyrae, met gasten Bert Joris, John Ruocco en Chris Joris.",
     cover:"cover-aquarelle.png", cat:"Lyrae 9609006" },
-  { y:"’90", label:"Jaren ’90", type:"samenwerking", title:"Chris Joris Experience",
+  { y:"na ’96", label:"Na 1996", type:"samenwerking", title:"Chris Joris Experience",
     text:"Schrijft composities en arrangementen voor de groep; hun album “Live” kent veel succes. Zijn song “The Miner’s Tale” wordt opgepikt in de VS en Canada." },
   { y:"1998", label:"1998", type:"album", title:"A Child’s Blessing",
     text:"Kwartet-album met de legendarische trompettist Kenny Wheeler, uitgebracht door W.E.R.F.",

@@ -18,5 +18,12 @@ Each design has an interactive career timeline (shared data in `assets/js/career
 piano/jazz-themed scroll animations. A small synthesized piano sound (`assets/js/piano.js`) plays
 only when the visitor clicks. All motion is switched off for visitors who ask for reduced motion.
 
-Placeholders still to fill in: Spotify links, social media accounts, the newsletter
-form and the "all press" page. The audio player in A is a visual mock-up.
+All outbound links live in one place: `SITE` at the top of `assets/js/site.js`. A value of
+`null` means "not available yet", and every button or link that points at it is hidden, so
+the pages never show a dead link. Fill in a URL there and the button appears in all three
+designs. Still empty: Spotify, social media, the press archive, the press kit, the privacy
+statement, the newsletter service and the FR/DE/EN pages (the language switch appears once a
+second language has a URL). Until `SITE.newsletter` is set, the newsletter form only shows
+its success message.
+
+Fonts are self-hosted in `assets/fonts/` and WebP versions of the photos are in `assets/img/web/`.
