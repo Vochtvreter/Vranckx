@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nieuwe website — drie richtingen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f6f5f2;--ink:#161616;--muted:#77746e;--line:#dedad2;--card:#fff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:"Inter Tight",system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+  header{padding:80px 0 50px}
+  .kicker{font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  h1{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(44px,6vw,80px);line-height:1;letter-spacing:-.02em;margin:14px 0 20px}
+  h1 i{color:#5a6f7d}
+  .intro{max-width:680px;color:#45423d;font-size:18px}
+  .now{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:center;margin:50px 0 70px;padding:28px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+  .now img{width:100%;border-radius:6px;border:1px solid var(--line)}
+  .now h2{font-size:20px;font-weight:600;margin-bottom:10px}
+  .now ul{padding-left:18px;color:#45423d}
+  .now li{margin-bottom:6px}
+  .options{display:grid;gap:36px;padding-bottom:90px}
+  .opt{display:grid;grid-template-columns:1.5fr 1fr;gap:0;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;text-decoration:none;transition:box-shadow .2s,transform .2s}
+  .opt:hover{box-shadow:0 20px 50px -20px rgba(0,0,0,.25);transform:translateY(-2px)}
+  .shots{position:relative;background:#e9e6df;padding:28px 70px 28px 28px}
+  .shots .desk{width:100%;display:block;border-radius:6px;box-shadow:0 10px 30px -10px rgba(0,0,0,.35)}
+  .shots .mob{position:absolute;right:22px;bottom:22px;width:22%;border-radius:10px;border:4px solid #111;box-shadow:0 10px 30px -8px rgba(0,0,0,.5)}
+  .txt{padding:36px 36px 32px;display:flex;flex-direction:column}
+  .letter{font-family:"Instrument Serif",serif;font-size:64px;line-height:.8;color:var(--muted)}
+  .txt h3{font-family:"Instrument Serif",serif;font-weight:400;font-size:40px;line-height:1.05;margin:14px 0 4px}
+  .txt .sub{color:var(--muted);margin-bottom:18px}
+  .txt p{color:#45423d;margin-bottom:16px}
+  .sw{display:flex;gap:6px;margin:6px 0 20px}
+  .sw span{width:28px;height:28px;border-radius:50%;border:1px solid rgba(0,0,0,.1)}
+  .meta{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:auto}
+  .meta b{color:var(--ink);font-weight:600}
+  .open{margin-top:18px;font-weight:600}
+  .shared{padding:50px;background:var(--ink);color:#eee;border-radius:12px;margin-bottom:90px}
+  .shared h2{font-family:"Instrument Serif",serif;font-weight:400;font-size:40px;margin-bottom:24px}
+  .shared .g{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+  .shared h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:6px}
+  .shared p{font-size:15px;color:#b9b6b0}
+  @media (max-width:900px){
+    .now,.opt,.shared .g{grid-template-columns:1fr}
+    .shots{padding:20px 60px 20px 20px}
+    .shared{padding:30px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Voorstel · ernstvranckx.be</div>
+    <h1>Een nieuwe website,<br><i>drie richtingen</i></h1>
+    <p class="intro">Drie uitgewerkte ontwerpen voor de homepage, telkens met dezelfde inhoud: het nieuwe album, biografie, discografie, pers, live en contact. Ze verschillen in sfeer en karakter. Klik een ontwerp open om het volledig te bekijken. Elk ontwerp werkt ook op gsm.</p>
+  </header>
+
+  <section class="now">
+    <img src="designs/previews/huidig.jpg" alt="Huidige website">
+    <div>
+      <div class="kicker">Vandaag</div>
+      <h2>Wat we willen verbeteren</h2>
+      <ul>
+        <li>Het nieuwe album en de cd-verkoop krijgen een duidelijke, prominente plek.</li>
+        <li>Uitgebreide perssectie wordt overzichtelijk: sterkste citaten vooraan.</li>
+        <li>Een eigen visuele identiteit in plaats van een standaard sjabloon.</li>
+        <li>Een uitnodiging tot boekingen en een nieuwsbrief.</li>
+        <li>Snel, toegankelijk en mooi op gsm.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="options">
+    <a class="opt" href="designs/a-nocturne/index.html">
+      <div class="shots"><img class="desk" src="designs/previews/a-nocturne.jpg" alt=""><img class="mob" src="designs/previews/a-nocturne-mobile.jpg" alt=""></div>
+      <div class="txt">
+        <span class="letter">A</span>
+        <h3>Nocturne</h3>
+        <div class="sub">Donker, warm, filmisch</div>
+        <p>De sfeer van een jazzclub na middernacht. Diep zwart met het amberkleurige podiumlicht uit de concertfoto’s, en een klassieke serif die het lyrische van de muziek benadrukt.</p>
+        <div class="sw"><span style="background:#0d0a08"></span><span style="background:#1c1510"></span><span style="background:#e09a52"></span><span style="background:#f1e8dc"></span></div>
+        <div class="meta"><b>Past bij:</b> wie de muziek wil laten voelen voor ze klinkt. Groot fotowerk, ingebouwde speler, boekingsblok.</div>
+        <div class="open">Bekijk ontwerp A →</div>
+      </div>
+    </a>
+
+    <a class="opt" href="designs/b-liner-notes/index.html">
+      <div class="shots"><img class="desk" src="designs/previews/b-liner-notes.jpg" alt=""><img class="mob" src="designs/previews/b-liner-notes-mobile.jpg" alt=""></div>
+      <div class="txt">
+        <span class="letter">B</span>
+        <h3>Liner Notes</h3>
+        <div class="sub">Licht, redactioneel, ingetogen</div>
+        <p>Geïnspireerd op de hoesteksten van een plaat en de sobere esthetiek van labels als ECM. Papierkleur, zwart-witfoto’s, veel witruimte en een catalogus met bezettingen en catalogusnummers.</p>
+        <div class="sw"><span style="background:#f3f0e9"></span><span style="background:#151515"></span><span style="background:#3e5a6b"></span><span style="background:#cfc8bb"></span></div>
+        <div class="meta"><b>Past bij:</b> een tijdloze, serieuze uitstraling die ook bij programmatoren en pers goed valt. Pers en bio staan centraal.</div>
+        <div class="open">Bekijk ontwerp B →</div>
+      </div>
+    </a>
+
+    <a class="opt" href="designs/c-colour/index.html">
+      <div class="shots"><img class="desk" src="designs/previews/c-colour.jpg" alt=""><img class="mob" src="designs/previews/c-colour-mobile.jpg" alt=""></div>
+      <div class="txt">
+        <span class="letter">C</span>
+        <h3>Colour</h3>
+        <div class="sub">Grafisch, gedurfd, eigentijds</div>
+        <p>Vertrekt van de hoes van <i>Black Is The Colour</i>: helder blauw en zwart, grote letters en duotoonfoto’s. Een eigenzinnige, opvallende identiteit die het nieuwe album meteen centraal zet.</p>
+        <div class="sw"><span style="background:#2ea6df"></span><span style="background:#0b0b0c"></span><span style="background:#efece3"></span><span style="background:#fbfaf6"></span></div>
+        <div class="meta"><b>Past bij:</b> een jonger, breder publiek bereiken en opvallen op sociale media. Sterkste nadruk op verkoop en luisteren.</div>
+        <div class="open">Bekijk ontwerp C →</div>
+      </div>
+    </a>
+  </div>
+
+  <section class="shared">
+    <h2>In elk ontwerp</h2>
+    <div class="g">
+      <div><h4>Nieuw album vooraan</h4><p>Hoes, bezetting, luisterlinks en een duidelijke knop om de cd te kopen.</p></div>
+      <div><h4>Vier talen</h4><p>NL, FR, DE en EN, zoals nu, met een zichtbare taalkeuze bovenaan.</p></div>
+      <div><h4>Pers, gefilterd</h4><p>De sterkste citaten op de homepage, het volledige persarchief op een aparte pagina.</p></div>
+      <div><h4>Live &amp; boekingen</h4><p>Een uitnodiging voor organisatoren, met ruimte voor concertdata.</p></div>
+      <div><h4>Nieuwsbrief &amp; socials</h4><p>Fans opbouwen voor de volgende release.</p></div>
+      <div><h4>Eigen beelden</h4><p>Alle foto’s en hoezen komen van de huidige site; nieuwe persfoto’s kunnen er zo in.</p></div>
+    </div>
+  </section>
+</div>
+</body>
+</html>

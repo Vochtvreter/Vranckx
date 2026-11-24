@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ernst Vranckx · Pianist & componist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0a08; --bg-2:#15100c; --bg-3:#1c1510;
+    --ink:#f1e8dc; --muted:#a8998a; --faint:#5e5248;
+    --amber:#e09a52; --ember:#c4622d; --line:rgba(241,232,220,.12);
+    --serif:"Cormorant Garamond", Georgia, serif;
+    --sans:"Manrope", system-ui, sans-serif;
+    --wrap:1240px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+  .eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--amber);font-weight:500}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5vw,68px);line-height:1.02;letter-spacing:-.01em}
+  h2 em{color:var(--amber);font-style:italic}
+
+  /* nav */
+  .nav{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:26px 40px;background:linear-gradient(var(--bg) 0%,rgba(13,10,8,0) 100%)}
+  .brand{font-family:var(--serif);font-size:24px;letter-spacing:.04em}
+  .brand span{color:var(--amber)}
+  .menu{display:flex;gap:34px;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+  .menu a{opacity:.8;transition:opacity .2s}
+  .menu a:hover{opacity:1;color:var(--amber)}
+  .lang{display:flex;gap:12px;font-size:12px;letter-spacing:.14em;color:var(--muted)}
+  .lang b{color:var(--ink);font-weight:500;border-bottom:1px solid var(--amber)}
+
+  /* hero */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
+  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% 40%;filter:saturate(.85) contrast(1.05)}
+  .hero::after{content:"";position:absolute;inset:0;background:
+     linear-gradient(90deg,rgba(13,10,8,0) 25%,rgba(13,10,8,.55) 55%,rgba(13,10,8,.95) 85%),
+     linear-gradient(0deg,var(--bg) 0%,rgba(13,10,8,0) 35%)}
+  .hero-copy{position:relative;z-index:2;margin-left:auto;width:min(560px,100%);padding:0 56px 14vh 0}
+  .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(64px,9vw,132px);line-height:.88;letter-spacing:-.02em;margin:18px 0 34px}
+  .hero h1 i{display:block;color:var(--amber);padding-left:.6em}
+  .hero blockquote{font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.4;color:#e8dccd;border-left:1px solid var(--amber);padding-left:22px}
+  .hero cite{display:block;margin-top:12px;font-family:var(--sans);font-style:normal;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .scroll{position:absolute;left:40px;bottom:40px;z-index:2;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;display:flex;align-items:center;gap:14px}
+  .scroll::after{content:"";width:1px;height:70px;background:linear-gradient(var(--amber),transparent)}
+
+  /* release */
+  section{padding:140px 0}
+  .release{overflow:hidden;background:radial-gradient(ellipse at 20% 30%,rgba(196,98,45,.18),transparent 60%),var(--bg)}
+  .release-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:90px;align-items:center}
+  .cover{position:relative}
+  .cover img{width:100%;box-shadow:0 40px 90px -20px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.05)}
+  .cover .vinyl{position:absolute;top:4%;right:-14%;width:92%;aspect-ratio:1;border-radius:50%;z-index:-1;background:
+     radial-gradient(circle,var(--ember) 0 15%,#111 15.5% 17%,#0a0a0a 17.5% 100%);
+     box-shadow:inset 0 0 0 1px #222}
+  .cover .vinyl::before{content:"";position:absolute;inset:6%;border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 3px,rgba(255,255,255,.025) 3px 4px)}
+  .release h2{margin:20px 0 28px}
+  .release p.lead{font-size:19px;color:#d9ccbd;max-width:520px}
+  .credits{margin:34px 0;display:grid;grid-template-columns:auto 1fr;gap:6px 28px;font-size:15px;border-top:1px solid var(--line);padding-top:26px}
+  .credits dt{font-family:var(--serif);font-size:20px}
+  .credits dd{color:var(--muted)}
+  .tracks{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
+  .tracks span{font-size:13px;padding:6px 14px;border:1px solid var(--line);border-radius:99px;color:#cfc2b3}
+  .btns{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;border-radius:2px;transition:.2s}
+  .btn-primary{background:var(--amber);color:#1a0f07}
+  .btn-primary:hover{background:#f0ad68}
+  .btn-ghost{border:1px solid rgba(241,232,220,.35)}
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+  .price{font-family:var(--serif);font-size:20px;letter-spacing:0;text-transform:none;opacity:.8}
+
+  /* player strip */
+  .player{margin-top:56px;display:flex;align-items:center;gap:20px;padding:18px 22px;background:var(--bg-3);border:1px solid var(--line)}
+  .play{width:46px;height:46px;border-radius:50%;background:var(--amber);display:grid;place-items:center;flex:none}
+  .play::after{content:"";border-left:13px solid #1a0f07;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:4px}
+  .player .t{font-family:var(--serif);font-size:20px;line-height:1.2}
+  .player .t small{display:block;font-family:var(--sans);font-size:12px;color:var(--muted);letter-spacing:.08em}
+  .wave{flex:1;height:34px;display:flex;align-items:center;gap:3px}
+  .wave i{flex:1;min-width:2px;background:#4a3f36;border-radius:2px}
+  .wave i.on{background:var(--amber)}
+  .player .time{font-size:12px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+
+  /* bio */
+  .bio{background:var(--bg-2)}
+  .bio-grid{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:start}
+  .bio-img{position:sticky;top:120px}
+  .bio-img img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:35% 50%}
+  .bio-img figcaption{margin-top:14px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+  .bio h2{margin:20px 0 40px}
+  .bio p{color:#d4c7b8;margin-bottom:22px}
+  .bio p:first-of-type::first-letter{font-family:var(--serif);float:left;font-size:88px;line-height:.8;padding:8px 12px 0 0;color:var(--amber)}
+  .timeline{margin-top:50px;border-top:1px solid var(--line)}
+  .timeline div{display:grid;grid-template-columns:90px 1fr;padding:18px 0;border-bottom:1px solid var(--line)}
+  .timeline b{font-family:var(--serif);font-weight:500;font-size:22px;color:var(--amber)}
+  .timeline span{color:#cfc2b3;font-size:15px}
+
+  /* discography */
+  .disco-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:60px;gap:40px}
+  .disco-head p{max-width:380px;color:var(--muted)}
+  .albums{display:grid;grid-template-columns:repeat(5,1fr);gap:26px}
+  .album img{width:100%;aspect-ratio:1;object-fit:cover;transition:transform .5s,filter .5s;filter:saturate(.9)}
+  .album:hover img{transform:translateY(-8px);filter:saturate(1.1)}
+  .album .y{margin-top:18px;font-size:12px;letter-spacing:.2em;color:var(--amber)}
+  .album h3{font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.15;margin:4px 0}
+  .album p{font-size:13px;color:var(--muted);line-height:1.5}
+
+  /* press */
+  .press{background:var(--bg-2);position:relative;overflow:hidden}
+  .press::before{content:"\201C";position:absolute;font-family:var(--serif);font-size:620px;line-height:1;top:-60px;left:-30px;color:rgba(224,154,82,.06)}
+  .big-quote{position:relative;font-family:var(--serif);font-size:clamp(30px,3.6vw,50px);line-height:1.22;max-width:1000px;margin:26px 0 30px}
+  .big-quote + cite{font-style:normal;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .quotes{margin-top:90px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+  .quotes figure{background:var(--bg-2);padding:40px 36px}
+  .quotes blockquote{font-family:var(--serif);font-size:21px;line-height:1.45;font-style:italic;color:#e3d7c8}
+  .quotes figcaption{margin-top:22px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+  .quotes figcaption span{display:block;color:var(--faint);margin-top:4px;letter-spacing:.1em}
+  .more{margin-top:50px;text-align:center}
+
+  /* live */
+  .live{position:relative;padding:0;min-height:80vh;display:flex;align-items:center;overflow:hidden}
+  .live img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .live::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,10,8,.92) 0%,rgba(13,10,8,.55) 45%,rgba(13,10,8,.1) 100%)}
+  .live .wrap{position:relative;z-index:2;width:100%}
+  .live-box{max-width:500px}
+  .live h2{margin:20px 0 24px}
+  .live p{color:#d9ccbd;margin-bottom:34px}
+  .formations{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+  .formations span{font-family:var(--serif);font-size:18px;padding:8px 18px;border:1px solid rgba(224,154,82,.45);color:var(--amber)}
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:90px}
+  .contact h2{margin:20px 0 30px}
+  .contact-list{border-top:1px solid var(--line)}
+  .contact-list a,.contact-list div{display:flex;justify-content:space-between;align-items:baseline;padding:24px 0;border-bottom:1px solid var(--line);gap:20px}
+  .contact-list small{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .contact-list strong{font-family:var(--serif);font-weight:400;font-size:26px;text-align:right;overflow-wrap:anywhere}
+  .contact-grid>*{min-width:0}
+  .contact-list a:hover strong{color:var(--amber)}
+  .newsletter{background:var(--bg-3);padding:44px;border:1px solid var(--line);align-self:start}
+  .newsletter h3{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.1;margin-bottom:12px}
+  .newsletter p{color:var(--muted);font-size:15px;margin-bottom:26px}
+  .field{display:flex;border-bottom:1px solid var(--amber)}
+  .field input{flex:1;background:none;border:0;color:var(--ink);font:inherit;padding:14px 0;outline:none}
+  .field button{background:none;border:0;color:var(--amber);font:inherit;font-size:13px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+
+  footer{padding:40px 0;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
+  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+  @media (max-width:980px){
+    .menu{display:none}
+    .nav{padding:20px 22px}
+    .wrap{padding:0 22px}
+    section{padding:90px 0}
+    .hero::after{background:linear-gradient(0deg,var(--bg) 8%,rgba(13,10,8,.6) 50%,rgba(13,10,8,.2) 100%)}
+    .hero-copy{padding:0 22px 12vh}
+    .scroll{display:none}
+    .release-grid,.bio-grid,.contact-grid{grid-template-columns:1fr;gap:56px}
+    .cover{max-width:440px}
+    .bio-img{position:static}
+    .albums{grid-template-columns:repeat(2,1fr)}
+    .quotes{grid-template-columns:1fr}
+    .disco-head{flex-direction:column;align-items:start}
+    .wave{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="#">Ernst <span>Vranckx</span></a>
+  <div class="menu">
+    <a href="#muziek">Muziek</a><a href="#bio">Bio</a><a href="#disco">Discografie</a><a href="#pers">Pers</a><a href="#live">Live</a><a href="#contact">Contact</a>
+  </div>
+  <div class="lang"><b>NL</b><a href="#">FR</a><a href="#">DE</a><a href="#">EN</a></div>
+</nav>
+
+<header class="hero">
+  <img src="../../assets/img/portrait-2.jpg" alt="Ernst Vranckx aan de vleugel">
+  <div class="hero-copy">
+    <div class="eyebrow">Jazzpianist &amp; componist · Leuven</div>
+    <h1>Ernst <i>Vranckx</i></h1>
+    <blockquote>“Er zijn weinig goede componisten. Ernst is één van de goede. Ik hou van zijn songs, ze vertellen me iets.”
+      <cite>Kenny Wheeler — De Standaard</cite></blockquote>
+  </div>
+  <div class="scroll">Scroll</div>
+</header>
+
+<section class="release" id="muziek">
+  <div class="wrap release-grid">
+    <div class="cover">
+      <div class="vinyl"></div>
+      <img src="../../assets/img/cover-black-is-the-colour.jpg" alt="Black Is The Colour — albumhoes">
+    </div>
+    <div>
+      <div class="eyebrow">Nieuw album · Eden River Records</div>
+      <h2>Black Is<br>The <em>Colour</em></h2>
+      <p class="lead">Opgenomen in mei 2022 in de Riverside Studio’s in Keulen. Een integer coloriet van cooljazz — fris en bezield — met de Nieuw-Zeelandse saxofonist Hayden Chisholm als gast en crooner.</p>
+      <dl class="credits">
+        <dt>Ernst Vranckx</dt><dd>piano</dd>
+        <dt>David Helm</dt><dd>contrabas</dd>
+        <dt>Kris Duerinckx</dt><dd>drums</dd>
+        <dt>Hayden Chisholm</dt><dd>sax &amp; vocals</dd>
+      </dl>
+      <div class="tracks">
+        <span>Black Is The Colour</span><span>Basil’s Hopscotch</span><span>Sketches of Pain</span><span>Gorgeous Tree</span><span>Aeolian Five</span><span>The Nearness of You</span><span>+ meer</span>
+      </div>
+      <div class="btns">
+        <a class="btn btn-primary" href="https://www.paypal.com/cgi-bin/webscr?business=ernst.vranckx%40hotmail.com&cmd=_xclick&amount=22.00&item_name=Ernst%20Vranckx%20Trio%20-%20Black%20Is%20The%20Colour%20(CD)&currency_code=EUR&add=1">Koop de CD <span class="price">€ 22</span></a>
+        <a class="btn btn-ghost" href="https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000">Beluister</a>
+      </div>
+      <div class="player">
+        <div class="play"></div>
+        <div class="t">Black Is The Colour<small>Ernst Vranckx Trio ft. Hayden Chisholm</small></div>
+        <div class="wave" id="wave"></div>
+        <div class="time">Fragment</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bio" id="bio">
+  <div class="wrap bio-grid">
+    <figure class="bio-img">
+      <img src="../../assets/img/trio-2.jpg" alt="Ernst Vranckx live">
+      <figcaption>Live met het kwartet</figcaption>
+    </figure>
+    <div>
+      <div class="eyebrow">Biografie</div>
+      <h2>European cool,<br>met <em>etnische</em> en klassieke kleuren</h2>
+      <p>Ernst Vranckx, geboren te Leuven op 3 april 1966, begint zijn muzikale carrière eind jaren ’80. Zijn muziek wordt omschreven als <em>European Cool</em> met etnische en klassieke invloeden — een blend die ver buiten de grenzen weerklank vindt.</p>
+      <p>Na zijn werk met de Chris Joris Experience volgt een samenwerking met trompettist Kenny Wheeler, met het album “A Child’s Blessing” voor W.E.R.F. als resultaat. Doorheen de jaren speelde hij concerten, festivals, radio- en tv-sessies in heel Europa, Zuidelijk Afrika en China.</p>
+      <p>Sinds 2015 werkt hij samen met de Duitse producer Ralf Kemper (Alan Broadbent, Arturo Sandoval, Jimmy Scott) voor het label Eden River Records.</p>
+      <div class="timeline">
+        <div><b>1994</b><span>Prix Nicolas Dor met fluitist Stefan Bracaval — album “Aquarelle”</span></div>
+        <div><b>W.E.R.F.</b><span>“A Child’s Blessing” met Kenny Wheeler en kwintet-album “Songs &amp; Dances”</span></div>
+        <div><b>2020</b><span>“Things As They Are” met Paul G. Ulrich &amp; Kris Duerinckx</span></div>
+        <div><b>2024</b><span>“Black Is The Colour” met Hayden Chisholm</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="disco">
+  <div class="wrap">
+    <div class="disco-head">
+      <div><div class="eyebrow">Discografie</div><h2 style="margin-top:20px">Vijf albums,<br><em>één stem</em></h2></div>
+      <p>Van het lyrische Aquarelle tot het intieme Black Is The Colour — beluister elk album of bestel de cd rechtstreeks bij Ernst.</p>
+    </div>
+    <div class="albums">
+      <a class="album" href="https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000"><img src="../../assets/img/cover-black-is-the-colour.jpg" alt=""><div class="y">2024</div><h3>Black Is The Colour</h3><p>Trio ft. Hayden Chisholm · Eden River</p></a>
+      <a class="album" href="https://music.apple.com/be/album/things-as-they-are-feat-paul-g-ulrich-kris-duerinckx/1498624574"><img src="../../assets/img/cover-things-as-they-are.jpg" alt=""><div class="y">2020</div><h3>Things As They Are</h3><p>Trio · Eden River</p></a>
+      <a class="album" href="https://music.apple.com/be/album/songs-dances/1512898739"><img src="../../assets/img/cover-songs-dances.jpg" alt=""><div class="y">W.E.R.F. 023</div><h3>Songs &amp; Dances</h3><p>Ernst Vranckx Quintet</p></a>
+      <a class="album" href="https://music.apple.com/be/album/a-childs-blessing/1513079355"><img src="../../assets/img/cover-a-childs-blessing.jpg" alt=""><div class="y">W.E.R.F. 013</div><h3>A Child’s Blessing</h3><p>Quartet feat. Kenny Wheeler</p></a>
+      <a class="album" href="#"><img src="../../assets/img/cover-aquarelle.png" alt=""><div class="y">Lyrae</div><h3>Aquarelle</h3><p>met Stefan Bracaval</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="press" id="pers">
+  <div class="wrap">
+    <div class="eyebrow">Pers</div>
+    <p class="big-quote">“Refined playing, interesting choice of compositions, a sense of space and economy when needed, intimate atmospheres… a delicate, sometimes fragile but touching music, always rich, inspired and with great harmonic sense. Nice storytelling!”</p>
+    <cite>Michel Herr · 2024</cite>
+    <div class="quotes">
+      <figure><blockquote>“Hoe meer we de plaat laten rijpen, hoe minder het ons verbaast dat Ernst Vranckx zo goed als elk continent heeft weten verblijden met zijn muziek.”</blockquote><figcaption>Da Music<span>Things As They Are</span></figcaption></figure>
+      <figure><blockquote>“Les thèmes évanescents du Flandrien qui peint des brumes à la Turner.”</blockquote><figcaption>Jazz Hot (FR)<span>A Child’s Blessing</span></figcaption></figure>
+      <figure><blockquote>“Vranckx lijkt mij een volbloed romanticus, wiens soms opvallend sterke composities vast ook in de smaak zouden vallen bij Manfred Eicher van ECM.”</blockquote><figcaption>Jazz Nu (NL)<span>A Child’s Blessing</span></figcaption></figure>
+    </div>
+    <div class="more"><a class="btn btn-ghost" href="#">Alle persberichten</a></div>
+  </div>
+</section>
+
+<section class="live" id="live">
+  <img src="../../assets/img/trio-wide.jpg" alt="Ernst Vranckx kwartet op het podium">
+  <div class="wrap">
+    <div class="live-box">
+      <div class="eyebrow">Live &amp; boekingen</div>
+      <h2>Breng het <em>trio</em><br>naar uw zaal</h2>
+      <p>Clubs, cultuurcentra en festivals — in België en daarbuiten. Ernst speelde al in heel Europa, Zuidelijk Afrika en China.</p>
+      <div class="formations"><span>Trio</span><span>Kwartet ft. Hayden Chisholm</span></div>
+      <a class="btn btn-primary" href="#contact">Boekingsaanvraag</a>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="eyebrow">Contact</div>
+      <h2>Laten we <em>praten</em></h2>
+      <div class="contact-list">
+        <a href="mailto:listen@ernstvranckx.be"><small>E-mail</small><strong>listen@ernstvranckx.be</strong></a>
+        <a href="tel:+32496512842"><small>Telefoon</small><strong>+32 496 51 28 42</strong></a>
+        <div><small>Adres</small><strong>Leopoldvest 65, 3300 Tienen</strong></div>
+      </div>
+    </div>
+    <div class="newsletter">
+      <h3>Blijf op de hoogte</h3>
+      <p>Nieuwe releases en concertdata, een paar keer per jaar in uw mailbox.</p>
+      <div class="field"><input type="email" placeholder="uw e-mailadres"><button>Inschrijven</button></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span>© 2026 Ernst Vranckx</span><span>Apple Music · Spotify</span></div>
+</footer>
+
+<script>
+  const w=document.getElementById('wave');
+  for(let i=0;i<64;i++){const b=document.createElement('i');b.style.height=(18+Math.abs(Math.sin(i*.55)*60+Math.sin(i*1.7)*22))+'%';if(i<14)b.className='on';w.appendChild(b)}
+</script>
+</body>
+</html>

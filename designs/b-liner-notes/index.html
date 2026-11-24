@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ernst Vranckx — piano, compositie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f3f0e9; --paper-2:#ebe6dc; --ink:#151515; --ink-2:#3c3a36; --muted:#86817a;
+    --rule:#cfc8bb; --accent:#3e5a6b;
+    --display:"Instrument Serif", Georgia, serif;
+    --text:"Newsreader", Georgia, serif;
+    --label:"Inter Tight", system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--text);font-size:19px;line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 48px}
+  .label{font-family:var(--label);font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .rule{border:0;border-top:1px solid var(--rule)}
+
+  /* top bar */
+  .top{border-bottom:1px solid var(--ink)}
+  .top .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:72px}
+  .top nav{display:flex;gap:28px;font-family:var(--label);font-size:13px;font-weight:500}
+  .top nav a:hover{color:var(--accent)}
+  .wordmark{font-family:var(--label);font-weight:600;font-size:14px;letter-spacing:.42em;text-transform:uppercase}
+  .top .lang{justify-self:end;display:flex;gap:16px;font-family:var(--label);font-size:12px;color:var(--muted)}
+  .top .lang b{color:var(--ink);font-weight:600}
+
+  /* hero */
+  .hero{padding:70px 0 0}
+  .hero-grid{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:end}
+  .hero h1{font-family:var(--display);font-weight:400;font-size:clamp(76px,10.5vw,168px);line-height:.84;letter-spacing:-.025em}
+  .hero h1 span{font-style:italic;color:var(--accent)}
+  .hero .meta{display:flex;gap:40px;margin-top:40px;padding-top:20px;border-top:1px solid var(--ink)}
+  .hero .meta div{font-family:var(--label);font-size:13px;line-height:1.5}
+  .hero .meta div .label{display:block;margin-bottom:4px}
+  .hero-img img{width:100%;height:520px;object-fit:cover;object-position:90% 40%;filter:grayscale(1) contrast(1.05)}
+  .hero-cap{display:flex;justify-content:space-between;margin-top:12px}
+
+  .statement{padding:110px 0 120px;display:grid;grid-template-columns:3fr 9fr;gap:48px}
+  .statement p{font-family:var(--display);font-size:clamp(32px,3.4vw,50px);line-height:1.15;letter-spacing:-.01em}
+  .statement p em{color:var(--accent)}
+  .statement cite{display:block;margin-top:28px;font-style:normal}
+
+  /* section head */
+  .sec{padding:0 0 130px}
+  .sec-head{display:grid;grid-template-columns:3fr 9fr;gap:48px;border-top:1px solid var(--ink);padding-top:22px;margin-bottom:60px}
+  .sec-head .no{font-family:var(--label);font-size:13px;font-weight:600}
+  .sec-head h2{font-family:var(--display);font-weight:400;font-size:56px;line-height:1;letter-spacing:-.01em}
+  .sec-head h2 i{color:var(--accent)}
+
+  /* release */
+  .release{display:grid;grid-template-columns:3fr 4fr 5fr;gap:48px}
+  .release .notes p{margin-bottom:18px;color:var(--ink-2)}
+  .release .notes p:first-child{font-size:22px;line-height:1.5;color:var(--ink)}
+  .personnel{font-family:var(--label);font-size:14px;line-height:1.9}
+  .personnel .label{display:block;margin:0 0 10px}
+  .personnel .label + .label{margin-top:22px}
+  .personnel p{display:flex;justify-content:space-between;border-bottom:1px dotted var(--rule)}
+  .personnel p span:last-child{color:var(--muted)}
+  .buy{margin-top:34px;display:flex;flex-direction:column;gap:10px}
+  .buy a{display:flex;justify-content:space-between;align-items:center;font-family:var(--label);font-size:14px;font-weight:500;padding:14px 18px;border:1px solid var(--ink);transition:.2s}
+  .buy a.dark{background:var(--ink);color:var(--paper)}
+  .buy a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+  .release figure img{width:100%;aspect-ratio:1}
+  .release figure figcaption{margin-top:12px}
+
+  /* catalogue */
+  .cat{width:100%;border-collapse:collapse;font-family:var(--label);font-size:14px}
+  .cat th{text-align:left;font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding:0 0 14px;border-bottom:1px solid var(--ink)}
+  .cat td{padding:20px 0;border-bottom:1px solid var(--rule);vertical-align:middle}
+  .cat tr:hover td{background:var(--paper-2)}
+  .cat td:first-child{width:96px}
+  .cat td img{width:72px;height:72px;object-fit:cover}
+  .cat .t{font-family:var(--display);font-size:30px;line-height:1.05}
+  .cat .t small{display:block;font-family:var(--label);font-size:13px;color:var(--muted);margin-top:4px}
+  .cat .num{font-variant-numeric:tabular-nums;color:var(--ink-2)}
+  .cat .go{text-align:right;white-space:nowrap}
+  .cat .go a{border-bottom:1px solid var(--ink);padding-bottom:2px;margin-left:18px}
+  .cat .go a:hover{color:var(--accent);border-color:var(--accent)}
+
+  /* bio */
+  .bio{display:grid;grid-template-columns:3fr 5fr 4fr;gap:48px}
+  .bio .col p{margin-bottom:20px;color:var(--ink-2)}
+  .bio .col p:first-child{color:var(--ink)}
+  .bio .col p:first-child::first-line{font-family:var(--label);font-size:15px;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+  .bio figure img{width:100%;filter:grayscale(1);aspect-ratio:3/4;object-fit:cover;object-position:40% 50%}
+  .bio figure figcaption{margin-top:12px}
+  .facts{font-family:var(--label);font-size:14px}
+  .facts div{padding:14px 0;border-top:1px solid var(--rule)}
+  .facts .label{display:block;margin-bottom:2px}
+
+  /* press */
+  .press{columns:3;column-gap:48px}
+  .press figure{break-inside:avoid;margin-bottom:44px;padding-top:18px;border-top:1px solid var(--rule)}
+  .press blockquote{font-size:20px;line-height:1.55}
+  .press figure.lg blockquote{font-family:var(--display);font-size:34px;line-height:1.15}
+  .press figcaption{margin-top:14px;font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+  .press figcaption span{display:block;font-weight:400;color:var(--muted);letter-spacing:.08em;margin-top:2px}
+
+  /* contact */
+  .contact{background:var(--ink);color:var(--paper);padding:110px 0 50px}
+  .contact .grid{display:grid;grid-template-columns:3fr 9fr;gap:48px}
+  .contact h2{font-family:var(--display);font-weight:400;font-size:clamp(56px,7vw,110px);line-height:.92;letter-spacing:-.02em}
+  .contact .grid>*{min-width:0}
+  .contact h2 a{overflow-wrap:anywhere;font-style:italic;color:#9fb6c4;border-bottom:1px solid #9fb6c4}
+  .contact .row{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:70px;padding-top:22px;border-top:1px solid #444;font-family:var(--label);font-size:15px}
+  .contact .label{color:#8b867f;display:block;margin-bottom:6px}
+  .contact .foot{margin-top:100px;display:flex;justify-content:space-between;font-family:var(--label);font-size:12px;color:#8b867f}
+
+  @media (max-width:980px){
+    .wrap{padding:0 22px}
+    .top .wrap{grid-template-columns:1fr auto}
+    .top nav{display:none}
+    .wordmark{justify-self:start;letter-spacing:.28em}
+    .hero-grid,.statement,.sec-head,.release,.bio,.contact .grid,.contact .row{grid-template-columns:1fr;gap:32px}
+    .hero-img img{height:340px}
+    .press{columns:1}
+    .contact h2{font-size:44px}
+    .cat th:nth-child(3),.cat td:nth-child(3),.cat th:nth-child(4),.cat td:nth-child(4){display:none}
+    .cat .go a{display:block;margin:0 0 6px}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <nav><a href="#muziek">Muziek</a><a href="#catalogus">Catalogus</a><a href="#bio">Biografie</a><a href="#pers">Pers</a><a href="#contact">Contact</a></nav>
+    <a class="wordmark" href="#">Ernst Vranckx</a>
+    <div class="lang"><b>NL</b><a href="#">FR</a><a href="#">DE</a><a href="#">EN</a></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="label" style="margin-bottom:28px">Piano · Compositie</div>
+      <h1>Ernst<br><span>Vranckx</span></h1>
+      <div class="meta">
+        <div><span class="label">Geboren</span>Leuven, 1966</div>
+        <div><span class="label">Label</span>Eden River Records</div>
+        <div><span class="label">Laatste album</span>Black Is The Colour</div>
+      </div>
+    </div>
+    <figure class="hero-img">
+      <img src="../../assets/img/portrait-piano.jpg" alt="Portret van Ernst Vranckx aan de piano">
+      <figcaption class="hero-cap"><span class="label">Portret, studio</span><span class="label">01 / 05</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="wrap statement">
+  <div class="label">Kenny Wheeler<br>over Ernst</div>
+  <div>
+    <p>“Het is gek, maar tien, vijftien jaar geleden componeerde haast geen enkele jonge musicus. Nu schrijft iedereen songs. Maar er zijn weinig goede componisten. <em>Ernst is een van de goede.</em> Ik hou van zijn songs, ze vertellen me iets.”</p>
+    <cite class="label">De Standaard — interview door Karel Van Keymeulen</cite>
+  </div>
+</div>
+
+<section class="sec" id="muziek">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">01</span><h2>Nieuw: <i>Black Is The Colour</i></h2></div>
+    <div class="release">
+      <div class="personnel">
+        <span class="label">Bezetting</span>
+        <p><span>Ernst Vranckx</span><span>piano</span></p>
+        <p><span>David Helm</span><span>bas</span></p>
+        <p><span>Kris Duerinckx</span><span>drums</span></p>
+        <span class="label">Featuring</span>
+        <p><span>Hayden Chisholm</span><span>sax, vocals</span></p>
+        <span class="label">Productie</span>
+        <p><span>Ralf Kemper</span><span>Riverside, Keulen</span></p>
+        <div class="buy">
+          <a class="dark" href="https://www.paypal.com/cgi-bin/webscr?business=ernst.vranckx%40hotmail.com&cmd=_xclick&amount=22.00&item_name=Ernst%20Vranckx%20Trio%20-%20Black%20Is%20The%20Colour%20(CD)&currency_code=EUR&add=1"><span>Bestel de cd</span><span>€ 22 →</span></a>
+          <a href="https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000"><span>Apple Music</span><span>↗</span></a>
+          <a href="#"><span>Spotify</span><span>↗</span></a>
+        </div>
+      </div>
+      <div class="notes">
+        <p>Opgenomen in mei 2022 in de Riverside Studio’s in Keulen, met een kwartet dat al in 2019 werd gevormd.</p>
+        <p>Hayden Chisholm ontpopt zich als een authentieke crooner met het warme timbre van een Leonard Cohen in het titelnummer, in de standard ‘The Nearness of You’ en de traditional ‘Aura Lee’. Zijn kleurrijke saxofoonklank doet denken aan zijn samenspel met John Taylor.</p>
+        <p>Op de covers na tekende Vranckx voor alle composities: het speelse ‘Basil’s Hopscotch’, het door Bill Evans beïnvloede ‘Sketches of Pain’, de cooljazz van ‘Gorgeous Tree’ en een herwerkte ‘A Child’s Blessing’.</p>
+        <p class="label" style="margin-top:28px">Eden River Records · ERR-CD-25</p>
+      </div>
+      <figure>
+        <img src="../../assets/img/cover-black-is-the-colour.jpg" alt="Albumhoes Black Is The Colour">
+        <figcaption class="label">Hoes — Black Is The Colour, 2024</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="catalogus">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">02</span><h2>Catalogus</h2></div>
+    <table class="cat">
+      <thead><tr><th></th><th>Titel</th><th>Bezetting</th><th>Cat. nr.</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><img src="../../assets/img/cover-black-is-the-colour.jpg" alt=""></td><td><div class="t">Black Is The Colour<small>Ernst Vranckx Trio ft. Hayden Chisholm</small></div></td><td>Helm · Duerinckx · Chisholm</td><td class="num">ERR-CD-25</td><td class="go"><a href="https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000">Luister</a><a href="#">Koop cd</a></td></tr>
+        <tr><td><img src="../../assets/img/cover-things-as-they-are.jpg" alt=""></td><td><div class="t">Things As They Are<small>Ernst Vranckx Trio</small></div></td><td>Ulrich · Duerinckx</td><td class="num">ERR-DD-06</td><td class="go"><a href="https://music.apple.com/be/album/things-as-they-are-feat-paul-g-ulrich-kris-duerinckx/1498624574">Luister</a><a href="#">Koop cd</a></td></tr>
+        <tr><td><img src="../../assets/img/cover-songs-dances.jpg" alt=""></td><td><div class="t">Songs &amp; Dances<small>Ernst Vranckx Quintet</small></div></td><td>Blondiau · Defoort · Lievestro · Pardon</td><td class="num">W.E.R.F. 023</td><td class="go"><a href="https://music.apple.com/be/album/songs-dances/1512898739">Luister</a></td></tr>
+        <tr><td><img src="../../assets/img/cover-a-childs-blessing.jpg" alt=""></td><td><div class="t">A Child’s Blessing<small>Quartet feat. Kenny Wheeler</small></div></td><td>Wheeler · Defoort · Lievestro · Van Oosterhout</td><td class="num">W.E.R.F. 013</td><td class="go"><a href="https://music.apple.com/be/album/a-childs-blessing/1513079355">Luister</a></td></tr>
+        <tr><td><img src="../../assets/img/cover-aquarelle.png" alt=""></td><td><div class="t">Aquarelle<small>Ernst Vranckx &amp; Stefan Bracaval</small></div></td><td>Lievestro · Pardon · B. Joris · Ruocco · C. Joris</td><td class="num">Lyrae 9609006</td><td class="go"><a href="#">Koop cd</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="sec" id="bio">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">03</span><h2>Biografie</h2></div>
+    <div class="bio">
+      <div class="facts">
+        <div><span class="label">Stijl</span>European Cool, met etnische en klassieke invloeden</div>
+        <div><span class="label">Prijs</span>Prix Nicolas Dor, 1994</div>
+        <div><span class="label">Samenwerkingen</span>Kenny Wheeler, Hayden Chisholm, Chris Joris, Stefan Bracaval</div>
+        <div><span class="label">Gespeeld in</span>Europa, Zuidelijk Afrika, China</div>
+      </div>
+      <div class="col">
+        <p>Ernst Vranckx, geboren te Leuven op 3 april 1966, begint zijn muzikale carrière eind jaren ’80. In 1994 wint hij de Prix Nicolas Dor met fluitist Stefan Bracaval; samen nemen ze het album “Aquarelle” op.</p>
+        <p>Hierop volgt zijn werk met de Chris Joris Experience, waar hij een deel van de composities en arrangementen voor zijn rekening neemt. Zijn song “The Miner’s Tale” wordt opgepikt in de Verenigde Staten en Canada.</p>
+        <p>Een samenwerking met trompettist Kenny Wheeler resulteert in “A Child’s Blessing” voor W.E.R.F.; hetzelfde label brengt zijn kwintet-album “Songs &amp; Dances” uit.</p>
+        <p>Sinds 2015 werkt hij met de Duitse producer Ralf Kemper voor Eden River Records: “Things As They Are” (2020) en “Black Is The Colour” (2024).</p>
+      </div>
+      <figure>
+        <img src="../../assets/img/portrait-2.jpg" alt="Ernst Vranckx aan de vleugel">
+        <figcaption class="label">Persfoto — download in hoge resolutie ↓</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="pers">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">04</span><h2>Pers</h2></div>
+    <div class="press">
+      <figure class="lg"><blockquote>“Ernst Vranckx toont zich een meesterverteller in geladen ballads … Helemaal een rustbaken in deze hectische tijd.”</blockquote><figcaption>Bernard Lefèvre, Jazzhalo<span>Things As They Are</span></figcaption></figure>
+      <figure><blockquote>“Ses compositions sont superbes et son univers est subtil, riche harmoniquement et mélodiquement. Beaucoup de raffinement … Un régal!”</blockquote><figcaption>Michel Herr, Jazz in Belgium<span>Album van de week</span></figcaption></figure>
+      <figure><blockquote>“Een integer coloriet van cooljazz, een fris en bezield album.”</blockquote><figcaption>Bernard Lefèvre<span>Black Is The Colour, 2024</span></figcaption></figure>
+      <figure><blockquote>“Schakel uw telefoon uit, trek de netwerkkabels uit de muren en laat ‘Things As They Are’ van Ernst Vranckx Trio door de speakers blazen.”</blockquote><figcaption>Nick Van Honste, Da Music<span>Things As They Are</span></figcaption></figure>
+      <figure class="lg"><blockquote>“Un disque mélancolique mais envoûtant.”</blockquote><figcaption>Jazz Hot (FR)<span>Songs &amp; Dances</span></figcaption></figure>
+      <figure><blockquote>“The music spins a hypnotic, methodically built web of mellow harmonies around intricately structured compositions.”</blockquote><figcaption>Cadence (US)<span>A Child’s Blessing</span></figcaption></figure>
+      <figure><blockquote>“Eén van onze meest inventieve componisten. Zijn werk straalt rust, opbouw en schakering uit … Klasse.”</blockquote><figcaption>Sim Simons, Jazzmozaïek<span>Songs &amp; Dances</span></figcaption></figure>
+      <figure><blockquote>“… Le plat pays est vraiment grand. Il faut y ajouter aujourd’hui le nom de Ernst Vranckx.”</blockquote><figcaption>Jazz Man (FR)<span>Songs &amp; Dances</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="grid">
+      <span class="label" style="color:#8b867f">05 — Contact &amp; boekingen</span>
+      <h2>Concerten, pers<br>of een cd? Schrijf naar<br><a href="mailto:listen@ernstvranckx.be">listen@ernstvranckx.be</a></h2>
+    </div>
+    <div class="row">
+      <div><span class="label">Telefoon</span>+32 496 51 28 42</div>
+      <div><span class="label">Adres</span>Leopoldvest 65<br>B-3300 Tienen</div>
+      <div><span class="label">Luister</span>Apple Music · Spotify</div>
+    </div>
+    <div class="foot"><span>© 2026 Ernst Vranckx</span><span>NL · FR · DE · EN</span></div>
+  </div>
+</section>
+
+</body>
+</html>
