@@ -12,7 +12,8 @@ Open `index.html` in a browser for the overview, or open a design directly:
 | C | [`designs/c-colour`](designs/c-colour/index.html) | Bold graphic blue/black, from the *Black Is The Colour* cover |
 
 Static screenshots are in `designs/previews/` (`*-volledig.jpg` = full page, `*-tijdlijn.jpg` = timeline).
-Figma import files (one per design and device) are in `figma/`.
+Figma import files (one per design and device) are in `figma/`. They show the first version of
+the designs, before the UX fixes; the screenshots in `designs/previews/` are current.
 
 Each design has an interactive career timeline (shared data in `assets/js/career.js`) and
 piano/jazz-themed scroll animations. A small synthesized piano sound (`assets/js/piano.js`) plays

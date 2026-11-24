@@ -4,44 +4,79 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ernst Vranckx — piano, compositie</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/fonts/b-liner-notes.css">
 <style>
   :root{
-    --paper:#f3f0e9; --paper-2:#ebe6dc; --ink:#151515; --ink-2:#3c3a36; --muted:#86817a;
-    --rule:#cfc8bb; --accent:#3e5a6b;
+    --paper:#f3f0e9; --paper-2:#ebe6dc; --ink:#151515; --ink-2:#3c3a36; --muted:#67625b;
+    --rule:#cfc8bb; --accent:#3e5a6b; --accent-lt:#9fb6c4; --dim:#8b867f; --err:#e8a08a;
     --display:"Instrument Serif", Georgia, serif;
     --text:"Newsreader", Georgia, serif;
     --label:"Inter Tight", system-ui, sans-serif;
+    --hdr:57px; /* compact sticky header height, incl. its rule */
   }
   *{box-sizing:border-box;margin:0;padding:0}
+  html.menu-open{overflow:hidden}
   body{background:var(--paper);color:var(--ink);font-family:var(--text);font-size:19px;line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
-  img{display:block;max-width:100%}
+  img{display:block;max-width:100%;height:auto}
+  picture{display:block}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:1320px;margin:0 auto;padding:0 48px}
   .label{font-family:var(--label);font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
   .rule{border:0;border-top:1px solid var(--rule)}
+  main section[id]{scroll-margin-top:calc(var(--hdr) + 24px)}
 
-  /* top bar */
-  .top{border-bottom:1px solid var(--ink)}
-  .top .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:72px}
+  /* accessibility */
+  .skip{position:fixed;left:16px;top:12px;z-index:100;padding:12px 18px;background:var(--ink);color:var(--paper);font-family:var(--label);font-size:14px;font-weight:500;transform:translateY(-160%)}
+  .skip:focus{transform:none}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .contact :focus-visible,.site-foot :focus-visible{outline-color:var(--accent-lt)}
+
+  /* buttons */
+  .btn{display:flex;justify-content:space-between;align-items:center;gap:18px;min-height:48px;padding:12px 18px;font-family:var(--label);font-size:14px;font-weight:500;line-height:1.3;border:1px solid var(--ink);color:var(--ink);background:none;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+  .btn.dark{background:var(--ink);color:var(--paper)}
+  .btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+  .buy-note{font-family:var(--label);font-size:12px;line-height:1.5;color:var(--muted);margin-top:10px}
+  .txt-link{display:inline-flex;align-items:center;min-height:44px;font-family:var(--label);font-size:14px;font-weight:500}
+  .txt-link span{border-bottom:1px solid currentColor;padding-bottom:1px}
+  .txt-link:hover{color:var(--accent)}
+
+  /* top bar (sticky) */
+  .top{position:sticky;top:0;z-index:60;background:var(--paper);border-bottom:1px solid var(--ink)}
+  .top .wrap{display:grid;grid-template-columns:1fr auto 1fr;column-gap:32px;align-items:center;height:72px;transition:height .3s ease}
+  .top.scrolled .wrap{height:56px}
   .top nav{display:flex;gap:28px;font-family:var(--label);font-size:13px;font-weight:500}
+  .top nav a{padding:6px 0}
   .top nav a:hover{color:var(--accent)}
-  .wordmark{font-family:var(--label);font-weight:600;font-size:14px;letter-spacing:.42em;text-transform:uppercase}
-  .top .lang{justify-self:end;display:flex;gap:16px;font-family:var(--label);font-size:12px;color:var(--muted)}
-  .top .lang b{color:var(--ink);font-weight:600}
+  .wordmark{font-family:var(--label);font-weight:600;font-size:14px;letter-spacing:.42em;text-transform:uppercase;padding:8px 0;white-space:nowrap}
+  .lang{display:flex;font-family:var(--label);font-size:12px;color:var(--muted)}
+  .lang a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px}
+  .lang a:hover{color:var(--ink)}
+  .lang a[aria-current]{color:var(--ink);font-weight:600}
+  .top .lang{justify-self:end;margin-right:-12px}
+  .prog{position:absolute;left:0;right:0;bottom:-1px;height:3px;background:var(--accent);transform:scaleX(0);transform-origin:0 50%;pointer-events:none}
+  .menu-btn{display:none}
+  @media (max-width:1320px){.top nav{gap:20px}}
+  @media (max-width:1180px){.wordmark{letter-spacing:.3em}}
+  .menu{display:none}
 
   /* hero */
-  .hero{padding:70px 0 0}
+  .hero{padding:64px 0 0}
+  .hero .kicker{display:block;margin-bottom:28px}
   .hero-grid{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:end}
   .hero h1{font-family:var(--display);font-weight:400;font-size:clamp(76px,10.5vw,168px);line-height:.84;letter-spacing:-.025em}
   .hero h1 span{font-style:italic;color:var(--accent)}
-  .hero .meta{display:flex;gap:40px;margin-top:40px;padding-top:20px;border-top:1px solid var(--ink)}
+  .hero .meta{display:flex;gap:40px;margin-top:36px;padding-top:18px;border-top:1px solid var(--ink)}
   .hero .meta div{font-family:var(--label);font-size:13px;line-height:1.5}
   .hero .meta div .label{display:block;margin-bottom:4px}
+  .hero-album{display:grid;grid-template-columns:64px 1fr;column-gap:18px;align-items:center;margin-top:24px;padding-top:22px;border-top:1px solid var(--rule)}
+  .hero-album .cover img{width:64px;height:64px;object-fit:cover}
+  .ha-title{display:block;font-family:var(--display);font-style:italic;font-size:30px;line-height:1.05;margin-top:5px}
+  .ha-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .ha-actions .btn{flex:0 0 auto}
+  .hero-album .buy-note{grid-column:1/-1}
+  .hero-img .ph{overflow:hidden}
   .hero-img img{width:100%;height:520px;object-fit:cover;object-position:90% 40%;filter:grayscale(1) contrast(1.05)}
-  .hero-cap{display:flex;justify-content:space-between;margin-top:12px}
+  .hero-cap{margin-top:12px}
 
   .statement{padding:110px 0 120px;display:grid;grid-template-columns:3fr 9fr;gap:48px}
   .statement p{font-family:var(--display);font-size:clamp(32px,3.4vw,50px);line-height:1.15;letter-spacing:-.01em}
@@ -56,18 +91,20 @@
   .sec-head h2 i{color:var(--accent)}
 
   /* release */
-  .release{display:grid;grid-template-columns:3fr 4fr 5fr;gap:48px}
+  .release{display:grid;grid-template-columns:3fr 4fr 5fr;grid-template-rows:auto 1fr;grid-template-areas:"pers notes fig" "buy notes fig";column-gap:48px}
+  .release .personnel{grid-area:pers}
+  .release .notes{grid-area:notes}
+  .release figure{grid-area:fig}
   .release .notes p{margin-bottom:18px;color:var(--ink-2)}
   .release .notes p:first-child{font-size:22px;line-height:1.5;color:var(--ink)}
   .personnel{font-family:var(--label);font-size:14px;line-height:1.9}
   .personnel .label{display:block;margin:0 0 10px}
-  .personnel .label + .label{margin-top:22px}
-  .personnel p{display:flex;justify-content:space-between;border-bottom:1px dotted var(--rule)}
-  .personnel p span:last-child{color:var(--muted)}
-  .buy{margin-top:34px;display:flex;flex-direction:column;gap:10px}
-  .buy a{display:flex;justify-content:space-between;align-items:center;font-family:var(--label);font-size:14px;font-weight:500;padding:14px 18px;border:1px solid var(--ink);transition:.2s}
-  .buy a.dark{background:var(--ink);color:var(--paper)}
-  .buy a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+  .personnel .label ~ .label{margin-top:22px}
+  .personnel p,.personnel li{display:flex;justify-content:space-between;gap:16px;border-bottom:1px dotted var(--rule)}
+  .personnel ul{list-style:none}
+  .personnel p span:last-child,.personnel li span:last-child{color:var(--muted)}
+  .buy{grid-area:buy;margin-top:34px;display:flex;flex-direction:column;gap:10px}
+  .buy .buy-note{margin-top:0}
   .release figure img{width:100%;aspect-ratio:1}
   .release figure figcaption{margin-top:12px}
 
@@ -91,7 +128,8 @@
   .bio .col p:first-child{color:var(--ink)}
   .bio .col p:first-child::first-line{font-family:var(--label);font-size:15px;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
   .bio figure img{width:100%;filter:grayscale(1);aspect-ratio:3/4;object-fit:cover;object-position:40% 50%}
-  .bio figure figcaption{margin-top:12px}
+  .bio figure figcaption{margin-top:6px;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:44px}
+  .bio figcaption .txt-link{font-size:13px}
   .facts{font-family:var(--label);font-size:14px}
   .facts div{padding:14px 0;border-top:1px solid var(--rule)}
   .facts .label{display:block;margin-bottom:2px}
@@ -104,48 +142,131 @@
   .press figcaption{margin-top:14px;font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
   .press figcaption span{display:block;font-weight:400;color:var(--muted);letter-spacing:.08em;margin-top:2px}
 
+  /* live & bookings */
+  .live{display:grid;grid-template-columns:3fr 9fr;gap:48px}
+  .live .personnel{grid-column:1;grid-row:1}
+  .live-lead{grid-column:2;grid-row:1}
+  .live-lead p{font-family:var(--display);font-size:clamp(32px,3.4vw,50px);line-height:1.15;letter-spacing:-.01em;max-width:17em}
+  .live-lead p em{color:var(--accent)}
+  .live-cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 32px;margin-top:44px}
+  .live-cta .btn{min-width:300px}
+
   /* contact */
-  .contact{background:var(--ink);color:var(--paper);padding:110px 0 50px}
+  .contact{background:var(--ink);color:var(--paper);padding:110px 0 0}
   .contact .grid{display:grid;grid-template-columns:3fr 9fr;gap:48px}
   .contact h2{font-family:var(--display);font-weight:400;font-size:clamp(56px,7vw,110px);line-height:.92;letter-spacing:-.02em}
   .contact .grid>*{min-width:0}
-  .contact h2 a{overflow-wrap:anywhere;font-style:italic;color:#9fb6c4;border-bottom:1px solid #9fb6c4}
+  .contact h2 a{font-style:italic;color:var(--accent-lt);border-bottom:1px solid var(--accent-lt)}
   .contact .row{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:70px;padding-top:22px;border-top:1px solid #444;font-family:var(--label);font-size:15px}
-  .contact .label{color:#8b867f;display:block;margin-bottom:6px}
-  .contact .foot{margin-top:100px;display:flex;justify-content:space-between;font-family:var(--label);font-size:12px;color:#8b867f}
+  .contact .row a{display:block;width:fit-content}
+  .contact .row a:hover,.contact h2 a:hover{color:var(--paper)}
+  .contact .label{color:var(--dim);display:block;margin-bottom:6px}
+
+  /* newsletter */
+  .nl-block{margin-top:70px;padding-top:22px;border-top:1px solid #444}
+  .nl{max-width:620px;font-family:var(--label)}
+  .nl label{display:block;font-size:13px;color:var(--dim)}
+  .nl-row{display:flex;gap:14px;align-items:flex-end;margin-top:2px}
+  .nl input{flex:1;min-width:0;height:52px;padding:0 0 4px;border:0;border-bottom:1px solid var(--dim);border-radius:0;background:none;color:var(--paper);font-family:var(--display);font-size:28px;letter-spacing:-.005em}
+  .nl input::placeholder{color:var(--dim);opacity:1}
+  .nl input:focus{border-bottom-color:var(--accent-lt)}
+  .nl input[aria-invalid=true]{border-bottom-color:var(--err)}
+  .nl .btn{flex:none;background:var(--paper);border-color:var(--paper);color:var(--ink)}
+  .nl .btn:hover{background:var(--accent-lt);border-color:var(--accent-lt);color:var(--ink)}
+  .nl-consent{margin-top:14px;font-size:13px;line-height:1.5;color:var(--dim)}
+  .nl-consent a{color:var(--paper);border-bottom:1px solid var(--dim)}
+  .nl-msg{font-size:14px;margin-top:8px;min-height:1.5em}
+  .nl-msg[data-state=error]{color:var(--err)}
+  .nl-msg[data-state=ok]{color:var(--accent-lt)}
+
+  .site-foot{background:var(--ink);color:var(--dim);font-family:var(--label);font-size:12px}
+  .site-foot .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;padding-top:90px;padding-bottom:40px}
+  .site-foot .lang{color:var(--dim);margin-right:-12px}
+  .site-foot .lang a[aria-current]{color:var(--paper)}
 
   @media (max-width:980px){
+    :root{--hdr:53px}
     .wrap{padding:0 22px}
-    .top .wrap{grid-template-columns:1fr auto}
-    .top nav{display:none}
+    .top .wrap{grid-template-columns:1fr auto;height:60px}
+    .top.scrolled .wrap{height:52px}
+    .top nav,.top .lang{display:none}
     .wordmark{justify-self:start;letter-spacing:.28em}
-    .hero-grid,.statement,.sec-head,.release,.bio,.contact .grid,.contact .row{grid-template-columns:1fr;gap:32px}
+    .menu-btn{display:inline-flex;align-items:center;gap:12px;min-height:44px;min-width:44px;padding:0 10px;margin-right:-10px;background:none;border:0;color:var(--ink);font-family:var(--label);font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+    .menu-btn i{position:relative;width:20px;height:9px}
+    .menu-btn i::before,.menu-btn i::after{content:"";position:absolute;left:0;right:0;height:1.5px;background:currentColor;transition:transform .25s ease,top .25s ease}
+    .menu-btn i::before{top:0}
+    .menu-btn i::after{top:7.5px}
+    .menu-btn[aria-expanded=true] i::before{top:3.75px;transform:rotate(45deg)}
+    .menu-btn[aria-expanded=true] i::after{top:3.75px;transform:rotate(-45deg)}
+    .menu.open{display:flex;flex-direction:column;position:fixed;inset:0;z-index:55;background:var(--paper);padding:84px 22px 32px;overflow-y:auto;animation:menuIn .25s ease}
+    .menu-list{list-style:none;border-top:1px solid var(--ink)}
+    .menu-list a{display:flex;align-items:baseline;gap:18px;padding:11px 0;border-bottom:1px solid var(--rule);font-family:var(--display);font-size:34px;line-height:1.1}
+    .menu-list a .no{flex:none;width:22px;font-family:var(--label);font-size:12px;font-weight:600;color:var(--muted)}
+    .menu-list a:hover{color:var(--accent)}
+    .menu-buy{margin-top:32px}
+    .menu .lang{margin-top:20px;margin-left:-12px}
+
+    .hero{padding-top:36px}
+    .hero-grid,.statement,.sec-head,.bio,.contact .grid,.contact .row,.live{grid-template-columns:1fr;gap:32px}
+    .hero .kicker{margin-bottom:20px}
+    .hero .meta{margin-top:28px;padding-top:16px}
+    .ha-title{font-size:27px}
+    .ha-actions .btn{flex:1 1 auto}
     .hero-img img{height:340px}
     .press{columns:1}
-    .contact h2{font-size:44px}
-    .cat th:nth-child(3),.cat td:nth-child(3),.cat th:nth-child(4),.cat td:nth-child(4){display:none}
-    .cat .go a{display:block;margin:0 0 6px}
+
+    .release{grid-template-columns:1fr;grid-template-rows:none;grid-template-areas:"fig" "buy" "notes" "pers";row-gap:32px}
+    .release figure{max-width:440px}
+    .buy{margin-top:0}
+
+    .cat thead{display:none}
+    .cat,.cat tbody{display:block}
+    .cat tr{display:grid;grid-template-columns:72px 1fr;column-gap:16px;align-items:start;padding:22px 0;border-bottom:1px solid var(--rule)}
+    .cat tr:hover td{background:none}
+    .cat td{display:block;padding:0;border:0}
+    .cat td:first-child{grid-row:1 / span 2;width:auto}
+    .cat .t{font-size:26px}
+    .cat td:nth-child(3){grid-column:2;margin-top:6px;font-size:13px;line-height:1.45;color:var(--ink-2)}
+    .cat td:nth-child(4){display:none}
+    .cat .go{grid-column:1/-1;display:flex;gap:10px;margin-top:16px;white-space:normal;text-align:left}
+    .cat .go:empty{display:none}
+    .cat .go a{flex:1;display:flex;align-items:center;justify-content:center;min-height:44px;margin:0;padding:0 14px;border:1px solid var(--ink)}
+    .cat .go a.dark{background:var(--ink);color:var(--paper)}
+    .cat .go a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+    .live .personnel,.live-lead{grid-column:1;grid-row:auto}
+    .live-cta{margin-top:32px}
+    .live-cta .btn{min-width:0;width:100%}
+
+    .contact{padding-top:80px}
+    .contact h2{font-size:clamp(34px,10.5vw,56px);line-height:.98}
+    .contact .row{margin-top:48px}
+    .nl-block{margin-top:48px;gap:20px}
+    .nl input{font-size:24px}
+    .site-foot .wrap{padding-top:64px;padding-bottom:32px}
   }
+  @media (max-width:360px){.wordmark{font-size:13px;letter-spacing:.18em}}
+  @keyframes menuIn{from{opacity:0}to{opacity:1}}
 
   /* ===== Timeline: a vertical score ===== */
   .tl{display:grid;grid-template-columns:3fr 9fr;gap:48px;align-items:start}
-  .tl-side{position:sticky;top:40px}
-  .tl-now{font-family:var(--display);font-size:96px;line-height:.85;letter-spacing:-.03em;color:var(--accent);margin:8px 0 26px;font-variant-numeric:lining-nums}
+  .tl-side{position:sticky;top:calc(var(--hdr) + 32px)}
+  .tl-now{font-family:var(--display);font-size:96px;line-height:.85;letter-spacing:-.03em;color:var(--accent);margin:8px 0 26px;font-variant-numeric:lining-nums;white-space:nowrap}
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:26px}
   .chip{font-family:var(--label);font-size:12px;font-weight:500;padding:7px 12px;border:1px solid var(--ink);background:none;cursor:pointer;color:var(--ink);transition:.2s}
-  .chip.on,.chip:hover{background:var(--ink);color:var(--paper)}
+  .chip[aria-pressed=true],.chip:hover{background:var(--ink);color:var(--paper)}
   .tl-index{list-style:none;font-family:var(--label);font-size:13px;columns:2;column-gap:16px}
   .tl-index a{display:block;padding:4px 0;color:var(--muted);transition:color .2s}
   .tl-index a:hover,.tl-index a.on{color:var(--ink)}
   .tl-index a.on::before{content:"♪ ";color:var(--accent)}
-  .tl-index a.dim{opacity:.3}
-  .tl-list{list-style:none;position:relative}
+  .tl-index a.dim{opacity:.45}
+  .tl-score{position:relative}
+  .tl-list{list-style:none}
   .tl-staff{position:absolute;left:96px;top:0;bottom:0;width:57px;background:repeating-linear-gradient(90deg,var(--rule) 0 1px,transparent 1px 14px);background-size:57px 100%;background-repeat:no-repeat}
   .tl-ink{position:absolute;left:96px;top:0;width:57px;height:0;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 14px);background-repeat:no-repeat;background-size:57px 100%}
-  .tl-item{position:relative;display:grid;grid-template-columns:96px 56px 1fr;gap:0;padding:26px 0;cursor:pointer;transition:opacity .4s}
+  .tl-item{position:relative;display:grid;grid-template-columns:96px 56px 1fr;gap:0;padding:26px 0;transition:opacity .4s}
   .tl-item.hide{display:none}
   .tl-item .yr{font-family:var(--label);font-size:13px;font-weight:600;padding-top:8px}
-  .tl-item .yr small{display:block;font-weight:400;color:var(--muted);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
   .tl-head-note{position:relative;height:40px}
   .nh{position:absolute;top:12px;width:19px;height:14px;border:2px solid var(--ink);border-radius:50%;transform:translateX(-50%) rotate(-22deg);background:var(--paper);transition:background .35s,transform .35s,border-color .35s;z-index:2}
   .nh::after{content:"";position:absolute;right:-2px;bottom:5px;width:2px;height:34px;background:var(--ink);transform:rotate(22deg);transform-origin:bottom;opacity:0;transition:opacity .35s}
@@ -156,30 +277,31 @@
   .tl-item:hover .nh{transform:translateX(-50%) rotate(-22deg) scale(1.25)}
   .tl-body{padding-left:34px}
   .tl-body .kind{font-family:var(--label);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-  .tl-body h3{font-family:var(--display);font-weight:400;font-size:36px;line-height:1.05;margin:4px 0 0;display:flex;align-items:center;gap:14px}
-  .tl-body h3 .pl{font-family:var(--label);font-size:18px;color:var(--muted);transition:transform .3s}
+  .tl-body h3{font-family:var(--display);font-weight:400;font-size:36px;line-height:1.05;margin:4px 0 0}
+  .tl-toggle{display:inline-block;max-width:100%;margin:0;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer}
+  .tl-toggle .nw{white-space:nowrap}
+  .tl-toggle::after{content:"";position:absolute;inset:0}
+  .tl-toggle:hover{color:var(--accent)}
+  .tl-body h3 .pl{display:inline-block;margin-left:12px;vertical-align:.12em;font-family:var(--label);font-size:18px;line-height:1;color:var(--muted);transition:transform .3s}
   .tl-item.open h3 .pl{transform:rotate(45deg);color:var(--accent)}
-  .tl-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
+  .tl-more{position:relative;z-index:1;display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
   .tl-item.open .tl-more{grid-template-rows:1fr}
-  .tl-more>div{overflow:hidden}
+  .tl-more>div{overflow:hidden;visibility:hidden;transition:visibility 0s .45s}
+  .tl-item.open .tl-more>div{visibility:visible;transition:none}
   .tl-more .in{display:flex;gap:24px;align-items:start;padding-top:14px}
   .tl-more p{color:var(--ink-2);max-width:520px}
+  .tl-more picture{flex:none}
   .tl-more img{width:120px;height:120px;object-fit:cover;flex:none}
   .tl-more .cat{display:block;font-family:var(--label);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:8px}
 
   /* ===== Scroll effects ===== */
-  .kprog{position:fixed;top:0;left:0;right:0;height:12px;display:flex;z-index:50;background:#111;box-shadow:0 1px 0 rgba(0,0,0,.2)}
-  .kprog i{flex:1;margin-right:1px;background:#f7f5f0;transition:background .25s}
-  .kprog i.lit{background:var(--accent)}
-  .kprog b{position:absolute;top:0;height:7px;width:.9%;background:#111;transform:translateX(-50%)}
-  .staff-div{display:block;width:100%;height:84px;margin:0 0 110px}
+  .staff-div{display:block;width:100%;height:60px;margin:-34px 0 76px}
   .staff-div line{stroke:var(--ink);stroke-width:1;stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.6s cubic-bezier(.6,.1,.2,1)}
   .staff-div .n{opacity:0;transform:translateY(-10px);transition:opacity .4s,transform .5s cubic-bezier(.3,1.6,.5,1)}
   .staff-div.in line{stroke-dashoffset:0}
   .staff-div.in .n{opacity:1;transform:none}
   .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
   .rv.in{opacity:1;transform:none}
-  .hero-img{overflow:hidden}
   .hero-img img{will-change:transform}
   @media (max-width:980px){
     .tl{grid-template-columns:1fr;gap:20px}
@@ -191,38 +313,82 @@
     .tl-body{padding-left:14px}
     .tl-body h3{font-size:28px}
     .tl-more .in{flex-direction:column}
-    .staff-div{margin-bottom:70px}
+    .sec{padding-bottom:96px}
+    .staff-div{height:52px;margin:-24px 0 56px}
   }
   @media (prefers-reduced-motion:reduce){
     .rv{opacity:1;transform:none;transition:none}
     .staff-div line{stroke-dashoffset:0;transition:none}.staff-div .n{opacity:1;transform:none;transition:none}
+    .top .wrap,.menu-btn i::before,.menu-btn i::after,.tl-more,.tl-body h3 .pl{transition:none}
+    .menu.open{animation:none}
   }
 </style>
 </head>
 <body>
+<a class="skip" href="#inhoud">Naar inhoud</a>
 
-<header class="top">
+<header class="top" id="top">
   <div class="wrap">
-    <nav><a href="#muziek">Muziek</a><a href="#catalogus">Catalogus</a><a href="#tijdlijn">Tijdlijn</a><a href="#bio">Biografie</a><a href="#pers">Pers</a><a href="#contact">Contact</a></nav>
-    <a class="wordmark" href="#">Ernst Vranckx</a>
-    <div class="lang"><b>NL</b><a href="#">FR</a><a href="#">DE</a><a href="#">EN</a></div>
+    <nav aria-label="Hoofdmenu"><a href="#muziek">Muziek</a><a href="#catalogus">Catalogus</a><a href="#tijdlijn">Tijdlijn</a><a href="#bio">Biografie</a><a href="#pers">Pers</a><a href="#live">Live</a><a href="#contact">Contact</a></nav>
+    <a class="wordmark" href="#top">Ernst Vranckx</a>
+    <div class="lang" data-langs><a data-lang="nl" href="#" aria-current="true" lang="nl">NL</a><a data-lang="fr" lang="fr">FR</a><a data-lang="de" lang="de">DE</a><a data-lang="en" lang="en">EN</a></div>
+    <button type="button" class="menu-btn" data-menu-toggle aria-expanded="false" aria-controls="menu"><span data-menu-label>Menu</span><i aria-hidden="true"></i></button>
   </div>
+  <span class="prog" id="prog" aria-hidden="true"></span>
 </header>
 
+<div class="menu" id="menu" data-menu>
+  <nav aria-label="Menu">
+    <ol class="menu-list">
+      <li><a href="#muziek"><span class="no">01</span>Muziek</a></li>
+      <li><a href="#catalogus"><span class="no">02</span>Catalogus</a></li>
+      <li><a href="#tijdlijn"><span class="no">03</span>Tijdlijn</a></li>
+      <li><a href="#bio"><span class="no">04</span>Biografie</a></li>
+      <li><a href="#pers"><span class="no">05</span>Pers</a></li>
+      <li><a href="#live"><span class="no">06</span>Live &amp; boekingen</a></li>
+      <li><a href="#contact"><span class="no">07</span>Contact</a></li>
+    </ol>
+  </nav>
+  <div class="menu-buy">
+    <a class="btn dark" data-link="buyCd"><span>Koop de cd · €22</span><span aria-hidden="true">→</span></a>
+    <p class="buy-note">Afrekenen via PayPal · verzendkosten zie je vóór je betaalt.</p>
+  </div>
+  <div class="lang" data-langs><a data-lang="nl" href="#" aria-current="true" lang="nl">NL</a><a data-lang="fr" lang="fr">FR</a><a data-lang="de" lang="de">DE</a><a data-lang="en" lang="en">EN</a></div>
+</div>
+
+<main id="inhoud">
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="label" style="margin-bottom:28px">Piano · Compositie</div>
+      <div class="label kicker">Piano · Compositie</div>
       <h1>Ernst<br><span>Vranckx</span></h1>
       <div class="meta">
         <div><span class="label">Geboren</span>Leuven, 1966</div>
         <div><span class="label">Label</span>Eden River Records</div>
-        <div><span class="label">Laatste album</span>Black Is The Colour</div>
+      </div>
+      <div class="hero-album">
+        <a class="cover" href="#muziek" aria-label="Over het album Black Is The Colour">
+          <picture>
+            <source type="image/webp" srcset="../../assets/img/web/cover-black-is-the-colour-600.webp">
+            <img src="../../assets/img/cover-black-is-the-colour.jpg" width="952" height="952" alt="">
+          </picture>
+        </a>
+        <div><span class="label">Nieuwste album</span><span class="ha-title">Black Is The Colour</span></div>
+        <div class="ha-actions">
+          <a class="btn dark" data-link="buyCd"><span>Koop de cd · €22</span><span aria-hidden="true">→</span></a>
+          <a class="btn" data-link="listen.apple"><span>Beluister</span><span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="buy-note">Afrekenen via PayPal · verzendkosten zie je vóór je betaalt.</p>
       </div>
     </div>
     <figure class="hero-img">
-      <img src="../../assets/img/portrait-piano.jpg" alt="Portret van Ernst Vranckx aan de piano">
-      <figcaption class="hero-cap"><span class="label">Portret, studio</span><span class="label">01 / 05</span></figcaption>
+      <div class="ph">
+        <picture>
+          <source type="image/webp" srcset="../../assets/img/web/portrait-piano-800.webp 800w, ../../assets/img/web/portrait-piano-1600.webp 1600w" sizes="(max-width:980px) 1000px, 1520px">
+          <img src="../../assets/img/portrait-piano.jpg" width="2000" height="685" alt="Portret van Ernst Vranckx aan de piano" fetchpriority="high">
+        </picture>
+      </div>
+      <figcaption class="hero-cap label">Portret, studio</figcaption>
     </figure>
   </div>
 </section>
@@ -248,11 +414,12 @@
         <p><span>Hayden Chisholm</span><span>sax, vocals</span></p>
         <span class="label">Productie</span>
         <p><span>Ralf Kemper</span><span>Riverside, Keulen</span></p>
-        <div class="buy">
-          <a class="dark" href="https://www.paypal.com/cgi-bin/webscr?business=ernst.vranckx%40hotmail.com&cmd=_xclick&amount=22.00&item_name=Ernst%20Vranckx%20Trio%20-%20Black%20Is%20The%20Colour%20(CD)&currency_code=EUR&add=1"><span>Bestel de cd</span><span>€ 22 →</span></a>
-          <a href="https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000"><span>Apple Music</span><span>↗</span></a>
-          <a href="#"><span>Spotify</span><span>↗</span></a>
-        </div>
+      </div>
+      <div class="buy">
+        <a class="btn dark" data-link="buyCd"><span>Koop de cd · €22</span><span aria-hidden="true">→</span></a>
+        <p class="buy-note">Afrekenen via PayPal · verzendkosten zie je vóór je betaalt.</p>
+        <a class="btn" data-link="listen.apple"><span>Apple Music</span><span aria-hidden="true">↗</span></a>
+        <a class="btn" data-link="listen.spotify"><span>Spotify</span><span aria-hidden="true">↗</span></a>
       </div>
       <div class="notes">
         <p>Opgenomen in mei 2022 in de Riverside Studio’s in Keulen, met een kwartet dat al in 2019 werd gevormd.</p>
@@ -261,7 +428,10 @@
         <p class="label" style="margin-top:28px">Eden River Records · ERR-CD-25</p>
       </div>
       <figure>
-        <img src="../../assets/img/cover-black-is-the-colour.jpg" alt="Albumhoes Black Is The Colour">
+        <picture>
+          <source type="image/webp" srcset="../../assets/img/web/cover-black-is-the-colour-600.webp 600w, ../../assets/img/web/cover-black-is-the-colour.webp 952w" sizes="(max-width:980px) min(440px, calc(100vw - 44px)), 470px">
+          <img src="../../assets/img/cover-black-is-the-colour.jpg" width="952" height="952" alt="Albumhoes Black Is The Colour" loading="lazy" decoding="async">
+        </picture>
         <figcaption class="label">Hoes — Black Is The Colour, 2024</figcaption>
       </figure>
     </div>
@@ -274,11 +444,11 @@
     <table class="cat">
       <thead><tr><th></th><th>Titel</th><th>Bezetting</th><th>Cat. nr.</th><th></th></tr></thead>
       <tbody>
-        <tr><td><img src="../../assets/img/cover-black-is-the-colour.jpg" alt=""></td><td><div class="t">Black Is The Colour<small>Ernst Vranckx Trio ft. Hayden Chisholm</small></div></td><td>Helm · Duerinckx · Chisholm</td><td class="num">ERR-CD-25</td><td class="go"><a href="https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000">Luister</a><a href="#">Koop cd</a></td></tr>
-        <tr><td><img src="../../assets/img/cover-things-as-they-are.jpg" alt=""></td><td><div class="t">Things As They Are<small>Ernst Vranckx Trio</small></div></td><td>Ulrich · Duerinckx</td><td class="num">ERR-DD-06</td><td class="go"><a href="https://music.apple.com/be/album/things-as-they-are-feat-paul-g-ulrich-kris-duerinckx/1498624574">Luister</a><a href="#">Koop cd</a></td></tr>
-        <tr><td><img src="../../assets/img/cover-songs-dances.jpg" alt=""></td><td><div class="t">Songs &amp; Dances<small>Ernst Vranckx Quintet</small></div></td><td>Blondiau · Defoort · Lievestro · Pardon</td><td class="num">W.E.R.F. 023</td><td class="go"><a href="https://music.apple.com/be/album/songs-dances/1512898739">Luister</a></td></tr>
-        <tr><td><img src="../../assets/img/cover-a-childs-blessing.jpg" alt=""></td><td><div class="t">A Child’s Blessing<small>Quartet feat. Kenny Wheeler</small></div></td><td>Wheeler · Defoort · Lievestro · Van Oosterhout</td><td class="num">W.E.R.F. 013</td><td class="go"><a href="https://music.apple.com/be/album/a-childs-blessing/1513079355">Luister</a></td></tr>
-        <tr><td><img src="../../assets/img/cover-aquarelle.png" alt=""></td><td><div class="t">Aquarelle<small>Ernst Vranckx &amp; Stefan Bracaval</small></div></td><td>Lievestro · Pardon · B. Joris · Ruocco · C. Joris</td><td class="num">Lyrae 9609006</td><td class="go"><a href="#">Koop cd</a></td></tr>
+        <tr><td><picture><source type="image/webp" srcset="../../assets/img/web/cover-black-is-the-colour-600.webp"><img src="../../assets/img/cover-black-is-the-colour.jpg" width="952" height="952" alt="" loading="lazy" decoding="async"></picture></td><td><div class="t">Black Is The Colour<small>Ernst Vranckx Trio ft. Hayden Chisholm</small></div></td><td>Helm · Duerinckx · Chisholm</td><td class="num">ERR-CD-25</td><td class="go"><a data-link="albums.black-is-the-colour.apple">Luister</a><a class="dark" data-link="buyCd">Koop cd</a></td></tr>
+        <tr><td><picture><source type="image/webp" srcset="../../assets/img/web/cover-things-as-they-are-600.webp"><img src="../../assets/img/cover-things-as-they-are.jpg" width="952" height="952" alt="" loading="lazy" decoding="async"></picture></td><td><div class="t">Things As They Are<small>Ernst Vranckx Trio</small></div></td><td>Ulrich · Duerinckx</td><td class="num">ERR-DD-06</td><td class="go"><a data-link="albums.things-as-they-are.apple">Luister</a><a class="dark" data-link="albums.things-as-they-are.buy">Koop cd</a></td></tr>
+        <tr><td><picture><source type="image/webp" srcset="../../assets/img/web/cover-songs-dances.webp"><img src="../../assets/img/cover-songs-dances.jpg" width="500" height="500" alt="" loading="lazy" decoding="async"></picture></td><td><div class="t">Songs &amp; Dances<small>Ernst Vranckx Quintet</small></div></td><td>Blondiau · Defoort · Lievestro · Pardon</td><td class="num">W.E.R.F. 023</td><td class="go"><a data-link="albums.songs-dances.apple">Luister</a><a class="dark" data-link="albums.songs-dances.buy">Koop cd</a></td></tr>
+        <tr><td><picture><source type="image/webp" srcset="../../assets/img/web/cover-a-childs-blessing.webp"><img src="../../assets/img/cover-a-childs-blessing.jpg" width="500" height="500" alt="" loading="lazy" decoding="async"></picture></td><td><div class="t">A Child’s Blessing<small>Quartet feat. Kenny Wheeler</small></div></td><td>Wheeler · Defoort · Lievestro · Van Oosterhout</td><td class="num">W.E.R.F. 013</td><td class="go"><a data-link="albums.a-childs-blessing.apple">Luister</a><a class="dark" data-link="albums.a-childs-blessing.buy">Koop cd</a></td></tr>
+        <tr><td><picture><source type="image/webp" srcset="../../assets/img/web/cover-aquarelle.webp"><img src="../../assets/img/cover-aquarelle.png" width="498" height="498" alt="" loading="lazy" decoding="async"></picture></td><td><div class="t">Aquarelle<small>Ernst Vranckx &amp; Stefan Bracaval</small></div></td><td>Lievestro · Pardon · B. Joris · Ruocco · C. Joris</td><td class="num">Lyrae 9609006</td><td class="go"><a data-link="albums.aquarelle.apple">Luister</a><a class="dark" data-link="albums.aquarelle.buy">Koop cd</a></td></tr>
       </tbody>
     </table>
   </div>
@@ -291,20 +461,24 @@
       <aside class="tl-side">
         <span class="label">Nu op de partituur</span>
         <div class="tl-now" id="tlNow">1966</div>
-        <div class="chips" id="chips">
-          <button class="chip on" data-f="alles">Alles</button>
-          <button class="chip" data-f="album">Albums</button>
-          <button class="chip" data-f="samenwerking">Samenwerkingen</button>
-          <button class="chip" data-f="mijlpaal">Mijlpalen</button>
+        <div class="chips" id="chips" role="group" aria-label="Filter de tijdlijn">
+          <button type="button" class="chip" data-f="alles" aria-pressed="true">Alles</button>
+          <button type="button" class="chip" data-f="album" aria-pressed="false">Albums</button>
+          <button type="button" class="chip" data-f="samenwerking" aria-pressed="false">Samenwerkingen</button>
+          <button type="button" class="chip" data-f="mijlpaal" aria-pressed="false">Mijlpalen</button>
         </div>
         <ol class="tl-index" id="tlIndex"></ol>
       </aside>
-      <ol class="tl-list" id="tlList"><div class="tl-staff"></div><div class="tl-ink" id="tlInk"></div></ol>
+      <div class="tl-score">
+        <div class="tl-staff" aria-hidden="true"></div>
+        <div class="tl-ink" id="tlInk" aria-hidden="true"></div>
+        <ol class="tl-list" id="tlList"></ol>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="wrap"><svg class="staff-div" data-melody="2,4,3,5,7,6,4,8,7,5,3,4"></svg></div>
+<div class="wrap"><svg class="staff-div" data-melody="2,4,3,5,7,6,4,8,7,5,3,4" aria-hidden="true"></svg></div>
 
 <section class="sec" id="bio">
   <div class="wrap">
@@ -323,8 +497,11 @@
         <p>Sinds 2015 werkt hij met de Duitse producer Ralf Kemper voor Eden River Records: “Things As They Are” (2020) en “Black Is The Colour” (2024).</p>
       </div>
       <figure>
-        <img src="../../assets/img/portrait-2.jpg" alt="Ernst Vranckx aan de vleugel">
-        <figcaption class="label">Persfoto — download in hoge resolutie ↓</figcaption>
+        <picture>
+          <source type="image/webp" srcset="../../assets/img/web/portrait-2-800.webp 800w, ../../assets/img/web/portrait-2-1600.webp 1600w" sizes="(max-width:980px) 180vw, 760px">
+          <img src="../../assets/img/portrait-2.jpg" width="2000" height="1335" alt="Ernst Vranckx aan de vleugel" loading="lazy" decoding="async">
+        </picture>
+        <figcaption><span class="label">Persfoto</span><a class="txt-link" data-link="pressKit"><span>Persfoto’s downloaden</span></a></figcaption>
       </figure>
     </div>
   </div>
@@ -346,21 +523,68 @@
   </div>
 </section>
 
-<section class="contact" id="contact">
+<section class="sec" id="live">
   <div class="wrap">
-    <div class="grid">
-      <span class="label" style="color:#8b867f">06 — Contact &amp; boekingen</span>
-      <h2>Concerten, pers<br>of een cd? Schrijf naar<br><a href="mailto:listen@ernstvranckx.be">listen@ernstvranckx.be</a></h2>
+    <div class="sec-head"><span class="no">06</span><h2>Live &amp; <i>boekingen</i></h2></div>
+    <div class="live">
+      <div class="live-lead">
+        <p>Clubs, cultuurcentra, festivals en privé-concerten, <em>in België en daarbuiten.</em></p>
+        <div class="live-cta">
+          <a class="btn dark" data-booking href="mailto:listen@ernstvranckx.be"><span>Boekingsaanvraag</span><span aria-hidden="true">→</span></a>
+          <a class="txt-link" data-link="pressKit"><span>Presskit &amp; technische fiche</span></a>
+        </div>
+      </div>
+      <div class="personnel">
+        <span class="label">Trio</span>
+        <ul>
+          <li><span>Ernst Vranckx</span><span>piano</span></li>
+          <li><span>David Helm</span><span>contrabas</span></li>
+          <li><span>Kris Duerinckx</span><span>drums</span></li>
+        </ul>
+        <span class="label">Kwartet — trio met</span>
+        <ul>
+          <li><span>Hayden Chisholm</span><span>sax &amp; zang</span></li>
+        </ul>
+      </div>
     </div>
-    <div class="row">
-      <div><span class="label">Telefoon</span>+32 496 51 28 42</div>
-      <div><span class="label">Adres</span>Leopoldvest 65<br>B-3300 Tienen</div>
-      <div><span class="label">Luister</span>Apple Music · Spotify</div>
-    </div>
-    <div class="foot"><span>© 2026 Ernst Vranckx</span><span>NL · FR · DE · EN</span></div>
   </div>
 </section>
 
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="grid">
+      <span class="label">07 — Contact</span>
+      <h2>Concerten, pers<br>of een cd? Schrijf naar<br><a href="mailto:listen@ernstvranckx.be">listen@<wbr>ernstvranckx.be</a></h2>
+    </div>
+    <div class="row">
+      <div><span class="label">Telefoon</span><a href="tel:+32496512842">+32 496 51 28 42</a></div>
+      <div><span class="label">Adres</span>Leopoldvest 65<br>B-3300 Tienen</div>
+      <div><span class="label">Luister</span><a data-link="listen.apple">Apple Music</a><a data-link="listen.spotify">Spotify</a></div>
+    </div>
+    <div class="grid nl-block">
+      <span class="label">Nieuwsbrief</span>
+      <form class="nl" data-newsletter novalidate>
+        <label for="nl-email">Je e-mailadres</label>
+        <div class="nl-row">
+          <input id="nl-email" name="email" type="email" autocomplete="email" required placeholder="naam@voorbeeld.be">
+          <button class="btn" type="submit">Inschrijven</button>
+        </div>
+        <p class="nl-consent">Een paar keer per jaar: nieuwe releases en concerten. Uitschrijven kan altijd. <a data-link="privacy">Privacy</a></p>
+        <p class="nl-msg" data-msg role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span>© 2026 Ernst Vranckx</span>
+    <div class="lang" data-langs><a data-lang="nl" href="#" aria-current="true" lang="nl">NL</a><a data-lang="fr" lang="fr">FR</a><a data-lang="de" lang="de">DE</a><a data-lang="en" lang="en">EN</a></div>
+  </div>
+</footer>
+
+<script src="../../assets/js/site.js"></script>
 <script src="../../assets/js/career.js"></script>
 <script src="../../assets/js/piano.js"></script>
 <script>
@@ -368,74 +592,71 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const IMG='../../assets/img/', data=window.CAREER;
   const list=document.getElementById('tlList'), idx=document.getElementById('tlIndex'), now=document.getElementById('tlNow'), ink=document.getElementById('tlInk');
+  // WebP versions and intrinsic sizes of the covers used in the timeline
+  const COVER={'cover-black-is-the-colour.jpg':['cover-black-is-the-colour-600.webp',952],'cover-things-as-they-are.jpg':['cover-things-as-they-are-600.webp',952],
+    'cover-songs-dances.jpg':['cover-songs-dances.webp',500],'cover-a-childs-blessing.jpg':['cover-a-childs-blessing.webp',500],'cover-aquarelle.png':['cover-aquarelle.webp',498]};
   // each event gets a "pitch": its note head sits on a line or space of the vertical staff
   const pitch=[1,2,4,3,5,6,4,7,5,6,8,7,8];
   const kindNL={album:'Album',mijlpaal:'Mijlpaal',prijs:'Prijs',samenwerking:'Samenwerking',tournee:'Tournee'};
+  function setOpen(li,open){ li.classList.toggle('open',open); li.querySelector('.tl-toggle').setAttribute('aria-expanded',open); }
   data.forEach((e,i)=>{
     const li=document.createElement('li'); li.className='tl-item'+(e.type==='album'?' album':''); li.dataset.type=e.type; li.id='tl-'+i;
-    const media=e.cover?'<img src="'+IMG+e.cover+'" alt="Hoes '+e.title+'">':'';
-    li.innerHTML='<div class="yr">'+e.label.replace('Eind jaren','Eind<br>jaren').replace('Jaren','Jaren')+'</div>'+
-      '<div class="tl-head-note"><span class="nh" style="left:'+(pitch[i]*7)+'px"></span></div>'+
-      '<div class="tl-body"><span class="kind">'+kindNL[e.type]+'</span><h3>'+e.title+' <span class="pl">+</span></h3>'+
-      '<div class="tl-more"><div><div class="in">'+media+'<div><p>'+e.text+'</p>'+(e.cat?'<span class="cat">'+e.cat+'</span>':'')+'</div></div></div></div></div>';
-    li.addEventListener('click',()=>{ li.classList.toggle('open'); if(li.classList.contains('open')) Piano.note(pitch[i]+2); });
+    const c=e.cover&&COVER[e.cover], sz=c?c[1]:120;
+    const media=e.cover?'<picture>'+(c?'<source type="image/webp" srcset="'+IMG+'web/'+c[0]+'">':'')+'<img src="'+IMG+e.cover+'" width="'+sz+'" height="'+sz+'" alt="Hoes '+e.title+'" loading="lazy" decoding="async"></picture>':'';
+    li.innerHTML='<div class="yr">'+e.label.replace('Eind jaren','Eind<br>jaren')+'</div>'+
+      '<div class="tl-head-note" aria-hidden="true"><span class="nh" style="left:'+(pitch[i]*7)+'px"></span></div>'+
+      '<div class="tl-body"><span class="kind">'+kindNL[e.type]+'</span><h3><button type="button" class="tl-toggle" aria-expanded="false" aria-controls="tl-more-'+i+'">'+e.title.replace(/ (\S+)$/,' <span class="nw">$1')+'<span class="pl" aria-hidden="true">+</span>'+(/ \S+$/.test(e.title)?'</span>':'')+'</button></h3>'+
+      '<div class="tl-more" id="tl-more-'+i+'"><div><div class="in">'+media+'<div><p>'+e.text+'</p>'+(e.cat?'<span class="cat">'+e.cat+'</span>':'')+'</div></div></div></div></div>';
+    li.querySelector('.tl-toggle').addEventListener('click',()=>{ const open=!li.classList.contains('open'); setOpen(li,open); if(open) Piano.note(pitch[i]+2); });
     list.appendChild(li);
     const a=document.createElement('li'); a.innerHTML='<a href="#tl-'+i+'">'+e.y+' · '+e.title+'</a>'; idx.appendChild(a);
-    a.firstChild.addEventListener('click',ev=>{ev.preventDefault(); li.classList.add('open'); li.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'}); Piano.note(pitch[i]+2);});
+    a.firstChild.addEventListener('click',ev=>{ev.preventDefault(); setOpen(li,true); li.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'}); li.querySelector('.tl-toggle').focus({preventScroll:true}); Piano.note(pitch[i]+2);});
   });
-  list.querySelector('.tl-item:last-of-type').classList.add('open');
+  setOpen(list.lastElementChild,true);
   const items=[...list.querySelectorAll('.tl-item')], links=[...idx.querySelectorAll('a')];
   document.getElementById('chips').addEventListener('click',ev=>{
     const c=ev.target.closest('.chip'); if(!c) return;
-    document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===c));
+    document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c));
     const f=c.dataset.f;
     items.forEach((it,i)=>{ const show = f==='alles' || it.dataset.type===f || (f==='mijlpaal' && ['prijs','tournee'].includes(it.dataset.type));
       it.classList.toggle('hide',!show); links[i].classList.toggle('dim',!show); });
     Piano.chord([-9,-5,-2]); update();
   });
 
-  /* keyboard scroll progress */
-  const kp=document.createElement('div'); kp.className='kprog'; kp.setAttribute('aria-hidden','true');
-  const NK=52; for(let i=0;i<NK;i++) kp.appendChild(document.createElement('i'));
-  for(let i=0;i<NK-1;i++) if([1,1,0,1,1,1,0][i%7]){ const b=document.createElement('b'); b.style.left=((i+1)/NK*100)+'%'; kp.appendChild(b); }
-  document.body.appendChild(kp); const keys=[...kp.querySelectorAll('i')];
-
   /* staff dividers that write a little melody */
-  document.querySelectorAll('.staff-div').forEach(svg=>{
-    const W=1200,H=84, mel=(svg.dataset.melody||'3,5,4,6,8,7,5,4').split(',').map(Number);
-    svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.setAttribute('preserveAspectRatio','none');
+  function drawStaff(svg){
+    const W=1200, mel=(svg.dataset.melody||'3,5,4,6,8,7,5,4').split(',').map(Number);
+    svg.setAttribute('viewBox','0 0 '+W+' 84'); svg.setAttribute('preserveAspectRatio','none');
     let h=''; for(let l=0;l<5;l++){ const y=18+l*12; h+='<line x1="0" x2="'+W+'" y1="'+y+'" y2="'+y+'" style="transition-delay:'+(l*90)+'ms"/>'; }
-    h+='<line x1="1" x2="1" y1="18" y2="66"/><line x1="'+(W-1)+'" x2="'+(W-1)+'" y1="18" y2="66"/>';
+    if(svg.dataset.bars!=='0') h+='<line x1="1" x2="1" y1="18" y2="66"/><line x1="'+(W-1)+'" x2="'+(W-1)+'" y1="18" y2="66"/>';
     mel.forEach((p,i)=>{ const x=90+i*(W-160)/mel.length, y=66-p*6;
       h+='<g class="n" style="transition-delay:'+(700+i*110)+'ms"><ellipse cx="'+x+'" cy="'+y+'" rx="7.5" ry="5.5" transform="rotate(-22 '+x+' '+y+')" fill="#151515"/><rect x="'+(x+6)+'" y="'+(y-34)+'" width="1.6" height="34" fill="#151515"/></g>'; });
     svg.innerHTML=h;
-  });
+  }
   // extra dividers between existing sections
   ['#catalogus','#pers'].forEach(sel=>{ const s=document.querySelector(sel); if(!s) return; const w=document.createElement('div'); w.className='wrap';
-    w.innerHTML='<svg class="staff-div" data-melody="'+(sel==='#pers'?'5,3,4,2,6,5,7,8,6,4':'1,3,5,8,7,5,6,4,2,3')+'"></svg>'; s.parentNode.insertBefore(w,s); });
-  document.querySelectorAll('.staff-div:not([viewBox])').forEach(svg=>{ const W=1200, mel=svg.dataset.melody.split(',').map(Number);
-    svg.setAttribute('viewBox','0 0 '+W+' 84'); svg.setAttribute('preserveAspectRatio','none'); let h='';
-    for(let l=0;l<5;l++){ const y=18+l*12; h+='<line x1="0" x2="'+W+'" y1="'+y+'" y2="'+y+'" style="transition-delay:'+(l*90)+'ms"/>'; }
-    mel.forEach((p,i)=>{ const x=90+i*(W-160)/mel.length, y=66-p*6; h+='<g class="n" style="transition-delay:'+(700+i*110)+'ms"><ellipse cx="'+x+'" cy="'+y+'" rx="7.5" ry="5.5" transform="rotate(-22 '+x+' '+y+')" fill="#151515"/><rect x="'+(x+6)+'" y="'+(y-34)+'" width="1.6" height="34" fill="#151515"/></g>'; });
-    svg.innerHTML=h; });
+    w.innerHTML='<svg class="staff-div" aria-hidden="true" data-bars="0" data-melody="'+(sel==='#pers'?'5,3,4,2,6,5,7,8,6,4':'1,3,5,8,7,5,6,4,2,3')+'"></svg>'; s.parentNode.insertBefore(w,s); });
+  document.querySelectorAll('.staff-div').forEach(drawStaff);
 
   /* reveals */
   const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }),{threshold:.2});
   document.querySelectorAll('.staff-div').forEach(s=>io.observe(s));
-  document.querySelectorAll('.statement p,.sec-head,.release>*,.cat tr,.bio>*,.press figure,.contact h2,.contact .row').forEach((el,i)=>{ if(!reduce){el.classList.add('rv'); el.style.transitionDelay=((i%4)*90)+'ms';} io.observe(el); });
+  document.querySelectorAll('.statement p,.sec-head,.release>*,.cat tr,.bio>*,.press figure,.live>*,.contact h2,.contact .row,.nl-block').forEach((el,i)=>{ if(!reduce){el.classList.add('rv'); el.style.transitionDelay=((i%4)*90)+'ms';} io.observe(el); });
 
-  /* scroll-linked */
+  /* scroll-linked: compact header, progress line, hero parallax, timeline ink */
+  const top=document.querySelector('.top'), prog=document.getElementById('prog');
   const heroImg=document.querySelector('.hero-img img');
   let tick=false;
   function update(){
-    tick=false; const y=scrollY, H=innerHeight, max=document.documentElement.scrollHeight-H;
-    const p=Math.min(1,y/max); keys.forEach((k,i)=>k.classList.toggle('lit',i<=Math.round(p*(NK-1)) && y>4));
+    tick=false; const y=scrollY, H=innerHeight, max=Math.max(1,document.documentElement.scrollHeight-H);
+    top.classList.toggle('scrolled',y>8);
+    prog.style.transform='scaleX('+Math.min(1,y/max)+')';
     if(!reduce && heroImg) heroImg.style.transform='translateY('+(y*.12)+'px) scale(1.08)';
     const r=list.getBoundingClientRect(), mark=H*.55;
     ink.style.height=Math.max(0,Math.min(r.height,mark-r.top))+'px';
     let cur=-1; items.forEach((it,i)=>{ if(it.classList.contains('hide')) return; const passed=it.getBoundingClientRect().top+40<mark; it.classList.toggle('passed',passed); if(passed) cur=i; });
     links.forEach((l,i)=>l.classList.toggle('on',i===cur));
-    if(cur>=0 && now.dataset.i!=cur){ now.dataset.i=cur; now.textContent=data[cur].y==='’80'?'’80':data[cur].y; }
+    if(cur>=0 && now.dataset.i!=cur){ now.dataset.i=cur; now.textContent=data[cur].y; }
   }
   addEventListener('scroll',()=>{ if(!tick){tick=true;requestAnimationFrame(update)} },{passive:true});
   addEventListener('resize',update); update();
