@@ -4,52 +4,98 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ernst Vranckx · Pianist & componist</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/fonts/a-nocturne.css">
 <style>
   :root{
     --bg:#0d0a08; --bg-2:#15100c; --bg-3:#1c1510;
-    --ink:#f1e8dc; --muted:#a8998a; --faint:#5e5248;
-    --amber:#e09a52; --ember:#c4622d; --line:rgba(241,232,220,.12);
+    --ink:#f1e8dc; --muted:#a8998a; --faint:#8f8174;
+    --amber:#e09a52; --ember:#c4622d; --error:#f2967a; --line:rgba(241,232,220,.12);
     --serif:"Cormorant Garamond", Georgia, serif;
     --sans:"Manrope", system-ui, sans-serif;
     --wrap:1240px;
+    --hdr:96px; --hdr-s:72px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
+  html.menu-open{overflow:hidden}
   body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
-  img{display:block;max-width:100%}
+  img{display:block;max-width:100%;height:auto}
+  picture{display:contents}
+  picture>source{display:none}
   a{color:inherit;text-decoration:none}
+  ul,ol{list-style:none}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+  [id]{scroll-margin-top:var(--hdr-s)}
   .wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
   .eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--amber);font-weight:500}
   h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5vw,68px);line-height:1.02;letter-spacing:-.01em}
   h2 em{color:var(--amber);font-style:italic}
 
+  /* skip link */
+  .skip{position:fixed;left:16px;top:12px;z-index:50;padding:12px 20px;background:var(--amber);color:#1a0f07;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;transform:translateY(-160%);transition:transform .2s}
+  .skip:focus{transform:none}
+
   /* nav */
-  .nav{transition:background .4s,padding .4s;position:fixed;inset:0 0 auto 0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:26px 40px;background:linear-gradient(var(--bg) 0%,rgba(13,10,8,0) 100%)}
-  .nav.scrolled{background:rgba(13,10,8,.92);backdrop-filter:blur(10px);padding-top:16px;padding-bottom:16px;border-bottom:1px solid var(--line)}
-  .brand{font-family:var(--serif);font-size:24px;letter-spacing:.04em}
+  .nav{transition:background .4s,height .4s;position:fixed;inset:0 0 auto 0;z-index:20;height:var(--hdr);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 40px;background:linear-gradient(var(--bg) 0%,rgba(13,10,8,0) 100%)}
+  .nav.scrolled{height:var(--hdr-s);background:rgba(13,10,8,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .brand{font-family:var(--serif);font-size:24px;letter-spacing:.04em;line-height:1;padding:10px 0}
   .brand span{color:var(--amber)}
   .menu{display:flex;gap:34px;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
-  .menu a{opacity:.8;transition:opacity .2s}
+  .menu a{opacity:.8;transition:opacity .2s;padding:10px 0}
   .menu a:hover{opacity:1;color:var(--amber)}
-  .lang{display:flex;gap:12px;font-size:12px;letter-spacing:.14em;color:var(--muted)}
-  .lang b{color:var(--ink);font-weight:500;border-bottom:1px solid var(--amber)}
+  .lang{display:flex;font-size:12px;letter-spacing:.14em;color:var(--muted)}
+  .lang a{display:grid;place-items:center;min-width:44px;min-height:44px}
+  .lang a:hover{color:var(--ink)}
+  .lang a[aria-current]{color:var(--ink);font-weight:500;text-decoration:underline;text-decoration-color:var(--amber);text-underline-offset:6px}
+  .menu-btn{display:none;align-items:center;gap:12px;min-height:44px;min-width:44px;padding:0 2px 0 12px;margin-right:-2px;background:none;border:0;color:var(--ink);font:500 12px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;cursor:pointer}
+  .burger{position:relative;width:24px;height:10px}
+  .burger::before,.burger::after{content:"";position:absolute;left:0;right:0;height:1.5px;background:var(--amber);transition:transform .3s,top .3s}
+  .burger::before{top:0}
+  .burger::after{top:8.5px;left:8px}
+  .menu-btn[aria-expanded="true"] .burger::before{top:4.25px;transform:rotate(45deg)}
+  .menu-btn[aria-expanded="true"] .burger::after{top:4.25px;left:0;transform:rotate(-45deg)}
+
+  /* mobile menu panel */
+  .sheet{display:none}
+  .sheet-links{counter-reset:m;border-top:1px solid var(--line)}
+  .sheet-links a{display:flex;align-items:baseline;gap:18px;padding:11px 0;border-bottom:1px solid var(--line);font-family:var(--serif);font-size:32px;line-height:1.15}
+  .sheet-links a::before{counter-increment:m;content:"0" counter(m);font-family:var(--sans);font-size:11px;letter-spacing:.2em;color:var(--amber);font-weight:500;width:22px}
+  .sheet-buy{margin-top:30px}
+  .sheet-buy .btn{width:100%;justify-content:center}
+  .sheet .lang{margin-top:22px;margin-left:-12px}
 
   /* hero */
   .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
-  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% 40%;filter:saturate(.85) contrast(1.05)}
+  .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% 40%;filter:saturate(.85) contrast(1.05);will-change:transform}
   .hero::after{content:"";position:absolute;inset:0;background:
      linear-gradient(90deg,rgba(13,10,8,0) 25%,rgba(13,10,8,.55) 55%,rgba(13,10,8,.95) 85%),
      linear-gradient(0deg,var(--bg) 0%,rgba(13,10,8,0) 35%)}
-  .hero-copy{position:relative;z-index:2;margin-left:auto;width:min(560px,100%);padding:0 56px 14vh 0}
-  .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(64px,9vw,132px);line-height:.88;letter-spacing:-.02em;margin:18px 0 34px}
+  .hero-notes{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;mix-blend-mode:screen;-webkit-mask-image:linear-gradient(#000 40%,transparent 78%);mask-image:linear-gradient(#000 40%,transparent 78%)}
+  .hero-notes svg{position:absolute;top:0;fill:var(--amber);will-change:transform}
+  .hero-copy{position:relative;z-index:2;margin-left:auto;width:min(560px,100%);padding:calc(var(--hdr) + 24px) 56px 9vh 0}
+  .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(64px,8.4vw,124px);line-height:.88;letter-spacing:-.02em;margin:16px 0 30px}
   .hero h1 i{display:block;color:var(--amber);padding-left:.6em}
-  .hero blockquote{font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.4;color:#e8dccd;border-left:1px solid var(--amber);padding-left:22px}
-  .hero cite{display:block;margin-top:12px;font-family:var(--sans);font-style:normal;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .hero blockquote{font-family:var(--serif);font-style:italic;font-size:23px;line-height:1.4;color:#e8dccd;border-left:1px solid var(--amber);padding-left:22px}
+  .hero cite{display:block;margin-top:10px;font-family:var(--sans);font-style:normal;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .hero-album{margin-top:34px;padding-top:26px;border-top:1px solid var(--line)}
+  .ha-head{display:flex;align-items:center;gap:18px;margin-bottom:20px}
+  .ha-thumb{width:64px;height:64px;flex:none;object-fit:cover;box-shadow:0 14px 30px -10px #000,0 0 0 1px rgba(255,255,255,.06)}
+  .ha-head .eyebrow{font-size:11px}
+  .ha-title{display:block;font-family:var(--serif);font-size:26px;line-height:1.1;margin-top:4px}
   .scroll{position:absolute;left:40px;bottom:40px;z-index:2;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;display:flex;align-items:center;gap:14px}
   .scroll::after{content:"";width:1px;height:70px;background:linear-gradient(var(--amber),transparent)}
+
+  /* buttons */
+  .btns{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:14px 28px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;border-radius:2px;transition:.2s}
+  .btn-primary{background:var(--amber);color:#1a0f07}
+  .btn-primary:hover{background:#f0ad68}
+  .btn-ghost{border:1px solid rgba(241,232,220,.35)}
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+  .price{font-family:var(--serif);font-size:20px;line-height:1;letter-spacing:0;text-transform:none;opacity:.8}
+  .buy-note{margin-top:12px;font-size:13px;line-height:1.5;color:var(--muted)}
+  .text-link{display:inline-flex;align-items:center;min-height:44px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:var(--ink);text-decoration:underline;text-decoration-color:rgba(224,154,82,.6);text-underline-offset:6px;transition:color .2s}
+  .text-link:hover{color:var(--amber)}
 
   /* release */
   section{padding:140px 0}
@@ -57,35 +103,19 @@
   .release-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:90px;align-items:center}
   .cover{position:relative}
   .cover img{width:100%;box-shadow:0 40px 90px -20px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.05)}
-  .cover .vinyl{position:absolute;top:4%;right:-14%;width:92%;aspect-ratio:1;border-radius:50%;z-index:-1;background:
+  .cover .vinyl{position:absolute;top:4%;right:-14%;width:92%;aspect-ratio:1;border-radius:50%;z-index:-1;will-change:transform;background:
      radial-gradient(circle,var(--ember) 0 15%,#111 15.5% 17%,#0a0a0a 17.5% 100%);
      box-shadow:inset 0 0 0 1px #222}
   .cover .vinyl::before{content:"";position:absolute;inset:6%;border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 3px,rgba(255,255,255,.025) 3px 4px)}
   .release h2{margin:20px 0 28px}
   .release p.lead{font-size:19px;color:#d9ccbd;max-width:520px}
-  .credits{margin:34px 0;display:grid;grid-template-columns:auto 1fr;gap:6px 28px;font-size:15px;border-top:1px solid var(--line);padding-top:26px}
+  .credits{margin:34px 0 26px;display:grid;grid-template-columns:auto 1fr;gap:6px 28px;font-size:15px;border-top:1px solid var(--line);padding-top:26px}
   .credits dt{font-family:var(--serif);font-size:20px}
   .credits dd{color:var(--muted)}
-  .tracks{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
-  .tracks span{font-size:13px;padding:6px 14px;border:1px solid var(--line);border-radius:99px;color:#cfc2b3}
-  .btns{display:flex;gap:14px;flex-wrap:wrap}
-  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;border-radius:2px;transition:.2s}
-  .btn-primary{background:var(--amber);color:#1a0f07}
-  .btn-primary:hover{background:#f0ad68}
-  .btn-ghost{border:1px solid rgba(241,232,220,.35)}
-  .btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
-  .price{font-family:var(--serif);font-size:20px;letter-spacing:0;text-transform:none;opacity:.8}
-
-  /* player strip */
-  .player{margin-top:56px;display:flex;align-items:center;gap:20px;padding:18px 22px;background:var(--bg-3);border:1px solid var(--line)}
-  .play{width:46px;height:46px;border-radius:50%;background:var(--amber);display:grid;place-items:center;flex:none}
-  .play::after{content:"";border-left:13px solid #1a0f07;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:4px}
-  .player .t{flex:none;max-width:210px;font-family:var(--serif);font-size:20px;line-height:1.2}
-  .player .t small{display:block;font-family:var(--sans);font-size:12px;color:var(--muted);letter-spacing:.08em}
-  .wave{flex:1;min-width:0;overflow:hidden;height:34px;display:flex;align-items:center;gap:3px}
-  .wave i{flex:1;min-width:2px;background:#4a3f36;border-radius:2px}
-  .wave i.on{background:var(--amber)}
-  .player .time{font-size:12px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+  .tracks-label{display:block;font-family:var(--sans);font-style:normal;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:6px}
+  .tracks{margin-bottom:40px;font-family:var(--serif);font-style:italic;font-size:19px;line-height:1.5;color:#cfc2b3;max-width:520px}
+  .tracks li{display:inline}
+  .tracks li+li::before{content:" · ";color:var(--amber);font-style:normal}
 
   /* bio */
   .bio{background:var(--bg-2)}
@@ -96,20 +126,22 @@
   .bio h2{margin:20px 0 40px}
   .bio p{color:#d4c7b8;margin-bottom:22px}
   .bio p:first-of-type::first-letter{font-family:var(--serif);float:left;font-size:88px;line-height:.8;padding:8px 12px 0 0;color:var(--amber)}
-  .timeline{margin-top:50px;border-top:1px solid var(--line)}
-  .timeline div{display:grid;grid-template-columns:90px 1fr;padding:18px 0;border-bottom:1px solid var(--line)}
-  .timeline b{font-family:var(--serif);font-weight:500;font-size:22px;color:var(--amber)}
-  .timeline span{color:#cfc2b3;font-size:15px}
 
   /* discography */
   .disco-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:60px;gap:40px}
+  .disco-head h2{margin-top:20px}
   .disco-head p{max-width:380px;color:var(--muted)}
   .albums{display:grid;grid-template-columns:repeat(5,1fr);gap:26px}
+  .album{position:relative}
   .album img{width:100%;aspect-ratio:1;object-fit:cover;transition:transform .5s,filter .5s;filter:saturate(.9)}
-  .album:hover img{transform:translateY(-8px);filter:saturate(1.1)}
-  .album .y{margin-top:18px;font-size:12px;letter-spacing:.2em;color:var(--amber)}
-  .album h3{font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.15;margin:4px 0}
+  .album:has(.album-link):hover img{transform:translateY(-8px);filter:saturate(1.1)}
+  .album:has(.album-link):hover h3{color:var(--amber)}
+  .album-link{position:absolute;inset:0;z-index:1}
+  .album-link:focus-visible{outline-offset:8px}
+  .album .y{margin-top:18px;font-size:12px;letter-spacing:.2em;color:var(--amber);font-weight:500}
+  .album h3{font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.15;margin:4px 0;transition:color .2s}
   .album p{font-size:13px;color:var(--muted);line-height:1.5}
+  .album .cat{margin-top:6px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
 
   /* press */
   .press{background:var(--bg-2);position:relative;overflow:hidden}
@@ -125,14 +157,15 @@
 
   /* live */
   .live{position:relative;padding:0;min-height:80vh;display:flex;align-items:center;overflow:hidden}
-  .live img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .live-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .live::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,10,8,.92) 0%,rgba(13,10,8,.55) 45%,rgba(13,10,8,.1) 100%)}
-  .live .wrap{position:relative;z-index:2;width:100%}
+  .live .wrap{position:relative;z-index:2;width:100%;padding-top:110px;padding-bottom:110px}
   .live-box{max-width:500px}
   .live h2{margin:20px 0 24px}
   .live p{color:#d9ccbd;margin-bottom:34px}
   .formations{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px}
   .formations span{font-family:var(--serif);font-size:18px;padding:8px 18px;border:1px solid rgba(224,154,82,.45);color:var(--amber)}
+  .live .btns{align-items:center;gap:14px 26px}
 
   /* contact */
   .contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:90px}
@@ -144,120 +177,216 @@
   .contact-grid>*{min-width:0}
   .contact-list a:hover strong{color:var(--amber)}
   .newsletter{background:var(--bg-3);padding:44px;border:1px solid var(--line);align-self:start}
-  .newsletter h3{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.1;margin-bottom:12px}
-  .newsletter p{color:var(--muted);font-size:15px;margin-bottom:26px}
-  .field{display:flex;border-bottom:1px solid var(--amber)}
-  .field input{flex:1;background:none;border:0;color:var(--ink);font:inherit;padding:14px 0;outline:none}
-  .field button{background:none;border:0;color:var(--amber);font:inherit;font-size:13px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+  .newsletter h3{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.1;margin-bottom:26px}
+  .newsletter label{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:4px}
+  .field{display:flex;align-items:stretch;gap:16px;border-bottom:1px solid var(--amber);transition:border-color .2s}
+  .field:has(input:focus-visible){outline:2px solid var(--amber);outline-offset:6px}
+  .field:has([aria-invalid="true"]){border-bottom-color:var(--error)}
+  .field input{flex:1;min-width:0;background:none;border:0;border-radius:0;color:var(--ink);font:inherit;font-size:17px;padding:12px 0;min-height:48px}
+  .field input:focus{outline:none}
+  .field input::placeholder{color:var(--faint);opacity:1}
+  .field button{flex:none;min-height:48px;padding:0 2px;background:none;border:0;color:var(--amber);font:inherit;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;cursor:pointer;transition:color .2s}
+  .field button:hover{color:#f3c48c}
+  .field button::after{content:" →";letter-spacing:0}
+  .consent{margin-top:16px;font-size:13px;line-height:1.55;color:var(--muted)}
+  .consent a{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(224,154,82,.6);text-underline-offset:3px}
+  .consent a:hover{color:var(--amber)}
+  .nl-msg{font-size:14px;line-height:1.5}
+  .nl-msg:not(:empty){margin-top:16px;padding:12px 14px 12px 16px;border-left:2px solid currentColor}
+  .nl-msg[data-state="error"]{color:var(--error);background:rgba(242,150,122,.07)}
+  .nl-msg[data-state="ok"]{color:var(--amber);background:rgba(224,154,82,.08)}
 
-  footer{padding:40px 0;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
-  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  /* footer */
+  footer{padding:80px 0 34px;border-top:1px solid var(--line);background:var(--bg);font-size:14px;color:var(--faint)}
+  .f-top{display:grid;grid-template-columns:1.3fr repeat(3,auto);gap:40px 80px;align-items:start;padding-bottom:56px}
+  .f-brand .brand{display:inline-block;padding:0;color:var(--ink)}
+  .f-brand p{margin-top:14px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint)}
+  .f-col h2{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;line-height:1.7}
+  .f-nav ul{columns:2;column-gap:56px}
+  .f-col li{break-inside:avoid}
+  .f-col a{display:inline-flex;align-items:center;min-height:34px;color:var(--muted);transition:color .2s}
+  .f-col a:hover{color:var(--ink)}
+  .f-col:not(:has(a)){display:none}
+  .f-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px 28px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--line);font-size:13px}
+  .f-bottom .f-legal{display:flex;align-items:center;gap:6px 28px;flex-wrap:wrap}
+  .f-bottom a{display:inline-flex;align-items:center;min-height:44px;color:var(--muted)}
+  .f-bottom a:hover{color:var(--ink)}
+  footer .lang{margin-right:-12px}
 
   @media (max-width:980px){
-    .menu{display:none}
-    .nav{padding:20px 22px}
+    :root{--hdr:72px;--hdr-s:64px}
+    .menu,.nav > .lang{display:none}
+    .menu-btn{display:inline-flex}
+    .nav{padding:0 22px}
+    .sheet{display:flex;flex-direction:column;position:fixed;inset:0;z-index:19;padding:calc(var(--hdr) + 14px) 22px 32px;overflow-y:auto;overscroll-behavior:contain;
+      background:radial-gradient(ellipse at 90% 0%,rgba(196,98,45,.2),transparent 55%),var(--bg);
+      visibility:hidden;opacity:0;transform:translateY(-10px);transition:opacity .3s,transform .3s,visibility 0s .3s}
+    .sheet.open{visibility:visible;opacity:1;transform:none;transition:opacity .3s,transform .3s}
+    html.menu-open .nav{background:var(--bg);border-bottom-color:transparent}
     .wrap{padding:0 22px}
     section{padding:90px 0}
-    .hero::after{background:linear-gradient(0deg,var(--bg) 8%,rgba(13,10,8,.6) 50%,rgba(13,10,8,.2) 100%)}
-    .hero-copy{padding:0 22px 12vh}
+    .hero{align-items:flex-end}
+    .hero-bg{object-position:30% 30%;height:62%}
+    .hero::after{background:linear-gradient(0deg,var(--bg) 40%,rgba(13,10,8,.55) 62%,rgba(13,10,8,.1) 100%)}
+    .hero-copy{padding:calc(var(--hdr) + 24px) 22px 36px}
+    .hero h1{margin:12px 0 22px}
+    .hero blockquote{font-size:19px;padding-left:18px}
+    .hero-album{margin-top:24px;padding-top:20px}
+    .ha-head{margin-bottom:16px}
     .scroll{display:none}
     .release-grid,.bio-grid,.contact-grid{grid-template-columns:1fr;gap:56px}
     .cover{max-width:440px}
     .bio-img{position:static}
-    .albums{grid-template-columns:repeat(2,1fr)}
+    .albums{grid-template-columns:repeat(2,1fr);gap:34px 18px}
     .quotes{grid-template-columns:1fr}
     .disco-head{flex-direction:column;align-items:start}
-    .wave{display:none}
+    .newsletter{padding:32px 24px}
+    .f-top{grid-template-columns:1fr 1fr;gap:36px 24px}
+    .f-brand{grid-column:1/-1}
+    .f-nav ul{column-gap:24px}
+  }
+  @media (max-width:560px){
+    .btns .btn{padding:14px 20px;letter-spacing:.12em}
+    .hero .btns{gap:10px}
+    .field{flex-direction:column;align-items:stretch;gap:0;border-bottom:0}
+    .field input{border-bottom:1px solid var(--amber)}
+    .field:has(input:focus-visible){outline:none}
+    .field input:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+    .field [aria-invalid="true"]{border-bottom-color:var(--error)}
+    .field button{margin-top:16px;min-height:52px;background:var(--amber);color:#1a0f07;border-radius:2px}
+    .field button:hover{background:#f0ad68;color:#1a0f07}
   }
 
   /* ===== Timeline: playable keyboard ===== */
   .tl{background:radial-gradient(ellipse at 80% 0%,rgba(196,98,45,.16),transparent 55%),var(--bg);overflow:hidden}
   .tl-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;margin-bottom:50px}
   .tl-head h2{margin-top:20px}
-  .tl-ctrl{display:flex;gap:10px}
-  .tl-ctrl button{font:inherit;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;padding:13px 20px;background:none;color:var(--ink);border:1px solid rgba(241,232,220,.3);cursor:pointer;transition:.2s}
+  .tl-ctrl{display:flex;gap:10px;flex-wrap:wrap}
+  .tl-ctrl button{font:inherit;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;min-height:46px;padding:12px 20px;background:none;color:var(--ink);border:1px solid rgba(241,232,220,.3);cursor:pointer;transition:.2s}
   .tl-ctrl button:hover,.tl-ctrl button.on{border-color:var(--amber);color:var(--amber)}
-  .tl-card{display:grid;grid-template-columns:240px 1fr 220px;gap:50px;align-items:center;min-height:250px;padding:0 0 46px}
-  .tl-year{font-family:var(--serif);font-size:128px;line-height:.8;color:var(--amber);letter-spacing:-.03em}
+  .tl-card{display:grid;grid-template-columns:240px 1fr 220px;grid-template-areas:"year body media";gap:50px;align-items:center;min-height:300px;padding:0 0 46px}
+  .tl-year{grid-area:year;font-family:var(--serif);font-size:128px;line-height:.8;color:var(--amber);letter-spacing:-.03em}
+  .tl-year small{display:block;font-size:.3em;font-style:italic;letter-spacing:0;line-height:1;margin:0 0 .25em .1em;color:var(--muted)}
+  .tl-body{grid-area:body}
   .tl-type{display:inline-block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:5px 10px;margin-bottom:16px}
   .tl-type.album{color:#1a0f07;background:var(--amber);border-color:var(--amber)}
   .tl-title{font-family:var(--serif);font-size:44px;line-height:1.05;margin-bottom:12px}
   .tl-text{color:#d4c7b8;max-width:560px}
   .tl-cat{margin-top:12px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
-  .tl-media{aspect-ratio:1;position:relative}
+  .tl-media{grid-area:media;aspect-ratio:1;position:relative}
   .tl-media img{width:100%;height:100%;object-fit:cover;box-shadow:0 30px 60px -20px #000}
   .tl-media .ph{position:absolute;inset:0;border:1px solid var(--line);display:grid;place-items:center;color:rgba(224,154,82,.5)}
   .tl-media .ph svg{width:44%;fill:currentColor}
   .tl-anim{animation:tlIn .55s cubic-bezier(.2,.7,.2,1)}
   @keyframes tlIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-  .kb-scroll{overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
-  .kb{position:relative;display:flex;min-width:760px;height:230px;padding:14px 14px 0;background:linear-gradient(#1b1410,#0b0806);border-radius:6px 6px 0 0;box-shadow:inset 0 2px 0 rgba(255,255,255,.05),0 40px 80px -30px #000}
+  .kb{--kb-pad:14px;position:relative;display:flex;height:230px;padding:var(--kb-pad) var(--kb-pad) 0;background:linear-gradient(#1b1410,#0b0806);border-radius:6px 6px 0 0;box-shadow:inset 0 2px 0 rgba(255,255,255,.05),0 40px 80px -30px #000}
   .kb::before{content:"";position:absolute;left:0;right:0;top:0;height:14px;background:linear-gradient(90deg,#2a1d14,#4a2f1c,#2a1d14);border-radius:6px 6px 0 0}
-  .wk{position:relative;flex:1;margin:0 1px;border:0;cursor:pointer;background:linear-gradient(#f3ece1 0%,#fffaf2 70%,#e5dccd 100%);border-radius:0 0 6px 6px;box-shadow:inset 0 -10px 0 #d6cbb8,0 2px 0 #000;transition:transform .12s,box-shadow .12s,background .2s;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-bottom:22px;font-family:var(--sans);color:#3a2c20}
+  .wk{position:relative;flex:1;min-width:0;margin:0 1px;border:0;cursor:pointer;background:linear-gradient(#f3ece1 0%,#fffaf2 70%,#e5dccd 100%);border-radius:0 0 6px 6px;box-shadow:inset 0 -10px 0 #d6cbb8,0 2px 0 #000;transition:transform .12s,box-shadow .12s,background .2s;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-bottom:22px;font-family:var(--sans);color:#3a2c20}
   .wk:hover{background:linear-gradient(#f6efe4,#fff 70%,#eadfcf)}
-  .wk .yr{font-family:var(--serif);font-size:19px;font-weight:600;line-height:1}
+  .wk .yr{font-family:var(--serif);font-size:19px;font-weight:600;line-height:1;text-align:center;white-space:nowrap}
+  .wk .yr-s{display:none}
+  .wk .yr{position:relative}
+  .wk .yr small{font-size:.8em;font-weight:500;font-style:italic;margin-right:.25em}
   .wk .dot{width:7px;height:7px;border-radius:50%;background:#c9bba6;margin-bottom:10px}
   .wk.album .dot{background:var(--ember)}
   .wk.on{transform:translateY(5px);background:linear-gradient(#f1c58f,#f7dcb4 70%,#e3a868);box-shadow:inset 0 -4px 0 #c88a4a,0 0 40px rgba(224,154,82,.55)}
-  .wk:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
-  .bk{position:absolute;top:14px;width:calc((100% - 28px)/13*.58);height:58%;background:linear-gradient(#2a2a2a,#050505 85%);border-radius:0 0 4px 4px;box-shadow:inset 0 -6px 0 #333,0 4px 6px rgba(0,0,0,.6);transform:translateX(-50%);z-index:2;pointer-events:none}
+  .wk:focus-visible{outline:2px solid var(--amber);outline-offset:2px;z-index:3}
+  .bk{position:absolute;top:var(--kb-pad);width:calc((100% - 2 * var(--kb-pad))/13*.58);height:58%;background:linear-gradient(#2a2a2a,#050505 85%);border-radius:0 0 4px 4px;box-shadow:inset 0 -6px 0 #333,0 4px 6px rgba(0,0,0,.6);transform:translateX(-50%);z-index:2;pointer-events:none}
   .tl-hint{margin-top:18px;font-size:13px;color:var(--faint);letter-spacing:.06em}
-  .legend{display:flex;gap:22px;margin-top:6px;font-size:12px;color:var(--muted)}
+  .legend{display:flex;gap:6px 22px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--muted)}
   .legend i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;background:#c9bba6}
   .legend i.a{background:var(--ember)}
 
   /* ===== Scroll effects ===== */
-  .notes-layer{position:fixed;inset:0;pointer-events:none;z-index:15;overflow:hidden;mix-blend-mode:screen}
-  .notes-layer svg{position:absolute;fill:var(--amber);will-change:transform}
   .keys-divider{position:relative;height:70px;display:flex;background:#000;overflow:hidden;border-top:1px solid #2a1d14}
   .keys-divider i{flex:1;margin:0 1px;background:linear-gradient(#e9e0d2,#fffaf2);border-radius:0 0 3px 3px;transition:transform .18s,background .18s}
   .keys-divider i.p{transform:translateY(4px);background:linear-gradient(#e09a52,#f3c48c)}
   .keys-divider b{position:absolute;top:0;width:1.3%;height:60%;background:#0b0b0b;border-radius:0 0 2px 2px;transform:translateX(-50%);z-index:2}
   .rv{opacity:0;transform:translateY(34px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
   .rv.in{opacity:1;transform:none}
-  .wave i{transform-origin:center}
-  .player.inview .wave i{animation:eq 1.1s ease-in-out infinite alternate}
-  @keyframes eq{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
-  .cover .vinyl{will-change:transform}
-  .hero img{will-change:transform}
   @media (max-width:980px){
-    .tl-card{grid-template-columns:1fr;gap:18px}
+    .tl-card{grid-template-columns:1fr 116px;grid-template-areas:"year media" "body body";gap:22px 20px;align-items:end;min-height:var(--tl-min,0px);align-content:start}
     .tl-year{font-size:84px}
-    .tl-media{max-width:200px}
+    .kb{--kb-pad:8px;height:178px;padding-top:12px}
+    .kb::before{height:12px}
+    .bk{top:12px}
+    .wk{margin:0 .5px;padding-bottom:14px;border-radius:0 0 4px 4px}
+    .wk .yr{font-size:14px}
+    .wk .yr-l{display:none}
+    .wk .yr-s{display:block}
+    .wk .yr-s small{position:absolute;left:50%;bottom:calc(100% + 18px);transform:translateX(-50%);margin:0;font-size:11px}
+    .wk .dot{width:6px;height:6px;margin-bottom:8px}
   }
   @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
     .rv{opacity:1;transform:none;transition:none}
-    .notes-layer{display:none}
-    .player.inview .wave i,.tl-anim{animation:none}
+    .hero-notes{display:none}
+    .tl-anim{animation:none}
+    .sheet,.sheet.open{transition:none}
   }
 </style>
 </head>
 <body>
+<a class="skip" href="#inhoud">Naar inhoud</a>
 
-<nav class="nav">
-  <a class="brand" href="#">Ernst <span>Vranckx</span></a>
-  <div class="menu">
+<header class="nav">
+  <a class="brand" href="#top">Ernst <span>Vranckx</span></a>
+  <nav class="menu" aria-label="Hoofdmenu">
     <a href="#muziek">Muziek</a><a href="#bio">Bio</a><a href="#tijdlijn">Tijdlijn</a><a href="#disco">Discografie</a><a href="#pers">Pers</a><a href="#live">Live</a><a href="#contact">Contact</a>
-  </div>
-  <div class="lang"><b>NL</b><a href="#">FR</a><a href="#">DE</a><a href="#">EN</a></div>
-</nav>
+  </nav>
+  <div class="lang" data-langs><a data-lang="nl" href="#" aria-current="true" lang="nl">NL</a><a data-lang="fr" lang="fr">FR</a><a data-lang="de" lang="de">DE</a><a data-lang="en" lang="en">EN</a></div>
+  <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu"><span data-menu-label>Menu</span><span class="burger" aria-hidden="true"></span></button>
+</header>
 
-<header class="hero">
-  <img src="../../assets/img/portrait-2.jpg" alt="Ernst Vranckx aan de vleugel">
+<div class="sheet" id="menu" data-menu>
+  <nav class="sheet-links" aria-label="Menu">
+    <a href="#muziek">Muziek</a><a href="#bio">Bio</a><a href="#tijdlijn">Tijdlijn</a><a href="#disco">Discografie</a><a href="#pers">Pers</a><a href="#live">Live</a><a href="#contact">Contact</a>
+  </nav>
+  <div class="sheet-buy">
+    <a class="btn btn-primary" data-link="buyCd" href="https://www.paypal.com/cgi-bin/webscr?business=ernst.vranckx%40hotmail.com&amp;cmd=_xclick&amp;amount=22.00&amp;item_name=Ernst%20Vranckx%20Trio%20-%20Black%20Is%20The%20Colour%20(CD)&amp;currency_code=EUR&amp;add=1">Koop de cd <span class="price">· €22</span></a>
+    <p class="buy-note">Afrekenen via PayPal · verzendkosten zie je vóór je betaalt.</p>
+  </div>
+  <div class="lang" data-langs><a data-lang="nl" href="#" aria-current="true" lang="nl">NL</a><a data-lang="fr" lang="fr">FR</a><a data-lang="de" lang="de">DE</a><a data-lang="en" lang="en">EN</a></div>
+</div>
+
+<main id="inhoud">
+
+<div class="hero" id="top">
+  <picture>
+    <source type="image/webp" srcset="../../assets/img/web/portrait-2-800.webp 800w, ../../assets/img/web/portrait-2-1600.webp 1600w" sizes="100vw">
+    <img class="hero-bg" src="../../assets/img/portrait-2.jpg" width="2000" height="1335" fetchpriority="high" decoding="async" alt="Ernst Vranckx aan de vleugel">
+  </picture>
   <div class="hero-copy">
     <div class="eyebrow">Jazzpianist &amp; componist · Leuven</div>
     <h1>Ernst <i>Vranckx</i></h1>
     <blockquote>“Er zijn weinig goede componisten. Ernst is één van de goede. Ik hou van zijn songs, ze vertellen me iets.”
       <cite>Kenny Wheeler — De Standaard</cite></blockquote>
+    <div class="hero-album">
+      <div class="ha-head">
+        <picture>
+          <source type="image/webp" srcset="../../assets/img/web/cover-black-is-the-colour-600.webp">
+          <img class="ha-thumb" src="../../assets/img/cover-black-is-the-colour.jpg" width="952" height="952" decoding="async" alt="">
+        </picture>
+        <p><span class="eyebrow">Nieuwste album</span><span class="ha-title">Black Is The Colour</span></p>
+      </div>
+      <div class="btns">
+        <a class="btn btn-primary" data-link="buyCd" href="https://www.paypal.com/cgi-bin/webscr?business=ernst.vranckx%40hotmail.com&amp;cmd=_xclick&amp;amount=22.00&amp;item_name=Ernst%20Vranckx%20Trio%20-%20Black%20Is%20The%20Colour%20(CD)&amp;currency_code=EUR&amp;add=1">Koop de cd <span class="price">· €22</span></a>
+        <a class="btn btn-ghost" data-link="listen.apple" href="https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000">Beluister</a>
+      </div>
+      <p class="buy-note">Afrekenen via PayPal · verzendkosten zie je vóór je betaalt.</p>
+    </div>
   </div>
-  <div class="scroll">Scroll</div>
-</header>
+  <div class="scroll" aria-hidden="true">Scroll</div>
+</div>
 
 <section class="release" id="muziek">
   <div class="wrap release-grid">
     <div class="cover">
       <div class="vinyl"></div>
-      <img src="../../assets/img/cover-black-is-the-colour.jpg" alt="Black Is The Colour — albumhoes">
+      <picture>
+        <source type="image/webp" srcset="../../assets/img/web/cover-black-is-the-colour-600.webp 600w, ../../assets/img/web/cover-black-is-the-colour.webp 952w" sizes="(max-width:980px) min(440px, 90vw), 560px">
+        <img src="../../assets/img/cover-black-is-the-colour.jpg" width="952" height="952" loading="lazy" decoding="async" alt="Black Is The Colour — albumhoes">
+      </picture>
     </div>
     <div>
       <div class="eyebrow">Nieuw album · Eden River Records</div>
@@ -270,18 +399,17 @@
         <dt>Hayden Chisholm</dt><dd>sax &amp; vocals</dd>
       </dl>
       <div class="tracks">
-        <span>Black Is The Colour</span><span>Basil’s Hopscotch</span><span>Sketches of Pain</span><span>Gorgeous Tree</span><span>Aeolian Five</span><span>The Nearness of You</span><span>+ meer</span>
+        <span class="tracks-label">Op het album</span>
+        <ul>
+          <li>Black Is The Colour</li><li>Basil’s Hopscotch</li><li>Sketches of Pain</li><li>Gorgeous Tree</li><li>Aeolian Five</li><li>The Nearness of You</li>
+        </ul>
       </div>
       <div class="btns">
-        <a class="btn btn-primary" href="https://www.paypal.com/cgi-bin/webscr?business=ernst.vranckx%40hotmail.com&cmd=_xclick&amount=22.00&item_name=Ernst%20Vranckx%20Trio%20-%20Black%20Is%20The%20Colour%20(CD)&currency_code=EUR&add=1">Koop de CD <span class="price">€ 22</span></a>
-        <a class="btn btn-ghost" href="https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000">Beluister</a>
+        <a class="btn btn-primary" data-link="buyCd" href="https://www.paypal.com/cgi-bin/webscr?business=ernst.vranckx%40hotmail.com&amp;cmd=_xclick&amp;amount=22.00&amp;item_name=Ernst%20Vranckx%20Trio%20-%20Black%20Is%20The%20Colour%20(CD)&amp;currency_code=EUR&amp;add=1">Koop de cd <span class="price">· €22</span></a>
+        <a class="btn btn-ghost" data-link="listen.apple" href="https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000">Beluister</a>
+        <a class="btn btn-ghost" data-link="listen.spotify">Spotify</a>
       </div>
-      <div class="player">
-        <div class="play"></div>
-        <div class="t">Black Is The Colour<small>Ernst Vranckx Trio ft. Hayden Chisholm</small></div>
-        <div class="wave" id="wave"></div>
-        <div class="time">Fragment</div>
-      </div>
+      <p class="buy-note">Afrekenen via PayPal · verzendkosten zie je vóór je betaalt.</p>
     </div>
   </div>
 </section>
@@ -289,7 +417,10 @@
 <section class="bio" id="bio">
   <div class="wrap bio-grid">
     <figure class="bio-img">
-      <img src="../../assets/img/trio-2.jpg" alt="Ernst Vranckx live">
+      <picture>
+        <source type="image/webp" srcset="../../assets/img/web/trio-2-800.webp 800w" sizes="(max-width:980px) 100vw, 560px">
+        <img src="../../assets/img/trio-2.jpg" width="1385" height="897" loading="lazy" decoding="async" alt="Ernst Vranckx live">
+      </picture>
       <figcaption>Live met het kwartet</figcaption>
     </figure>
     <div>
@@ -310,30 +441,47 @@
       <div><div class="eyebrow">Tijdlijn</div><h2>Een carrière in<br><em>dertien noten</em></h2></div>
       <div class="tl-ctrl">
         <button id="tlPlay" type="button">▶ Speel de tijdlijn</button>
-        <button id="tlMute" type="button">♪ Geluid aan</button>
+        <button id="tlMute" type="button" aria-pressed="false">♪ Geluid aan</button>
       </div>
     </div>
     <div class="tl-card" id="tlCard" aria-live="polite"></div>
-    <div class="kb-scroll"><div class="kb" id="kb" role="tablist" aria-label="Tijdlijn van Ernst Vranckx"></div></div>
+    <div class="kb" id="kb" role="group" aria-label="Tijdlijn van Ernst Vranckx: kies een jaar"></div>
     <div class="legend"><span><i class="a"></i>Album</span><span><i></i>Mijlpaal, prijs of samenwerking</span></div>
-    <p class="tl-hint">Speel op de toetsen, of gebruik ← → om door zijn carrière te wandelen.</p>
+    <p class="tl-hint">Speel op de toetsen, of gebruik ← → op het klavier om door zijn carrière te wandelen.</p>
   </div>
 </section>
-
-<div class="keys-divider" data-keys="48" aria-hidden="true"></div>
 
 <section id="disco">
   <div class="wrap">
     <div class="disco-head">
-      <div><div class="eyebrow">Discografie</div><h2 style="margin-top:20px">Vijf albums,<br><em>één stem</em></h2></div>
+      <div><div class="eyebrow">Discografie</div><h2>Vijf albums,<br><em>één stem</em></h2></div>
       <p>Van het lyrische Aquarelle tot het intieme Black Is The Colour — beluister elk album of bestel de cd rechtstreeks bij Ernst.</p>
     </div>
     <div class="albums">
-      <a class="album" href="https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000"><img src="../../assets/img/cover-black-is-the-colour.jpg" alt=""><div class="y">2024</div><h3>Black Is The Colour</h3><p>Trio ft. Hayden Chisholm · Eden River</p></a>
-      <a class="album" href="https://music.apple.com/be/album/things-as-they-are-feat-paul-g-ulrich-kris-duerinckx/1498624574"><img src="../../assets/img/cover-things-as-they-are.jpg" alt=""><div class="y">2020</div><h3>Things As They Are</h3><p>Trio · Eden River</p></a>
-      <a class="album" href="https://music.apple.com/be/album/songs-dances/1512898739"><img src="../../assets/img/cover-songs-dances.jpg" alt=""><div class="y">W.E.R.F. 023</div><h3>Songs &amp; Dances</h3><p>Ernst Vranckx Quintet</p></a>
-      <a class="album" href="https://music.apple.com/be/album/a-childs-blessing/1513079355"><img src="../../assets/img/cover-a-childs-blessing.jpg" alt=""><div class="y">W.E.R.F. 013</div><h3>A Child’s Blessing</h3><p>Quartet feat. Kenny Wheeler</p></a>
-      <a class="album" href="#"><img src="../../assets/img/cover-aquarelle.png" alt=""><div class="y">Lyrae</div><h3>Aquarelle</h3><p>met Stefan Bracaval</p></a>
+      <article class="album">
+        <picture><source type="image/webp" srcset="../../assets/img/web/cover-black-is-the-colour-600.webp 600w, ../../assets/img/web/cover-black-is-the-colour.webp 952w" sizes="(max-width:980px) 45vw, 220px"><img src="../../assets/img/cover-black-is-the-colour.jpg" width="952" height="952" loading="lazy" decoding="async" alt=""></picture>
+        <div class="y">2024</div><h3>Black Is The Colour</h3><p>Trio ft. Hayden Chisholm</p><div class="cat">Eden River · ERR-CD-25</div>
+        <a class="album-link" data-link="albums.black-is-the-colour.apple" href="https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000" aria-label="Black Is The Colour beluisteren op Apple Music"></a>
+      </article>
+      <article class="album">
+        <picture><source type="image/webp" srcset="../../assets/img/web/cover-things-as-they-are-600.webp 600w, ../../assets/img/web/cover-things-as-they-are.webp 952w" sizes="(max-width:980px) 45vw, 220px"><img src="../../assets/img/cover-things-as-they-are.jpg" width="952" height="952" loading="lazy" decoding="async" alt=""></picture>
+        <div class="y">2020</div><h3>Things As They Are</h3><p>Trio met Paul G. Ulrich &amp; Kris Duerinckx</p><div class="cat">Eden River · ERR-DD-06</div>
+        <a class="album-link" data-link="albums.things-as-they-are.apple" href="https://music.apple.com/be/album/things-as-they-are-feat-paul-g-ulrich-kris-duerinckx/1498624574" aria-label="Things As They Are beluisteren op Apple Music"></a>
+      </article>
+      <article class="album">
+        <picture><source type="image/webp" srcset="../../assets/img/web/cover-songs-dances.webp"><img src="../../assets/img/cover-songs-dances.jpg" width="500" height="500" loading="lazy" decoding="async" alt=""></picture>
+        <div class="y">2001</div><h3>Songs &amp; Dances</h3><p>Ernst Vranckx Quintet</p><div class="cat">W.E.R.F. 023</div>
+        <a class="album-link" data-link="albums.songs-dances.apple" href="https://music.apple.com/be/album/songs-dances/1512898739" aria-label="Songs &amp; Dances beluisteren op Apple Music"></a>
+      </article>
+      <article class="album">
+        <picture><source type="image/webp" srcset="../../assets/img/web/cover-a-childs-blessing.webp"><img src="../../assets/img/cover-a-childs-blessing.jpg" width="500" height="500" loading="lazy" decoding="async" alt=""></picture>
+        <div class="y">1998</div><h3>A Child’s Blessing</h3><p>Quartet feat. Kenny Wheeler</p><div class="cat">W.E.R.F. 013</div>
+        <a class="album-link" data-link="albums.a-childs-blessing.apple" href="https://music.apple.com/be/album/a-childs-blessing/1513079355" aria-label="A Child’s Blessing beluisteren op Apple Music"></a>
+      </article>
+      <article class="album">
+        <picture><source type="image/webp" srcset="../../assets/img/web/cover-aquarelle.webp"><img src="../../assets/img/cover-aquarelle.png" width="498" height="498" loading="lazy" decoding="async" alt=""></picture>
+        <div class="y">1996</div><h3>Aquarelle</h3><p>met Stefan Bracaval</p><div class="cat">Lyrae 9609006</div>
+      </article>
     </div>
   </div>
 </section>
@@ -348,20 +496,25 @@
       <figure><blockquote>“Les thèmes évanescents du Flandrien qui peint des brumes à la Turner.”</blockquote><figcaption>Jazz Hot (FR)<span>A Child’s Blessing</span></figcaption></figure>
       <figure><blockquote>“Vranckx lijkt mij een volbloed romanticus, wiens soms opvallend sterke composities vast ook in de smaak zouden vallen bij Manfred Eicher van ECM.”</blockquote><figcaption>Jazz Nu (NL)<span>A Child’s Blessing</span></figcaption></figure>
     </div>
-    <div class="more"><a class="btn btn-ghost" href="#">Alle persberichten</a></div>
+    <div class="more"><a class="btn btn-ghost" data-link="pressAll" data-link-remove=".more">Alle persberichten</a></div>
   </div>
 </section>
 
-<div class="keys-divider" data-keys="64" aria-hidden="true"></div>
 <section class="live" id="live">
-  <img src="../../assets/img/trio-wide.jpg" alt="Ernst Vranckx kwartet op het podium">
+  <picture>
+    <source type="image/webp" srcset="../../assets/img/web/trio-wide-800.webp 800w, ../../assets/img/web/trio-wide-1600.webp 1600w" sizes="100vw">
+    <img class="live-bg" src="../../assets/img/trio-wide.jpg" width="1938" height="933" loading="lazy" decoding="async" alt="Ernst Vranckx kwartet op het podium">
+  </picture>
   <div class="wrap">
     <div class="live-box">
       <div class="eyebrow">Live &amp; boekingen</div>
       <h2>Breng het <em>trio</em><br>naar uw zaal</h2>
       <p>Clubs, cultuurcentra en festivals — in België en daarbuiten. Ernst speelde al in heel Europa, Zuidelijk Afrika en China.</p>
       <div class="formations"><span>Trio</span><span>Kwartet ft. Hayden Chisholm</span></div>
-      <a class="btn btn-primary" href="#contact">Boekingsaanvraag</a>
+      <div class="btns">
+        <a class="btn btn-primary" data-booking href="mailto:listen@ernstvranckx.be">Boekingsaanvraag</a>
+        <a class="text-link" data-link="pressKit">Presskit &amp; technische fiche</a>
+      </div>
     </div>
   </div>
 </section>
@@ -377,22 +530,49 @@
         <div><small>Adres</small><strong>Leopoldvest 65, 3300 Tienen</strong></div>
       </div>
     </div>
-    <div class="newsletter">
+    <form class="newsletter" data-newsletter novalidate>
       <h3>Blijf op de hoogte</h3>
-      <p>Nieuwe releases en concertdata, een paar keer per jaar in uw mailbox.</p>
-      <div class="field"><input type="email" placeholder="uw e-mailadres"><button>Inschrijven</button></div>
-    </div>
+      <label for="nl-email">Uw e-mailadres</label>
+      <div class="field">
+        <input id="nl-email" name="email" type="email" autocomplete="email" required placeholder="naam@voorbeeld.be">
+        <button type="submit">Inschrijven</button>
+      </div>
+      <p class="consent">Een paar keer per jaar: nieuwe releases en concerten. Uitschrijven kan altijd. <a data-link="privacy">Privacy</a></p>
+      <p class="nl-msg" data-msg role="status" aria-live="polite"></p>
+    </form>
   </div>
 </section>
 
+</main>
+
 <footer>
-  <div class="wrap"><span>© 2026 Ernst Vranckx</span><span>Apple Music · Spotify</span></div>
+  <div class="wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <a class="brand" href="#top">Ernst <span>Vranckx</span></a>
+        <p>Jazzpianist &amp; componist · Leuven</p>
+      </div>
+      <nav class="f-col f-nav" aria-label="Footermenu">
+        <h2>Ontdek</h2>
+        <ul><li><a href="#muziek">Muziek</a></li><li><a href="#bio">Bio</a></li><li><a href="#tijdlijn">Tijdlijn</a></li><li><a href="#disco">Discografie</a></li><li><a href="#pers">Pers</a></li><li><a href="#live">Live</a></li><li><a href="#contact">Contact</a></li></ul>
+      </nav>
+      <div class="f-col">
+        <h2>Luister</h2>
+        <ul><li><a data-link="listen.apple" data-link-remove="li" href="https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000">Apple Music</a></li><li><a data-link="listen.spotify" data-link-remove="li">Spotify</a></li></ul>
+      </div>
+      <div class="f-col">
+        <h2>Volg</h2>
+        <ul><li><a data-link="socials.instagram" data-link-remove="li">Instagram</a></li><li><a data-link="socials.facebook" data-link-remove="li">Facebook</a></li><li><a data-link="socials.youtube" data-link-remove="li">YouTube</a></li></ul>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <div class="f-legal"><span>© 2026 Ernst Vranckx</span><a data-link="privacy">Privacy</a></div>
+      <div class="lang" data-langs><a data-lang="nl" href="#" aria-current="true" lang="nl">NL</a><a data-lang="fr" lang="fr">FR</a><a data-lang="de" lang="de">DE</a><a data-lang="en" lang="en">EN</a></div>
+    </div>
+  </div>
 </footer>
 
-<script>
-  const w=document.getElementById('wave');
-  for(let i=0;i<44;i++){const b=document.createElement('i');b.style.height=(18+Math.abs(Math.sin(i*.55)*60+Math.sin(i*1.7)*22))+'%';if(i<14)b.className='on';w.appendChild(b)}
-</script>
+<script src="../../assets/js/site.js"></script>
 <script src="../../assets/js/career.js"></script>
 <script src="../../assets/js/piano.js"></script>
 <script>
@@ -401,80 +581,125 @@
   const IMG = '../../assets/img/';
   const NOTE = '<svg viewBox="0 0 24 32"><ellipse cx="8" cy="26" rx="6.5" ry="4.6" transform="rotate(-22 8 26)"/><rect x="12.6" y="3" width="2" height="23"/><path d="M14.6 3c0 6 7.5 7 7.5 14.5-1.2-4.4-4.4-6.3-7.5-6.3z"/></svg>';
   const BEAM = '<svg viewBox="0 0 38 32"><ellipse cx="7" cy="27" rx="6.3" ry="4.5" transform="rotate(-22 7 27)"/><ellipse cx="29" cy="23" rx="6.3" ry="4.5" transform="rotate(-22 29 23)"/><rect x="11.4" y="5" width="2" height="22"/><rect x="33.4" y="1" width="2" height="22"/><path d="M11.4 5 35.4 1v5l-24 4z"/></svg>';
+  /* cover file -> [webp file, intrinsic size] */
+  const COVERS = {
+    'cover-aquarelle.png':['cover-aquarelle.webp',498],
+    'cover-a-childs-blessing.jpg':['cover-a-childs-blessing.webp',500],
+    'cover-songs-dances.jpg':['cover-songs-dances.webp',500],
+    'cover-things-as-they-are.jpg':['cover-things-as-they-are-600.webp',952],
+    'cover-black-is-the-colour.jpg':['cover-black-is-the-colour-600.webp',952]
+  };
+
+  /* ---------- Mobile menu: keep the page behind the open menu out of the tab order ---------- */
+  const menuBtn = document.querySelector('[data-menu-toggle]'), behind = [document.querySelector('main'), document.querySelector('footer')];
+  new MutationObserver(()=>{ const open = menuBtn.getAttribute('aria-expanded')==='true'; behind.forEach(el=>el.inert=open); })
+    .observe(menuBtn,{attributes:true,attributeFilter:['aria-expanded']});
 
   /* ---------- Timeline keyboard ---------- */
   const data = window.CAREER, kb = document.getElementById('kb'), card = document.getElementById('tlCard');
+  const yearHTML = y => /^na /.test(y) ? '<small>na</small>'+y.slice(3) : y;               // "na ’96" -> small "na" over "’96"
+  const shortHTML = y => /^\d{4}$/.test(y) ? '’'+y.slice(2) : yearHTML(y);                // "1966" -> "’66"
   let cur = data.length - 1;
-  data.forEach((e,i)=>{
+  const keys = data.map((e,i)=>{
     const k = document.createElement('button');
     k.className = 'wk' + (e.type==='album' ? ' album' : '');
-    k.type='button'; k.setAttribute('role','tab'); k.setAttribute('aria-label', e.label+': '+e.title);
-    k.innerHTML = '<span class="dot"></span><span class="yr">'+e.y+'</span>';
+    k.type = 'button'; k.tabIndex = -1; k.setAttribute('aria-pressed','false');
+    k.setAttribute('aria-label', e.label+': '+e.title);
+    k.innerHTML = '<span class="dot"></span><span class="yr" aria-hidden="true"><span class="yr-l">'+yearHTML(e.y)+'</span><span class="yr-s">'+shortHTML(e.y)+'</span></span>';
     k.addEventListener('click',()=>{ select(i,true); });
     kb.appendChild(k);
+    return k;
   });
   // black keys following a piano pattern (after C, D, F, G, A)
   const pattern=[1,1,0,1,1,1,0];
-  for(let i=0;i<data.length-1;i++){ if(pattern[i%7]){ const b=document.createElement('span'); b.className='bk'; b.style.left='calc(14px + (100% - 28px)/'+data.length+'*'+(i+1)+')'; kb.appendChild(b);} }
+  for(let i=0;i<data.length-1;i++){ if(pattern[i%7]){ const b=document.createElement('span'); b.className='bk'; b.style.left='calc(var(--kb-pad,14px) + (100% - 2 * var(--kb-pad,14px))/'+data.length+'*'+(i+1)+')'; kb.appendChild(b);} }
+  function cardHTML(e, i){
+    let media;
+    if (e.cover){ const c = COVERS[e.cover] || [null,500];
+      media = '<picture>'+(c[0]?'<source type="image/webp" srcset="'+IMG+'web/'+c[0]+'">':'')+'<img src="'+IMG+e.cover+'" width="'+c[1]+'" height="'+c[1]+'" decoding="async" alt="Hoes '+e.title+'"></picture>';
+    } else media = '<div class="ph">'+(i%2?BEAM:NOTE)+'</div>';
+    return '<div class="tl-year tl-anim">'+yearHTML(e.y)+'</div>'+
+      '<div class="tl-body tl-anim"><span class="tl-type '+(e.type==='album'?'album':'')+'">'+e.type+' · '+e.label+'</span><div class="tl-title">'+e.title+'</div><p class="tl-text">'+e.text+'</p>'+(e.cat?'<div class="tl-cat">'+e.cat+'</div>':'')+'</div>'+
+      '<div class="tl-media tl-anim">'+media+'</div>';
+  }
   function select(i, sound){
     cur = (i+data.length)%data.length;
-    const e = data[cur];
-    [...kb.querySelectorAll('.wk')].forEach((k,j)=>{k.classList.toggle('on',j===cur);k.setAttribute('aria-selected',j===cur)});
-    const media = e.cover ? '<img src="'+IMG+e.cover+'" alt="Hoes '+e.title+'">' : '<div class="ph">'+(cur%2?BEAM:NOTE)+'</div>';
-    card.innerHTML = '<div class="tl-year tl-anim">'+e.label.replace('Eind jaren ','').replace('Jaren ','')+'</div>'+
-      '<div class="tl-anim"><span class="tl-type '+(e.type==='album'?'album':'')+'">'+e.type+' · '+e.label+'</span><div class="tl-title">'+e.title+'</div><p class="tl-text">'+e.text+'</p>'+(e.cat?'<div class="tl-cat">'+e.cat+'</div>':'')+'</div>'+
-      '<div class="tl-media tl-anim">'+media+'</div>';
-    const key=kb.querySelectorAll('.wk')[cur], sc=kb.parentNode; if(sc.scrollWidth>sc.clientWidth) sc.scrollTo({left:key.offsetLeft-sc.clientWidth/2+key.offsetWidth/2,behavior:'smooth'});
+    keys.forEach((k,j)=>{ const on = j===cur; k.classList.toggle('on',on); k.setAttribute('aria-pressed',on); k.tabIndex = on ? 0 : -1; });
+    card.innerHTML = cardHTML(data[cur], cur);
     if(sound) Piano.note(cur);
   }
-  select(cur,false);
-  document.addEventListener('keydown',ev=>{
-    const r = kb.getBoundingClientRect(); if(r.top>innerHeight||r.bottom<0) return;
-    if(ev.key==='ArrowRight'){select(cur+1,true);ev.preventDefault()}
-    if(ev.key==='ArrowLeft'){select(cur-1,true);ev.preventDefault()}
+  /* Reserve the height of the tallest entry so the layout never jumps (mobile, single column) */
+  function reserve(){
+    card.style.setProperty('--tl-min','0px');
+    if (!matchMedia('(max-width: 980px)').matches) return;
+    const probe = card.cloneNode(false); probe.removeAttribute('id'); probe.removeAttribute('aria-live');
+    probe.setAttribute('aria-hidden','true'); probe.style.cssText='position:absolute;visibility:hidden;left:0;right:0;';
+    card.parentNode.appendChild(probe);
+    let max = 0; data.forEach((e,i)=>{ probe.innerHTML = cardHTML(e,i); max = Math.max(max, probe.offsetHeight); });
+    probe.remove(); card.style.setProperty('--tl-min', Math.ceil(max)+'px');
+  }
+  select(cur,false); reserve();
+  let rz; addEventListener('resize',()=>{ clearTimeout(rz); rz=setTimeout(reserve,150); });
+  document.fonts && document.fonts.ready.then(reserve);
+  /* Arrow keys only while focus is on the keyboard (roving tabindex) */
+  kb.addEventListener('keydown',ev=>{
+    let n = null;
+    if(ev.key==='ArrowRight'||ev.key==='ArrowUp') n = cur+1;
+    else if(ev.key==='ArrowLeft'||ev.key==='ArrowDown') n = cur-1;
+    else if(ev.key==='Home') n = 0;
+    else if(ev.key==='End') n = data.length-1;
+    if(n===null) return;
+    ev.preventDefault(); select(n,true); keys[cur].focus();
   });
   const mute = document.getElementById('tlMute');
-  mute.onclick=()=>{Piano.muted=!Piano.muted; mute.textContent = Piano.muted?'♪ Geluid uit':'♪ Geluid aan'; mute.classList.toggle('on',Piano.muted)};
+  mute.onclick=()=>{Piano.muted=!Piano.muted; mute.textContent = Piano.muted?'♪ Geluid uit':'♪ Geluid aan'; mute.classList.toggle('on',Piano.muted); mute.setAttribute('aria-pressed',Piano.muted)};
   let playing=null; const playBtn=document.getElementById('tlPlay');
+  function stop(){ clearInterval(playing); playing=null; playBtn.textContent='▶ Speel de tijdlijn'; playBtn.classList.remove('on'); }
   playBtn.onclick=()=>{
-    if(playing){clearInterval(playing);playing=null;playBtn.textContent='▶ Speel de tijdlijn';playBtn.classList.remove('on');return}
+    if(playing){ stop(); return; }
     let i=0; select(i,true); playBtn.textContent='■ Stop'; playBtn.classList.add('on');
-    playing=setInterval(()=>{ i++; if(i>=data.length){clearInterval(playing);playing=null;playBtn.textContent='▶ Speel de tijdlijn';playBtn.classList.remove('on');Piano.chord([-9,-5,-2,3]);return} select(i,true)},1100);
+    playing=setInterval(()=>{ i++; if(i>=data.length){ stop(); Piano.chord([-9,-5,-2,3]); return; } select(i,true)},1100);
   };
 
-  /* ---------- Piano-key dividers ---------- */
+  /* ---------- Piano-key divider ---------- */
   const dividers=[...document.querySelectorAll('.keys-divider')];
   dividers.forEach(d=>{ const n=+d.dataset.keys; for(let i=0;i<n;i++) d.appendChild(document.createElement('i'));
     for(let i=0;i<n-1;i++){ if([1,1,0,1,1,1,0][i%7]){ const b=document.createElement('b'); b.style.left=((i+1)/n*100)+'%'; d.appendChild(b);} } });
 
-  /* ---------- Floating notes ---------- */
-  const layer=document.createElement('div'); layer.className='notes-layer'; document.body.appendChild(layer);
-  const notes=[];
-  if(!reduce){ for(let i=0;i<16;i++){ const w=document.createElement('div'); w.innerHTML=i%3?NOTE:BEAM; const s=w.firstChild; const size=14+Math.random()*26;
-      s.style.width=size+'px'; s.style.left=(Math.random()*100)+'vw'; s.style.opacity=(.12+Math.random()*.28).toFixed(2); layer.appendChild(s);
-      notes.push({el:s,base:Math.random()*1.4,speed:.25+Math.random()*.7,amp:10+Math.random()*30,ph:Math.random()*6.28,rot:-20+Math.random()*40}); } }
+  /* ---------- Floating notes: hero only, behind the hero text ---------- */
+  const hero=document.querySelector('.hero'), notes=[];
+  if(!reduce){
+    const box=document.createElement('div'); box.className='hero-notes'; box.setAttribute('aria-hidden','true');
+    hero.insertBefore(box, hero.querySelector('.hero-copy'));
+    [[9,.15,30,.34],[24,.62,20,.22],[41,.32,36,.18],[63,.82,24,.26],[86,.48,18,.2]].forEach(([x,base,size,op],i)=>{
+      const w=document.createElement('div'); w.innerHTML=i%3?NOTE:BEAM; const s=w.firstChild;
+      s.style.width=size+'px'; s.style.left=x+'%'; s.style.opacity=op; box.appendChild(s);
+      notes.push({el:s,base,speed:.35+i*.09,amp:12+i*5,ph:i*1.7,rot:-18+i*9});
+    });
+  }
 
   /* ---------- Reveal on scroll ---------- */
-  const rvSel='.release h2,.release .lead,.credits,.tracks,.btns,.player,.bio h2,.bio p,.timeline div,.disco-head,.album,.big-quote,.quotes figure,.live-box,.contact h2,.contact-list,.newsletter,.tl-head,.kb-scroll';
-  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('in'); if(e.target.classList.contains('player')) e.target.classList.add('inview');} }),{threshold:.15});
+  const rvSel='.release h2,.release .lead,.credits,.tracks,.release .btns,.bio h2,.bio p,.disco-head,.album,.big-quote,.quotes figure,.live-box,.contact h2,.contact-list,.newsletter,.tl-head,.kb';
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.15});
   document.querySelectorAll(rvSel).forEach((el,i)=>{ if(!reduce){el.classList.add('rv'); el.style.transitionDelay=((i%5)*80)+'ms';} io.observe(el); });
-  document.querySelectorAll('.wave i').forEach((b,i)=>b.style.animationDelay=(i*47%900)+'ms');
 
   /* ---------- Scroll-linked effects ---------- */
-  const heroImg=document.querySelector('.hero img'), vinyl=document.querySelector('.cover .vinyl'), cover=document.querySelector('.cover');
+  const nav=document.querySelector('.nav'), heroImg=document.querySelector('.hero-bg'), vinyl=document.querySelector('.cover .vinyl'), cover=document.querySelector('.cover');
   function prog(el){ const r=el.getBoundingClientRect(); return Math.min(1,Math.max(0,(innerHeight-r.top)/(innerHeight+r.height))); }
   let ticking=false;
   function frame(){
-    ticking=false; const y=scrollY, H=innerHeight;
-    document.querySelector('.nav').classList.toggle('scrolled', y>60);
+    ticking=false; const y=scrollY, H=hero.offsetHeight;
+    nav.classList.toggle('scrolled', y>60);
     if(!reduce){
-      heroImg.style.transform='translateY('+(y*.3)+'px) scale('+(1+y*.0002)+')';
+      if(y<H){
+        heroImg.style.transform='translateY('+(y*.3)+'px) scale('+(1+y*.0002)+')';
+        notes.forEach(n=>{ const span=H+120; const ty=((n.base*span - y*n.speed) % span + span) % span - 60;
+          const tx=Math.sin(y*.004+n.ph)*n.amp; n.el.style.transform='translate('+tx+'px,'+ty+'px) rotate('+(n.rot+Math.sin(y*.003+n.ph)*15)+'deg)'; });
+      }
       const p=prog(cover); vinyl.style.transform='translateX('+(-38+Math.min(1,p*1.6)*38)+'%) rotate('+(y*.35)+'deg)';
-      notes.forEach(n=>{ const span=H+160; const ty=((n.base*span - y*n.speed) % span + span) % span - 80;
-        const tx=Math.sin(y*.004+n.ph)*n.amp; n.el.style.transform='translate('+tx+'px,'+ty+'px) rotate('+(n.rot+Math.sin(y*.003+n.ph)*15)+'deg)'; });
     }
-    dividers.forEach(d=>{ const p=prog(d), keys=d.querySelectorAll('i'), n=keys.length, at=p*(n+6)-3;
-      keys.forEach((k,i)=>k.classList.toggle('p',Math.abs(i-at)<2.2)); });
+    dividers.forEach(d=>{ const p=prog(d), ks=d.querySelectorAll('i'), n=ks.length, at=p*(n+6)-3;
+      ks.forEach((k,i)=>k.classList.toggle('p',Math.abs(i-at)<2.2)); });
   }
   addEventListener('scroll',()=>{ if(!ticking){ticking=true;requestAnimationFrame(frame)} },{passive:true});
   addEventListener('resize',frame); frame();
