@@ -4,6 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ernst Vranckx — Jazz piano</title>
+<meta name="description" content="Ernst Vranckx, jazzpianist en componist uit Leuven. Nieuw album Black Is The Colour met saxofonist Hayden Chisholm. Concerten, boekingen en de cd.">
+<meta property="og:title" content="Ernst Vranckx — Jazz piano">
+<meta property="og:description" content="Jazzpianist en componist uit Leuven. Nieuw album Black Is The Colour met Hayden Chisholm. Concerten en boekingen.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="../../assets/img/cover-black-is-the-colour.jpg">
+<meta property="og:locale" content="nl_BE">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%232ea6df'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='30' letter-spacing='-2' fill='%230b0b0c'%3EEV%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+  {"@type":["MusicGroup","Person"],"@id":"#ernst","name":"Ernst Vranckx","genre":"Jazz","description":"Jazzpianist en componist uit Leuven.","birthPlace":{"@type":"Place","name":"Leuven"},"homeLocation":{"@type":"Place","name":"Leuven"},"email":"listen@ernstvranckx.be"},
+  {"@type":"MusicAlbum","name":"Black Is The Colour","datePublished":"2024","byArtist":{"@id":"#ernst"},"genre":"Jazz","recordLabel":{"@type":"Organization","name":"Eden River Records"},"catalogNumber":"ERR-CD-25","image":"../../assets/img/cover-black-is-the-colour.jpg",
+   "offers":{"@type":"Offer","price":"22.00","priceCurrency":"EUR","availability":"https://schema.org/InStock","url":"https://www.paypal.com/cgi-bin/webscr?business=ernst.vranckx%40hotmail.com&cmd=_xclick&amount=22.00&item_name=Ernst%20Vranckx%20Trio%20-%20Black%20Is%20The%20Colour%20(CD)&currency_code=EUR&add=1"}}
+]}
+</script>
 <link rel="stylesheet" href="../../assets/fonts/c-colour.css">
 <style>
   :root{
@@ -22,6 +37,7 @@
   a{color:inherit;text-decoration:none}
   html.menu-open{overflow:hidden}
   main section[id],footer[id]{scroll-margin-top:var(--hdr)}
+  #nieuwsbrief{scroll-margin-top:calc(var(--hdr) + 24px)}
 
   /* focus: blue on black, black on blue, deep blue on white/cream */
   .hero,.press,footer,.bar,.menu,.tcard.album{--focus:var(--black)}
@@ -47,7 +63,7 @@
   .logo{font-family:var(--display);font-weight:900;font-size:26px;letter-spacing:-.03em;line-height:1;justify-self:start;padding:9px 0}
   .bar nav{display:flex;gap:2px;font-weight:500;font-size:15px;background:var(--white);border-radius:99px;padding:5px}
   .bar nav a{padding:8px 16px;border-radius:99px;transition:.2s}
-  .bar nav a:hover{background:var(--black);color:var(--blue)}
+  .bar nav a:hover,.bar nav a[aria-current]{background:var(--black);color:var(--blue)}
   .lang{display:flex;gap:4px;font-size:13px;font-weight:700}
   .lang a{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;border:2px solid var(--black);background:var(--white);transition:.2s}
   .lang a:hover{background:var(--black);color:var(--white)}
@@ -65,8 +81,9 @@
   .menu.open{visibility:visible;opacity:1;transform:none;transition:opacity .25s,transform .25s}
   .menu nav{border-top:2px solid var(--black)}
   .menu nav a{display:flex;justify-content:space-between;align-items:center;min-height:44px;padding:10px 0;border-bottom:2px solid var(--black);font-family:var(--display);font-weight:900;font-size:clamp(32px,9vw,46px);line-height:1;letter-spacing:-.045em}
-  .menu nav a::after{content:"→";font-family:var(--sans);font-weight:500;font-size:20px;letter-spacing:0;transition:transform .2s}
+  .menu nav a::after{content:"→";flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-family:var(--sans);font-weight:500;font-size:20px;letter-spacing:0;transition:transform .2s,background-color .2s,color .2s}
   .menu nav a:hover::after{transform:translateX(4px)}
+  .menu nav a[aria-current]::after{background:var(--black);color:var(--blue);transform:none}
   .menu .micro{margin-top:10px}
   @media (min-width:981px){.menu{display:none}}
 
@@ -94,7 +111,7 @@
   .hero-img .note{position:absolute;left:-60px;bottom:70px;z-index:4;background:var(--black);color:var(--white);padding:22px 26px;max-width:320px;border-radius:4px}
   .hero-img .note small{color:var(--blue);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:11px}
   .hero-img .note p{font-family:var(--display);font-size:20px;line-height:1.25;margin:6px 0 8px}
-  .hero-img .note span{font-size:13px;opacity:.6}
+  .hero-img .note figcaption{font-size:13px;opacity:.6}
   .btn{display:inline-flex;align-items:center;gap:12px;padding:18px 28px;border-radius:99px;font-weight:700;font-size:15px;transition:.2s;border:0;font-family:var(--sans);cursor:pointer;min-height:44px}
   .btn-black{background:var(--black);color:var(--white)}
   .btn-black:hover{background:var(--white);color:var(--black)}
@@ -130,8 +147,13 @@
   .lineup span{font-size:13px;opacity:.6}
   .lineup div.feat{background:var(--blue)}
   .lineup div.feat span{opacity:.8}
-  .rel-btns{display:flex;gap:12px;flex-wrap:wrap}
   .release .micro{padding-left:4px}
+  .listen{margin-top:30px;padding-top:22px;border-top:2px solid var(--black)}
+  .listen small{display:block;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:11px;margin-bottom:12px;opacity:.75}
+  .listen-btns{display:flex;gap:8px;flex-wrap:wrap}
+  .pill{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border:2px solid var(--black);border-radius:99px;font-weight:700;font-size:15px;transition:.2s}
+  .pill:hover{background:var(--black);color:var(--blue)}
+  .pill span{font-weight:500}
 
   /* bio */
   .bio{background:var(--black);color:var(--white);padding:140px 0;position:relative;overflow:hidden}
@@ -142,7 +164,7 @@
   .bio h2 b{font-weight:900;color:var(--blue)}
   .bio .cols{columns:2;column-gap:40px;color:#cfcfcf;font-size:16px}
   .bio .cols p{margin-bottom:18px}
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:56px;border-top:2px solid var(--blue)}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);column-gap:16px;margin-top:56px;border-top:2px solid var(--blue)}
   .stats div{padding:24px 0}
   .stats b{display:block;font-family:var(--display);font-weight:900;font-size:64px;line-height:1;color:var(--blue);letter-spacing:-.04em}
   .stats span{font-size:14px;opacity:.7}
@@ -161,18 +183,24 @@
   .rec .yr{display:inline-block;margin:16px 0 8px;font-size:11px;font-weight:700;letter-spacing:.12em;background:var(--blue);padding:3px 8px;border-radius:99px}
   .rec h3{font-family:var(--display);font-weight:600;font-size:22px;line-height:1.05;letter-spacing:-.02em}
   .rec p{font-size:13px;opacity:.6;margin-top:6px}
+  .rec p.cat span{white-space:nowrap}
+  .rec p.cat{margin-top:12px;padding-top:10px;border-top:2px solid var(--cream);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
 
   /* press */
   .press{background:var(--blue);padding:140px 0;position:relative;overflow:hidden}
-  .press .q{font-family:var(--display);font-weight:300;font-size:clamp(34px,4.6vw,72px);line-height:1.04;letter-spacing:-.035em;max-width:1150px}
+  .press h2{font-family:var(--display);font-weight:900;font-size:clamp(54px,7vw,110px);line-height:.85;letter-spacing:-.05em;margin:22px 0 56px}
+  .press h2 i{font-weight:300;letter-spacing:-.03em}
+  .lead-q{border-top:2px solid var(--black);padding-top:40px}
+  .press .q{font-family:var(--display);font-weight:300;font-size:clamp(30px,4vw,60px);line-height:1.06;letter-spacing:-.035em;max-width:1150px}
   .press .q b{font-weight:900}
-  .press .who{margin-top:30px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px}
-  .press-cards{margin-top:90px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .lead-q .cap{margin-top:28px}
+  .cap{font-size:14px;font-weight:500;line-height:1.45}
+  .cap strong{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+  .cap span{display:block;opacity:.65;font-size:13px}
+  .press-cards{margin-top:80px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
   .press-cards figure{background:var(--white);border-radius:8px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
   .press-cards figure:nth-child(2){background:var(--black);color:var(--white)}
   .press-cards blockquote{font-family:var(--display);font-size:20px;line-height:1.3}
-  .press-cards figcaption{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
-  .press-cards figcaption span{display:block;font-weight:400;opacity:.6;letter-spacing:.04em;text-transform:none;font-size:13px}
 
   /* live */
   .live{display:grid;grid-template-columns:1fr 1fr;min-height:640px}
@@ -188,6 +216,25 @@
   .txt-link{font-weight:700;font-size:15px;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px;padding:12px 0}
   .live-txt .txt-link{text-decoration-color:var(--blue)}
   .txt-link:hover{color:var(--blue)}
+
+  /* agenda */
+  .agenda{background:var(--white);padding:110px 0}
+  .ag-grid{display:grid;grid-template-columns:5fr 7fr;gap:36px 80px;align-items:start}
+  .ag-head h2{font-family:var(--display);font-weight:900;font-size:clamp(54px,6vw,96px);line-height:.85;letter-spacing:-.05em;margin-top:22px}
+  .ag-list{list-style:none;border-top:2px solid var(--black)}
+  .ag-list[hidden],.ag-empty[hidden]{display:none}
+  .ag-list li{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px 26px;padding:16px 0;border-bottom:2px solid var(--black)}
+  .ag-date{width:88px;padding:12px 0 10px;border-radius:8px;background:var(--blue);text-align:center;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;line-height:1.2}
+  .ag-date .d{display:block;font-family:var(--display);font-weight:900;font-size:40px;line-height:.9;letter-spacing:-.04em;margin-bottom:4px}
+  .ag-date .y{opacity:.65}
+  .ag-where b{display:block;font-family:var(--display);font-weight:600;font-size:26px;line-height:1.05;letter-spacing:-.02em}
+  .ag-where span{display:block;font-size:14px;opacity:.65;margin-top:4px}
+  .ag-empty{display:flex;align-items:flex-start;gap:22px;background:var(--cream);border-radius:8px;padding:32px}
+  .ag-ico{flex:none;width:56px;height:56px;border-radius:50%;background:var(--blue);display:grid;place-items:center}
+  .ag-ico svg{width:26px;height:26px;fill:none;stroke:var(--black);stroke-width:2;stroke-linecap:round}
+  .ag-empty p{font-family:var(--display);font-weight:300;font-size:22px;line-height:1.32;letter-spacing:-.01em;max-width:560px}
+  .ag-empty a{font-weight:600;text-decoration:underline;text-decoration-thickness:2px;text-decoration-color:var(--blue-d);text-underline-offset:4px}
+  .ag-empty a:hover{color:var(--blue-d)}
 
   /* footer */
   footer{background:var(--blue);padding:100px 0 40px}
@@ -217,7 +264,11 @@
   .nl-msg[data-state]::before{width:24px;height:24px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:13px;background:var(--blue);color:var(--black)}
   .nl-msg[data-state="error"]::before{content:"!"}
   .nl-msg[data-state="ok"]::before{content:"✓"}
-  .f-copy{margin-top:60px;font-size:13px;opacity:.6}
+  .f-end{margin-top:56px;padding-top:22px;border-top:2px solid var(--black);display:flex;justify-content:space-between;align-items:center;gap:20px 30px;flex-wrap:wrap}
+  .f-nav{display:flex;flex-wrap:wrap;gap:6px}
+  .f-nav a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:2px solid var(--black);border-radius:99px;font-weight:500;font-size:14px;transition:.2s}
+  .f-nav a:hover{background:var(--black);color:var(--blue)}
+  .f-copy{font-size:13px;opacity:.6}
 
   @media (max-width:980px){
     .wrap{padding:0 20px}
@@ -228,9 +279,24 @@
     .menu-btn{display:inline-flex}
     .hero{grid-template-columns:1fr}
     .hero-type{padding:110px 20px 40px}
-    .hero-img{min-height:60vh}
-    .hero-img .note{left:20px;right:20px;bottom:20px;max-width:none}
-    .rel-grid,.bio-grid,.live{grid-template-columns:1fr;gap:56px}
+    /* phone hero: shorter photo zoomed on the face, quote card on the bottom edge below it */
+    .hero-img{display:flex;flex-direction:column}
+    .hero-img .duo{position:relative;inset:auto;height:42vh;min-height:300px}
+    .hero-img .duo img{object-position:0% 50%;transform:scale(1.5);transform-origin:0% 64%}
+    .hero-img .note{position:relative;left:auto;bottom:auto;margin:-28px 20px 24px;max-width:none;padding:20px 22px}
+    .hero-img .note p{font-size:19px}
+    .rel-grid,.bio-grid,.live,.ag-grid{grid-template-columns:1fr;gap:56px}
+    .ag-grid{gap:30px}
+    .agenda{padding:80px 0}
+    .ag-empty{padding:24px 22px;gap:16px}
+    .ag-ico{width:44px;height:44px}.ag-ico svg{width:22px;height:22px}
+    .ag-empty p{font-size:19px}
+    .ag-list li{grid-template-columns:auto 1fr;gap:12px 18px}
+    .ag-list li .pill{grid-column:2;justify-self:start}
+    .ag-date{width:76px}.ag-date .d{font-size:34px}
+    .ag-where b{font-size:22px}
+    .press h2{margin-bottom:40px}
+    .lead-q{padding-top:30px}
     .live{gap:0}
     .nl{grid-template-columns:1fr;gap:24px}
     .lineup{grid-template-columns:repeat(2,1fr)}
@@ -261,6 +327,11 @@
   .tl-nav{display:flex;align-items:center;gap:10px}
   .tl-nav button{width:56px;height:56px;border-radius:50%;border:2px solid var(--black);background:none;font-size:20px;cursor:pointer;transition:.2s;color:var(--black)}
   .tl-nav button:hover{background:var(--black);color:var(--blue)}
+  .tl-nav .snd{width:auto;border-radius:99px;display:inline-flex;align-items:center;gap:10px;padding:0 20px 0 8px;margin-right:8px;font:700 14px/1 var(--sans);white-space:nowrap}
+  .snd-ico{position:relative;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:var(--black);font-size:17px;transition:.2s}
+  .snd[aria-pressed="false"] .snd-ico{background:var(--cream)}
+  .snd[aria-pressed="false"] .snd-ico::after{content:"";position:absolute;left:50%;top:50%;width:2px;height:22px;margin:-11px 0 0 -1px;background:var(--black);border-radius:2px;transform:rotate(45deg)}
+  .tl-nav .snd:hover .snd-ico{background:var(--blue);color:var(--black)}
   .tl-count{font-weight:700;font-size:14px;letter-spacing:.1em;min-width:70px;text-align:center}
   .track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 40px 30px;scrollbar-width:none;cursor:grab;user-select:none}
   .track::-webkit-scrollbar{display:none}
@@ -294,11 +365,11 @@
   .scrub button.on span{transform:translateX(-50%) scale(.62);transform-origin:top}
 
   /* ===== Scroll effects ===== */
-  .keys-band{position:relative;height:150px;overflow:hidden;background:var(--black);border-top:6px solid var(--black);border-bottom:6px solid var(--black)}
+  .keys-band{position:relative;height:80px;overflow:hidden;background:var(--black);border-top:4px solid var(--black);border-bottom:4px solid var(--black)}
   .keys-band .strip{position:absolute;top:0;left:0;height:100%;display:flex;will-change:transform}
-  .keys-band .wk{width:56px;height:100%;margin-right:3px;background:var(--white);border-radius:0 0 6px 6px;flex:none;position:relative;transition:background .15s,transform .15s}
-  .keys-band .wk.hit{background:var(--blue);transform:translateY(4px)}
-  .keys-band .bk{position:absolute;top:0;width:34px;height:60%;background:var(--black);border-radius:0 0 5px 5px;z-index:2}
+  .keys-band .wk{width:40px;height:100%;margin-right:3px;background:var(--white);border-radius:0 0 6px 6px;flex:none;position:relative;transition:background .15s,transform .15s}
+  .keys-band .wk.hit{background:var(--blue);transform:translateY(3px)}
+  .keys-band .bk{position:absolute;top:0;width:24px;height:60%;background:var(--black);border-radius:0 0 5px 5px;z-index:2}
   .marquee div{animation:none!important;will-change:transform}
   .rel-cover{z-index:1}
   .rel-vinyl{position:absolute;top:4%;left:4%;width:92%;aspect-ratio:1;border-radius:50%;z-index:-1;background:radial-gradient(circle,var(--blue) 0 15%,#111 15.5% 17%,#0a0a0a 17.5%);will-change:transform}
@@ -318,10 +389,15 @@
     .tcard{flex-basis:280px;min-height:420px}
     .tcard .yr{font-size:84px}
     .scrub{margin:30px 20px 0}
+    .tl-nav{width:100%}
+    .tl-nav button{width:48px;height:48px}
+    .tl-nav .snd{height:48px;margin-right:auto;padding:0 16px 0 6px;gap:8px}
+    .snd-ico{width:34px;height:34px;font-size:15px}
+    .tl-count{min-width:56px}
     .scrub button span{display:none}
     .scrub button.on span{display:block;transform:translateX(-50%) scale(.62)}
-    .keys-band{height:100px}
-    .keys-band .wk{width:38px}.keys-band .bk{width:22px}
+    .keys-band{height:64px}
+    .keys-band .wk{width:30px}.keys-band .bk{width:18px}
   }
   @media (prefers-reduced-motion:reduce){
     .pop{opacity:1;transform:none;transition:none}
@@ -334,14 +410,14 @@
 
 <header class="bar">
   <a class="logo" href="#top" aria-label="Ernst Vranckx, naar boven">E.V.</a>
-  <nav aria-label="Hoofdmenu"><a href="#nieuw">Nieuw album</a><a href="#bio">Over Ernst</a><a href="#tijdlijn">Tijdlijn</a><a href="#platen">Platen</a><a href="#pers">Pers</a><a href="#live">Live</a><a href="#contact">Contact</a></nav>
+  <nav aria-label="Hoofdmenu" data-spy><a href="#nieuw">Muziek</a><a href="#pers">Pers</a><a href="#live">Live</a><a href="#bio">Over Ernst</a><a href="#platen">Platen</a><a href="#contact">Contact</a></nav>
   <div class="lang" data-langs aria-label="Taal"><a data-lang="nl" href="#" aria-current="true" lang="nl">NL</a><a data-lang="fr" lang="fr">FR</a><a data-lang="de" lang="de">DE</a><a data-lang="en" lang="en">EN</a></div>
   <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu"><span data-menu-label>Menu</span><span class="ico" aria-hidden="true"></span></button>
 </header>
 
 <div class="menu" id="menu" data-menu>
-  <nav aria-label="Menu"><a href="#nieuw">Nieuw album</a><a href="#bio">Over Ernst</a><a href="#tijdlijn">Tijdlijn</a><a href="#platen">Platen</a><a href="#pers">Pers</a><a href="#live">Live</a><a href="#contact">Contact</a></nav>
-  <div><a class="btn btn-black" data-link="buyCd">Koop de cd · €22 <span class="arr">→</span></a><p class="micro">Afrekenen via PayPal · verzendkosten zie je vóór je betaalt.</p></div>
+  <nav aria-label="Menu" data-spy><a href="#nieuw">Muziek</a><a href="#pers">Pers</a><a href="#live">Live</a><a href="#bio">Over Ernst</a><a href="#platen">Platen</a><a href="#contact">Contact</a></nav>
+  <div><a class="btn btn-black" data-link="buyCd" target="_blank" rel="noopener">Koop de cd · €22 <span class="arr">↗</span></a><p class="micro">Afrekenen via PayPal · verzendkosten zie je vóór je betaalt.</p></div>
   <div class="lang" data-langs aria-label="Taal"><a data-lang="nl" href="#" aria-current="true" lang="nl">NL</a><a data-lang="fr" lang="fr">FR</a><a data-lang="de" lang="de">DE</a><a data-lang="en" lang="en">EN</a></div>
 </div>
 
@@ -358,8 +434,8 @@
         </a>
         <div>
           <div class="ha-btns">
-            <a class="btn btn-black" data-link="buyCd">Koop de cd · €22 <span class="arr">→</span></a>
-            <a class="btn btn-line" data-link="listen.apple">▶ Beluister</a>
+            <a class="btn btn-black" data-link="buyCd" target="_blank" rel="noopener">Koop de cd · €22 <span class="arr">↗</span></a>
+            <a class="btn btn-line" data-link="listen.apple" target="_blank" rel="noopener">Beluister <span aria-hidden="true">↗</span></a>
           </div>
           <p class="micro">Afrekenen via PayPal · verzendkosten zie je vóór je betaalt.</p>
         </div>
@@ -368,17 +444,17 @@
   </div>
   <div class="hero-img">
     <div class="duo"><picture><source type="image/webp" srcset="../../assets/img/web/portrait-2-800.webp 800w, ../../assets/img/web/portrait-2-1600.webp 1600w" sizes="(max-width:980px) 100vw, 45vw"><img src="../../assets/img/portrait-2.jpg" alt="Ernst Vranckx aan de vleugel" width="2000" height="1335" fetchpriority="high" decoding="async"></picture></div>
-    <div class="note">
+    <figure class="note">
       <small>Kenny Wheeler</small>
-      <p>“Ernst is één van de goede. Ik hou van zijn songs, ze vertellen me iets.”</p>
-      <span>via De Standaard</span>
-    </div>
+      <blockquote><p>“Ernst is één van de goede. Ik hou van zijn songs, ze vertellen me iets.”</p></blockquote>
+      <figcaption>via De Standaard</figcaption>
+    </figure>
   </div>
 </section>
 
 <div class="marquee" role="region" aria-label="Uit de pers"><div>
-  “Un disque mélancolique mais envoûtant” <b>✦</b> “Nice storytelling!” <b>✦</b> “Een meesterverteller in geladen ballads” <b>✦</b> “Des brumes à la Turner” <b>✦</b> “Eén van onze meest inventieve componisten” <b>✦</b>
-  “Un disque mélancolique mais envoûtant” <b>✦</b> “Nice storytelling!” <b>✦</b> “Een meesterverteller in geladen ballads” <b>✦</b> “Des brumes à la Turner” <b>✦</b> “Eén van onze meest inventieve componisten” <b>✦</b>
+  <span lang="fr">“Un disque mélancolique mais envoûtant”</span> <b>✦</b> <span lang="en">“Nice storytelling!”</span> <b>✦</b> <span>“Een meesterverteller in geladen ballads”</span> <b>✦</b> <span lang="fr">“Des brumes à la Turner”</span> <b>✦</b> <span>“Eén van onze meest inventieve componisten”</span> <b>✦</b>
+  <span aria-hidden="true"><span lang="fr">“Un disque mélancolique mais envoûtant”</span> <b>✦</b> <span lang="en">“Nice storytelling!”</span> <b>✦</b> <span>“Een meesterverteller in geladen ballads”</span> <b>✦</b> <span lang="fr">“Des brumes à la Turner”</span> <b>✦</b> <span>“Eén van onze meest inventieve componisten”</span> <b>✦</b></span>
 </div><button class="mq-btn" type="button" aria-label="Pauzeer" title="Pauzeer"><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="3.5" height="12" rx="1"/><rect x="9.5" y="2" width="3.5" height="12" rx="1"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.2v11.6a.8.8 0 0 0 1.2.7l9.3-5.8a.8.8 0 0 0 0-1.4L5.2 1.5A.8.8 0 0 0 4 2.2z"/></svg></button></div>
 
 <section class="release" id="nieuw">
@@ -397,84 +473,111 @@
         <div><b>Kris Duerinckx</b><span>drums</span></div>
         <div class="feat"><b>Hayden Chisholm</b><span>sax &amp; zang</span></div>
       </div>
-      <div class="rel-btns">
-        <a class="btn btn-black" data-link="buyCd">Koop de cd · €22 <span class="arr">→</span></a>
-        <a class="btn btn-line" data-link="listen.apple">▶ Apple Music</a>
-        <a class="btn btn-line" data-link="listen.spotify">▶ Spotify</a>
+      <div class="buy">
+        <a class="btn btn-black" data-link="buyCd" target="_blank" rel="noopener">Koop de cd · €22 <span class="arr">↗</span></a>
+        <p class="micro">Afrekenen via PayPal · verzendkosten zie je vóór je betaalt.</p>
       </div>
-      <p class="micro">Afrekenen via PayPal · verzendkosten zie je vóór je betaalt.</p>
-    </div>
-  </div>
-</section>
-
-<section class="bio" id="bio">
-  <div class="wrap bio-grid">
-    <div class="duo black"><picture><source type="image/webp" srcset="../../assets/img/web/trio-2-800.webp 800w" sizes="(max-width:980px) 100vw, 40vw"><img src="../../assets/img/trio-2.jpg" alt="Ernst Vranckx live aan de vleugel" width="1385" height="897" loading="lazy" decoding="async"></picture></div>
-    <div>
-      <span class="tag" style="color:var(--blue)">Over Ernst</span>
-      <h2>Van Leuven tot <b>China</b> — al drie decennia songs die <b>iets vertellen</b>.</h2>
-      <div class="cols">
-        <p>Ernst Vranckx (Leuven, 1966) begint zijn carrière eind jaren ’80. In 1994 wint hij de Prix Nicolas Dor met fluitist Stefan Bracaval, met wie hij “Aquarelle” opneemt.</p>
-        <p>Met de Chris Joris Experience schrijft hij composities en arrangementen; zijn song “The Miner’s Tale” wordt opgepikt in de VS en Canada.</p>
-        <p>Met trompettist Kenny Wheeler maakt hij “A Child’s Blessing” voor W.E.R.F., gevolgd door het kwintet-album “Songs &amp; Dances”.</p>
-        <p>Met producer Ralf Kemper en Eden River Records volgen “Things As They Are” en “Black Is The Colour”.</p>
+      <div class="listen">
+        <small>Beluister op</small>
+        <div class="listen-btns">
+          <a class="pill" data-link="listen.apple" target="_blank" rel="noopener">Apple Music <span aria-hidden="true">↗</span></a>
+          <a class="pill" data-link="listen.spotify" target="_blank" rel="noopener">Spotify <span aria-hidden="true">↗</span></a>
+          <a class="pill" data-link="listenAll" target="_blank" rel="noopener">Alle platforms <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
-      <div class="stats">
-        <div><b>5</b><span>albums als leider</span></div>
-        <div><b>3</b><span>continenten bespeeld</span></div>
-        <div><b>’94</b><span>Prix Nicolas Dor</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="tl" id="tijdlijn">
-  <div class="wrap tl-top">
-    <div><span class="tag">Tijdlijn</span><h2>Van ’66<br><i>tot nu</i></h2></div>
-    <div class="tl-nav"><button type="button" id="tlPrev" aria-label="Vorige">←</button><span class="tl-count" id="tlCount">13 / 13</span><button type="button" id="tlNext" aria-label="Volgende">→</button></div>
-  </div>
-  <div class="track" id="track" aria-label="Tijdlijn van Ernst Vranckx"></div>
-  <div class="scrub" id="scrub"><div class="line"></div><div class="fill" id="fill"></div></div>
-</section>
-
-<div class="keys-band" id="band2" aria-hidden="true"><div class="strip"></div></div>
-
-<section class="disco" id="platen">
-  <div class="wrap">
-    <div class="head"><h2>De platen</h2><a class="btn btn-line" data-link="listenAll">Alle luisterlinks <span class="arr">→</span></a></div>
-    <div class="shelf">
-      <article class="rec"><picture><source type="image/webp" srcset="../../assets/img/web/cover-black-is-the-colour-600.webp 600w, ../../assets/img/web/cover-black-is-the-colour.webp 952w" sizes="(max-width:980px) 45vw, 250px"><img src="../../assets/img/cover-black-is-the-colour.jpg" alt="" width="952" height="952" loading="lazy" decoding="async"></picture><span class="yr">2024</span><h3><a data-link="albums.black-is-the-colour.apple">Black Is The Colour</a></h3><p>Trio ft. Hayden Chisholm</p></article>
-      <article class="rec"><picture><source type="image/webp" srcset="../../assets/img/web/cover-things-as-they-are-600.webp 600w, ../../assets/img/web/cover-things-as-they-are.webp 952w" sizes="(max-width:980px) 45vw, 250px"><img src="../../assets/img/cover-things-as-they-are.jpg" alt="" width="952" height="952" loading="lazy" decoding="async"></picture><span class="yr">2020</span><h3><a data-link="albums.things-as-they-are.apple">Things As They Are</a></h3><p>Trio met Ulrich &amp; Duerinckx</p></article>
-      <article class="rec"><picture><source type="image/webp" srcset="../../assets/img/web/cover-songs-dances.webp 500w" sizes="(max-width:980px) 45vw, 250px"><img src="../../assets/img/cover-songs-dances.jpg" alt="" width="500" height="500" loading="lazy" decoding="async"></picture><span class="yr">W.E.R.F.</span><h3><a data-link="albums.songs-dances.apple">Songs &amp; Dances</a></h3><p>Ernst Vranckx Quintet</p></article>
-      <article class="rec"><picture><source type="image/webp" srcset="../../assets/img/web/cover-a-childs-blessing.webp 500w" sizes="(max-width:980px) 45vw, 250px"><img src="../../assets/img/cover-a-childs-blessing.jpg" alt="" width="500" height="500" loading="lazy" decoding="async"></picture><span class="yr">W.E.R.F.</span><h3><a data-link="albums.a-childs-blessing.apple">A Child’s Blessing</a></h3><p>feat. Kenny Wheeler</p></article>
-      <article class="rec"><picture><source type="image/webp" srcset="../../assets/img/web/cover-aquarelle.webp 498w" sizes="(max-width:980px) 45vw, 250px"><img src="../../assets/img/cover-aquarelle.png" alt="" width="498" height="498" loading="lazy" decoding="async"></picture><span class="yr">Lyrae</span><h3><a data-link="albums.aquarelle.apple">Aquarelle</a></h3><p>met Stefan Bracaval</p></article>
     </div>
   </div>
 </section>
 
 <section class="press" id="pers">
   <div class="wrap">
-    <span class="tag">Wat ze zeggen</span>
-    <p class="q" style="margin-top:30px">“A delicate, sometimes fragile but touching music, <b>always rich, inspired</b> and with great harmonic sense. <b>Nice storytelling!</b>”</p>
-    <div class="who">— Michel Herr, 2024</div>
+    <span class="tag">Pers</span>
+    <h2>Wat ze <i>zeggen</i></h2>
+    <figure class="lead-q">
+      <blockquote><p class="q" lang="en">“A delicate, sometimes fragile but touching music, <b>always rich, inspired</b> and with great harmonic sense. <b>Nice storytelling!</b>”</p></blockquote>
+      <figcaption class="cap"><strong>Michel Herr</strong><span>2024</span></figcaption>
+    </figure>
     <div class="press-cards">
-      <figure><blockquote>“Schakel uw telefoon uit, trek de netwerkkabels uit de muren en laat ‘Things As They Are’ van Ernst Vranckx Trio door de speakers blazen.”</blockquote><figcaption>Da Music<span>Nick Van Honste</span></figcaption></figure>
-      <figure><blockquote>“Een integer coloriet van cooljazz, een fris en bezield album.”</blockquote><figcaption>Jazzhalo<span>Bernard Lefèvre</span></figcaption></figure>
-      <figure><blockquote>“Een CD die tot het beste behoort van wat we in onze contreien kunnen horen.”</blockquote><figcaption>Juul’s Halo<span>Juul Anthonissen</span></figcaption></figure>
-      <figure><blockquote>“Rich in harmonic beauty and improvised diversity.”</blockquote><figcaption>Cadence (US)<span>Frank Rubolino</span></figcaption></figure>
+      <figure><blockquote><p>“Schakel uw telefoon uit, trek de netwerkkabels uit de muren en laat ‘Things As They Are’ van Ernst Vranckx Trio door de speakers blazen.”</p></blockquote><figcaption class="cap"><strong>Da Music</strong> · Nick Van Honste<span>Things As They Are, 2020</span></figcaption></figure>
+      <figure><blockquote><p>“Een integer coloriet van cooljazz, een fris en bezield album.”</p></blockquote><figcaption class="cap"><strong>Jazzhalo</strong> · Bernard Lefèvre<span>Black Is The Colour, 2024</span></figcaption></figure>
+      <figure><blockquote><p>“Een CD die tot het beste behoort van wat we in onze contreien kunnen horen.”</p></blockquote><figcaption class="cap"><strong>Juul’s Halo</strong> · Juul Anthonissen</figcaption></figure>
+      <figure><blockquote lang="en"><p>“Rich in harmonic beauty and improvised diversity.”</p></blockquote><figcaption class="cap"><strong>Cadence (US)</strong> · Frank Rubolino</figcaption></figure>
     </div>
   </div>
 </section>
 
-<section class="live" id="live">
-  <div class="duo"><picture><source type="image/webp" srcset="../../assets/img/web/trio-wide-800.webp 800w, ../../assets/img/web/trio-wide-1600.webp 1600w" sizes="(max-width:980px) 100vw, 50vw"><img src="../../assets/img/trio-wide.jpg" alt="Het kwartet live op het podium" width="1938" height="933" loading="lazy" decoding="async" style="object-position:35% 50%"></picture></div>
-  <div class="live-txt">
-    <span class="tag" style="color:var(--blue);align-self:start">Live</span>
-    <h2>Boek het <i>trio</i> of kwartet</h2>
-    <p>Voor clubs, cultuurcentra, festivals en privé-concerten. Neem contact op voor beschikbaarheid, bezetting en technische fiche.</p>
-    <div class="live-cta">
-      <a class="btn btn-black" data-booking href="mailto:listen@ernstvranckx.be">Vraag een concert aan <span class="arr">→</span></a>
-      <a class="txt-link" data-link="pressKit">Presskit &amp; technische fiche</a>
+<section class="live-sec" id="live">
+  <div class="live">
+    <div class="duo"><picture><source type="image/webp" srcset="../../assets/img/web/trio-wide-800.webp 800w, ../../assets/img/web/trio-wide-1600.webp 1600w" sizes="(max-width:980px) 100vw, 50vw"><img src="../../assets/img/trio-wide.jpg" alt="Het kwartet live op het podium" width="1938" height="933" loading="lazy" decoding="async" style="object-position:35% 50%"></picture></div>
+    <div class="live-txt">
+      <span class="tag" style="color:var(--blue);align-self:start">Live &amp; boekingen</span>
+      <h2>Boek het <i>trio</i> of kwartet</h2>
+      <p>Voor clubs, cultuurcentra, festivals en privé-concerten. Neem contact op voor beschikbaarheid, bezetting en technische fiche.</p>
+      <div class="live-cta">
+        <a class="btn btn-black" data-booking href="mailto:listen@ernstvranckx.be">Vraag een concert aan <span class="arr">→</span></a>
+        <a class="txt-link" data-link="pressKit">Presskit &amp; technische fiche</a>
+      </div>
+    </div>
+  </div>
+  <div class="agenda">
+    <div class="wrap ag-grid">
+      <div class="ag-head"><span class="tag">Agenda</span><h2>Concerten</h2></div>
+      <div>
+        <ol class="ag-list" data-concerts>
+          <template data-concert-row><li><time class="ag-date"><span class="d" data-f="day"></span> <span class="m" data-f="month"></span> <span class="y" data-f="year"></span></time> <span class="ag-where"><b data-f="venue"></b> <span data-f="city"></span></span> <a class="pill" data-f="tickets" target="_blank" rel="noopener">Tickets <span aria-hidden="true">↗</span></a></li></template>
+        </ol>
+        <div class="ag-empty" data-concerts-empty hidden>
+          <span class="ag-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span>
+          <p>Er staan nu geen concerten gepland. Schrijf je in op de <a href="#nieuwsbrief">nieuwsbrief</a> om als eerste te horen wanneer er nieuwe data zijn, of <a data-booking href="mailto:listen@ernstvranckx.be">vraag zelf een concert aan</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="bio">
+  <div class="bio">
+    <div class="wrap bio-grid">
+      <div class="duo black"><picture><source type="image/webp" srcset="../../assets/img/web/trio-2-800.webp 800w" sizes="(max-width:980px) 100vw, 40vw"><img src="../../assets/img/trio-2.jpg" alt="Ernst Vranckx live aan de vleugel" width="1385" height="897" loading="lazy" decoding="async"></picture></div>
+      <div>
+        <span class="tag" style="color:var(--blue)">Over Ernst</span>
+        <h2>Van Leuven tot <b>China</b> — al drie decennia songs die <b>iets vertellen</b>.</h2>
+        <div class="cols">
+          <p>Ernst Vranckx (Leuven, 1966) begint zijn carrière eind jaren ’80. In 1994 wint hij de Prix Nicolas Dor met fluitist Stefan Bracaval, met wie hij “Aquarelle” opneemt.</p>
+          <p>Met de Chris Joris Experience schrijft hij composities en arrangementen; zijn song “The Miner’s Tale” wordt opgepikt in de VS en Canada.</p>
+          <p>Met trompettist Kenny Wheeler maakt hij “A Child’s Blessing” voor W.E.R.F., gevolgd door het kwintet-album “Songs &amp; Dances”.</p>
+          <p>Met producer Ralf Kemper en Eden River Records volgen “Things As They Are” en “Black Is The Colour”.</p>
+        </div>
+        <div class="stats">
+          <div><b>5</b><span>albums als leider</span></div>
+          <div><b>3</b><span>continenten bespeeld</span></div>
+          <div><b>’94</b><span>Prix Nicolas Dor</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="tl" id="tijdlijn">
+    <div class="wrap tl-top">
+      <div><span class="tag">Tijdlijn</span><h2>Van ’66<br><i>tot nu</i></h2></div>
+      <div class="tl-nav"><button type="button" class="snd" id="tlSound" aria-pressed="true"><span class="snd-ico" aria-hidden="true">♪</span><span>Geluid: <span data-snd>aan</span></span></button><button type="button" id="tlPrev" aria-label="Vorige">←</button><span class="tl-count" id="tlCount">13 / 13</span><button type="button" id="tlNext" aria-label="Volgende">→</button></div>
+    </div>
+    <div class="track" id="track" aria-label="Tijdlijn van Ernst Vranckx"></div>
+    <div class="scrub" id="scrub"><div class="line"></div><div class="fill" id="fill"></div></div>
+  </section>
+</section>
+
+<div class="keys-band" id="band" aria-hidden="true"><div class="strip"></div></div>
+
+<section class="disco" id="platen">
+  <div class="wrap">
+    <div class="head"><h2>De platen</h2><a class="btn btn-line" data-link="listenAll" target="_blank" rel="noopener">Alle platforms <span class="arr">↗</span></a></div>
+    <div class="shelf">
+      <article class="rec"><picture><source type="image/webp" srcset="../../assets/img/web/cover-black-is-the-colour-600.webp 600w, ../../assets/img/web/cover-black-is-the-colour.webp 952w" sizes="(max-width:980px) 45vw, 250px"><img src="../../assets/img/cover-black-is-the-colour.jpg" alt="" width="952" height="952" loading="lazy" decoding="async"></picture><span class="yr">2024</span><h3><a data-link="albums.black-is-the-colour.apple" target="_blank" rel="noopener">Black Is The Colour</a></h3><p>Trio ft. Hayden Chisholm</p><p class="cat">Eden River · <span>ERR-CD-25</span></p></article>
+      <article class="rec"><picture><source type="image/webp" srcset="../../assets/img/web/cover-things-as-they-are-600.webp 600w, ../../assets/img/web/cover-things-as-they-are.webp 952w" sizes="(max-width:980px) 45vw, 250px"><img src="../../assets/img/cover-things-as-they-are.jpg" alt="" width="952" height="952" loading="lazy" decoding="async"></picture><span class="yr">2020</span><h3><a data-link="albums.things-as-they-are.apple" target="_blank" rel="noopener">Things As They Are</a></h3><p>Trio met Ulrich &amp; Duerinckx</p><p class="cat">Eden River · <span>ERR-DD-06</span></p></article>
+      <article class="rec"><picture><source type="image/webp" srcset="../../assets/img/web/cover-songs-dances.webp 500w" sizes="(max-width:980px) 45vw, 250px"><img src="../../assets/img/cover-songs-dances.jpg" alt="" width="500" height="500" loading="lazy" decoding="async"></picture><span class="yr">2001</span><h3><a data-link="albums.songs-dances.apple" target="_blank" rel="noopener">Songs &amp; Dances</a></h3><p>Ernst Vranckx Quintet</p><p class="cat">W.E.R.F. <span>023</span></p></article>
+      <article class="rec"><picture><source type="image/webp" srcset="../../assets/img/web/cover-a-childs-blessing.webp 500w" sizes="(max-width:980px) 45vw, 250px"><img src="../../assets/img/cover-a-childs-blessing.jpg" alt="" width="500" height="500" loading="lazy" decoding="async"></picture><span class="yr">1998</span><h3><a data-link="albums.a-childs-blessing.apple" target="_blank" rel="noopener">A Child’s Blessing</a></h3><p>feat. Kenny Wheeler</p><p class="cat">W.E.R.F. <span>013</span></p></article>
+      <article class="rec"><picture><source type="image/webp" srcset="../../assets/img/web/cover-aquarelle.webp 498w" sizes="(max-width:980px) 45vw, 250px"><img src="../../assets/img/cover-aquarelle.png" alt="" width="498" height="498" loading="lazy" decoding="async"></picture><span class="yr">1996</span><h3>Aquarelle</h3><p>met Stefan Bracaval</p><p class="cat">Lyrae <span>9609006</span></p></article>
     </div>
   </div>
 </section>
@@ -484,7 +587,7 @@
   <div class="wrap">
     <span class="tag">Contact</span>
     <a class="f-big" href="mailto:listen@ernstvranckx.be" style="margin-top:30px">listen@<br>ernstvranckx.be</a>
-    <div class="nl">
+    <div class="nl" id="nieuwsbrief">
       <div>
         <small>Nieuwsbrief</small>
         <h2>Blijf op <i>de hoogte</i></h2>
@@ -502,10 +605,13 @@
     <div class="f-row">
       <div><small>Telefoon</small><a href="tel:+32496512842">+32 496 51 28 42</a></div>
       <div><small>Adres</small>Leopoldvest 65, 3300 Tienen</div>
-      <div data-link-group><small>Luister</small><div class="f-links"><a data-link="listen.apple">Apple Music</a><a data-link="listen.spotify">Spotify</a></div></div>
-      <div data-link-group><small>Volg</small><div class="f-links"><a data-link="socials.instagram">Instagram</a><a data-link="socials.facebook">Facebook</a><a data-link="socials.youtube">YouTube</a></div></div>
+      <div data-link-group><small>Luister</small><div class="f-links"><a data-link="listen.apple" target="_blank" rel="noopener">Apple Music ↗</a><a data-link="listen.spotify" target="_blank" rel="noopener">Spotify ↗</a></div></div>
+      <div data-link-group><small>Volg</small><div class="f-links"><a data-link="socials.instagram" target="_blank" rel="noopener">Instagram</a><a data-link="socials.facebook" target="_blank" rel="noopener">Facebook</a><a data-link="socials.youtube" target="_blank" rel="noopener">YouTube</a></div></div>
     </div>
-    <div class="f-copy">© 2026 Ernst Vranckx</div>
+    <div class="f-end">
+      <nav class="f-nav" aria-label="Footer"><a href="#nieuw">Muziek</a><a href="#pers">Pers</a><a href="#live">Live</a><a href="#bio">Over Ernst</a><a href="#platen">Platen</a><a href="#contact">Contact</a></nav>
+      <div class="f-copy">© 2026 Ernst Vranckx</div>
+    </div>
   </div>
 </footer>
 
@@ -564,15 +670,17 @@
   addEventListener('pointerup',()=>{ if(!down) return; down=false; track.classList.remove('drag'); if(moved) go(cur,false); setTimeout(()=>moved=false,0); });
   setActive(data.length-1); requestAnimationFrame(()=>{ const c=cards[cur]; track.scrollLeft=c.offsetLeft-(track.clientWidth-c.offsetWidth)/2; });
 
-  /* ---------- Piano key bands ---------- */
+  /* ---------- Sound toggle (timeline notes) ---------- */
+  const snd=document.getElementById('tlSound'), sndTxt=snd.querySelector('[data-snd]');
+  snd.addEventListener('click',()=>{ Piano.muted=!Piano.muted; snd.setAttribute('aria-pressed',String(!Piano.muted)); sndTxt.textContent=Piano.muted?'uit':'aan'; });
+
+  /* ---------- Piano key band (one, between timeline and records) ---------- */
   const bands=[];
-  function makeBand(el){ const strip=el.querySelector('.strip'); const n=60, ww=(innerWidth<980?41:59);
+  function makeBand(el){ const strip=el.querySelector('.strip'), small=innerWidth<=980, n=80, ww=small?33:43, bw=small?18:24;
     for(let i=0;i<n;i++){ const k=document.createElement('div'); k.className='wk'; strip.appendChild(k); }
-    for(let i=0;i<n-1;i++) if([1,1,0,1,1,1,0][i%7]){ const b=document.createElement('div'); b.className='bk'; b.style.left=((i+1)*ww-1.5-(innerWidth<980?11:17))+'px'; strip.appendChild(b); }
-    bands.push({el,strip,keys:[...strip.querySelectorAll('.wk')],ww,dir:el.id==='band2'?1:-1}); }
-  const b1=document.createElement('div'); b1.className='keys-band'; b1.id='band1'; b1.setAttribute('aria-hidden','true'); b1.innerHTML='<div class="strip"></div>';
-  document.getElementById('nieuw').after(b1);
-  makeBand(b1); makeBand(document.getElementById('band2'));
+    for(let i=0;i<n-1;i++) if([1,1,0,1,1,1,0][i%7]){ const b=document.createElement('div'); b.className='bk'; b.style.left=((i+1)*ww-1.5-bw/2)+'px'; strip.appendChild(b); }
+    bands.push({el,strip,keys:[...strip.querySelectorAll('.wk')],ww,dir:1}); }
+  const band=document.getElementById('band'); makeBand(band);
 
   /* ---------- Record out of the sleeve ---------- */
   const rc=document.querySelector('.rel-cover'); const vin=document.createElement('div'); vin.className='rel-vinyl'; rc.prepend(vin);
@@ -589,7 +697,7 @@
 
   /* ---------- Pop-in reveals ---------- */
   const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }),{threshold:.15});
-  document.querySelectorAll('.rec,.press-cards figure,.lineup div,.stats div,.release h2,.bio h2,.head h2,.tl-top h2,.live-txt h2,.f-big').forEach((el,i)=>{ if(!reduce){el.classList.add('pop'); el.style.transitionDelay=((i%5)*90)+'ms';} io.observe(el); });
+  document.querySelectorAll('.rec,.press-cards figure,.lineup div,.stats div,.release h2,.bio h2,.head h2,.press h2,.tl-top h2,.live-txt h2,.ag-head h2,.f-big').forEach((el,i)=>{ if(!reduce){el.classList.add('pop'); el.style.transitionDelay=((i%5)*90)+'ms';} io.observe(el); });
 
   /* ---------- Marquee: pause button, pause on hover / keyboard focus ---------- */
   const mqBox=document.querySelector('.marquee'), mq=mqBox.querySelector('div'), mqBtn=mqBox.querySelector('.mq-btn');
@@ -613,7 +721,7 @@
     if(mqRun){ mx-= .6 + Math.abs(vel)*.35; const half=mq.scrollWidth/2; if(-mx>half) mx+=half; mq.style.transform='translateX('+mx+'px) skewX('+Math.max(-12,Math.min(12,-vel*.4))+'deg)'; }
     if(moving){
       if(vis.has(hero)) heroSpans.forEach((s,i)=>s.style.transform='translateX('+(y*(i?-.25:.18))+'px)');
-      bands.forEach(b=>{ if(!vis.has(b.el)) return; const p=prog(b.el); const x=b.dir*(p*900)-(b.dir>0?900:0);
+      bands.forEach(b=>{ if(!vis.has(b.el)) return; const p=Math.max(0,Math.min(1,prog(b.el))); const x=b.dir*(p*900)-(b.dir>0?900:0);
         b.strip.style.transform='translateX('+(x-100)+'px)';
         const centre=(innerWidth/2 - (x-100))/b.ww; b.keys.forEach((k,i)=>k.classList.toggle('hit',Math.abs(i-centre)<1.2 && Math.abs(vel)>.3)); });
       if(vis.has(rc)){ const pr=prog(rc); vin.style.transform='translateX('+(Math.max(0,Math.min(1,pr*1.8-.2))*17)+'%) rotate('+(y*.4)+'deg)'; }
@@ -631,7 +739,7 @@
     bars.forEach((b,i)=>b.style.height=(20+Math.abs(Math.sin(i*.9))*65)+'%');
   } else {
     const vio=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){ vis.add(e.target); force=true; } else vis.delete(e.target); }); kick(); },{rootMargin:'80px 0px'});
-    [mqBox,hero,b1,document.getElementById('band2'),rc,press,eq].forEach(el=>vio.observe(el));
+    [mqBox,hero,band,rc,press,eq].forEach(el=>vio.observe(el));
     addEventListener('scroll',kick,{passive:true});
     addEventListener('resize',()=>{ force=true; kick(); });
   }
