@@ -1,17 +1,17 @@
 /* Shared site behaviour for all three designs.
    1. SITE: every outbound URL lives here. A value of null means "not available yet":
       any element that points at it is removed, so the page never shows a dead link.
-   2. Mobile menu, newsletter form and current-year helpers. */
+   2. Mobile menu, newsletter form, agenda and scrollspy helpers. */
 window.SITE = {
   email: 'listen@ernstvranckx.be',
   phone: '+32496512842',
   buyCd: 'https://www.paypal.com/cgi-bin/webscr?business=ernst.vranckx%40hotmail.com&cmd=_xclick&amount=22.00&item_name=Ernst%20Vranckx%20Trio%20-%20Black%20Is%20The%20Colour%20(CD)&currency_code=EUR&add=1',
   listen: {
-    apple: 'https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000',
+    apple: 'https://music.apple.com/be/album/black-is-the-colour/1735852999',
     spotify: null
   },
   albums: {
-    'black-is-the-colour': { apple: 'https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000', buy: 'buyCd' },
+    'black-is-the-colour': { apple: 'https://music.apple.com/be/album/black-is-the-colour/1735852999', buy: 'buyCd' },
     'things-as-they-are': { apple: 'https://music.apple.com/be/album/things-as-they-are-feat-paul-g-ulrich-kris-duerinckx/1498624574', buy: null },
     'songs-dances':       { apple: 'https://music.apple.com/be/album/songs-dances/1512898739', buy: null },
     'a-childs-blessing':  { apple: 'https://music.apple.com/be/album/a-childs-blessing/1513079355', buy: null },
@@ -23,7 +23,11 @@ window.SITE = {
   socials: { instagram: null, facebook: null, youtube: null },
   privacy: null,       // privacy statement (needed once the newsletter is live)
   newsletter: null,    // form endpoint of the mailing-list service
-  langs: { nl: '#', fr: null, de: null, en: null }
+  langs: { nl: '#', fr: null, de: null, en: null },
+  /* Upcoming concerts, newest last. Example:
+     { date: '2027-03-14', venue: 'De Singel', city: 'Antwerpen', tickets: 'https://…' }
+     With an empty list the agenda shows its empty state. */
+  concerts: []
 };
 
 /* Booking e-mail with a ready-to-fill template */
@@ -94,9 +98,49 @@ SITE.bookingMail = 'mailto:' + SITE.email + '?subject=' + encodeURIComponent('Bo
     });
   }
 
+  /* Agenda: [data-concerts] is a list holding a <template data-concert-row> with
+     [data-f="day|month|year|venue|city"] and an optional a[data-f="tickets"].
+     [data-concerts-empty] is shown only when there are no upcoming dates. */
+  function initConcerts(){
+    const today = new Date().toISOString().slice(0,10);
+    const items = (SITE.concerts||[]).filter(c=>c.date >= today).sort((a,b)=>a.date<b.date?-1:1);
+    document.querySelectorAll('[data-concerts]').forEach(list=>{
+      const tpl = list.querySelector('template[data-concert-row]');
+      const empty = document.querySelector('[data-concerts-empty]');
+      if (!items.length || !tpl) { list.hidden = true; if (empty) empty.hidden = false; return; }
+      if (empty) empty.hidden = true;
+      const months = ['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+      items.forEach(c=>{
+        const row = tpl.content.cloneNode(true), d = new Date(c.date+'T12:00:00');
+        const set = (k,v)=>row.querySelectorAll('[data-f="'+k+'"]').forEach(el=>el.textContent=v);
+        set('day', d.getDate()); set('month', months[d.getMonth()]); set('year', d.getFullYear());
+        set('venue', c.venue||''); set('city', c.city||'');
+        row.querySelectorAll('time').forEach(t=>t.dateTime=c.date);
+        row.querySelectorAll('a[data-f="tickets"]').forEach(a=>{ if (c.tickets) a.href=c.tickets; else a.remove(); });
+        list.appendChild(row);
+      });
+    });
+  }
+
+  /* Scrollspy: links in [data-spy] get aria-current="true" while their section is in view */
+  function initSpy(){
+    const links = [...document.querySelectorAll('[data-spy] a[href^="#"]')].filter(a=>a.getAttribute('href').length>1);
+    const ids = [...new Set(links.map(a=>a.getAttribute('href').slice(1)))];
+    const secs = ids.map(id=>document.getElementById(id)).filter(Boolean);
+    if (!secs.length || !('IntersectionObserver' in window)) return;
+    const visible = new Map();
+    const io = new IntersectionObserver(es=>{
+      es.forEach(e=>visible.set(e.target.id, e.isIntersecting));
+      const cur = secs.find(s=>visible.get(s.id));
+      links.forEach(a=>{ const on = cur && a.getAttribute('href')==='#'+cur.id;
+        if (on) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current'); });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    secs.forEach(s=>io.observe(s));
+  }
+
   function init(){
     document.querySelectorAll('[data-booking]').forEach(a=> a.href = SITE.bookingMail);
-    applyLinks(); initMenu(); initNewsletter();
+    applyLinks(); initMenu(); initNewsletter(); initConcerts(); initSpy();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
   window.SiteLinks = { apply: applyLinks };

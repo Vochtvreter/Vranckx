@@ -27,4 +27,7 @@ statement, the newsletter service and the FR/DE/EN pages (the language switch ap
 second language has a URL). Until `SITE.newsletter` is set, the newsletter form only shows
 its success message.
 
+Concert dates go in `SITE.concerts` (date, venue, city, ticket link). Past dates drop off
+automatically; with no upcoming dates the agenda shows an invitation to subscribe or book.
+
 Fonts are self-hosted in `assets/fonts/` and WebP versions of the photos are in `assets/img/web/`.
