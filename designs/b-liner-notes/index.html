@@ -126,13 +126,84 @@
     .cat th:nth-child(3),.cat td:nth-child(3),.cat th:nth-child(4),.cat td:nth-child(4){display:none}
     .cat .go a{display:block;margin:0 0 6px}
   }
+
+  /* ===== Timeline: a vertical score ===== */
+  .tl{display:grid;grid-template-columns:3fr 9fr;gap:48px;align-items:start}
+  .tl-side{position:sticky;top:40px}
+  .tl-now{font-family:var(--display);font-size:96px;line-height:.85;letter-spacing:-.03em;color:var(--accent);margin:8px 0 26px;font-variant-numeric:lining-nums}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:26px}
+  .chip{font-family:var(--label);font-size:12px;font-weight:500;padding:7px 12px;border:1px solid var(--ink);background:none;cursor:pointer;color:var(--ink);transition:.2s}
+  .chip.on,.chip:hover{background:var(--ink);color:var(--paper)}
+  .tl-index{list-style:none;font-family:var(--label);font-size:13px;columns:2;column-gap:16px}
+  .tl-index a{display:block;padding:4px 0;color:var(--muted);transition:color .2s}
+  .tl-index a:hover,.tl-index a.on{color:var(--ink)}
+  .tl-index a.on::before{content:"♪ ";color:var(--accent)}
+  .tl-index a.dim{opacity:.3}
+  .tl-list{list-style:none;position:relative}
+  .tl-staff{position:absolute;left:96px;top:0;bottom:0;width:57px;background:repeating-linear-gradient(90deg,var(--rule) 0 1px,transparent 1px 14px);background-size:57px 100%;background-repeat:no-repeat}
+  .tl-ink{position:absolute;left:96px;top:0;width:57px;height:0;background:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 14px);background-repeat:no-repeat;background-size:57px 100%}
+  .tl-item{position:relative;display:grid;grid-template-columns:96px 56px 1fr;gap:0;padding:26px 0;cursor:pointer;transition:opacity .4s}
+  .tl-item.hide{display:none}
+  .tl-item .yr{font-family:var(--label);font-size:13px;font-weight:600;padding-top:8px}
+  .tl-item .yr small{display:block;font-weight:400;color:var(--muted);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+  .tl-head-note{position:relative;height:40px}
+  .nh{position:absolute;top:12px;width:19px;height:14px;border:2px solid var(--ink);border-radius:50%;transform:translateX(-50%) rotate(-22deg);background:var(--paper);transition:background .35s,transform .35s,border-color .35s;z-index:2}
+  .nh::after{content:"";position:absolute;right:-2px;bottom:5px;width:2px;height:34px;background:var(--ink);transform:rotate(22deg);transform-origin:bottom;opacity:0;transition:opacity .35s}
+  .tl-item.passed .nh{background:var(--ink)}
+  .tl-item.passed .nh::after{opacity:1}
+  .tl-item.album.passed .nh{background:var(--accent);border-color:var(--accent)}
+  .tl-item.album .nh::after{background:var(--accent)}
+  .tl-item:hover .nh{transform:translateX(-50%) rotate(-22deg) scale(1.25)}
+  .tl-body{padding-left:34px}
+  .tl-body .kind{font-family:var(--label);font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .tl-body h3{font-family:var(--display);font-weight:400;font-size:36px;line-height:1.05;margin:4px 0 0;display:flex;align-items:center;gap:14px}
+  .tl-body h3 .pl{font-family:var(--label);font-size:18px;color:var(--muted);transition:transform .3s}
+  .tl-item.open h3 .pl{transform:rotate(45deg);color:var(--accent)}
+  .tl-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
+  .tl-item.open .tl-more{grid-template-rows:1fr}
+  .tl-more>div{overflow:hidden}
+  .tl-more .in{display:flex;gap:24px;align-items:start;padding-top:14px}
+  .tl-more p{color:var(--ink-2);max-width:520px}
+  .tl-more img{width:120px;height:120px;object-fit:cover;flex:none}
+  .tl-more .cat{display:block;font-family:var(--label);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+
+  /* ===== Scroll effects ===== */
+  .kprog{position:fixed;top:0;left:0;right:0;height:12px;display:flex;z-index:50;background:#111;box-shadow:0 1px 0 rgba(0,0,0,.2)}
+  .kprog i{flex:1;margin-right:1px;background:#f7f5f0;transition:background .25s}
+  .kprog i.lit{background:var(--accent)}
+  .kprog b{position:absolute;top:0;height:7px;width:.9%;background:#111;transform:translateX(-50%)}
+  .staff-div{display:block;width:100%;height:84px;margin:0 0 110px}
+  .staff-div line{stroke:var(--ink);stroke-width:1;stroke-dasharray:1400;stroke-dashoffset:1400;transition:stroke-dashoffset 1.6s cubic-bezier(.6,.1,.2,1)}
+  .staff-div .n{opacity:0;transform:translateY(-10px);transition:opacity .4s,transform .5s cubic-bezier(.3,1.6,.5,1)}
+  .staff-div.in line{stroke-dashoffset:0}
+  .staff-div.in .n{opacity:1;transform:none}
+  .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  .hero-img{overflow:hidden}
+  .hero-img img{will-change:transform}
+  @media (max-width:980px){
+    .tl{grid-template-columns:1fr;gap:20px}
+    .tl-side{position:static}
+    .tl-now{font-size:64px;margin-bottom:16px}
+    .tl-index{display:none}
+    .tl-staff,.tl-ink{left:64px}
+    .tl-item{grid-template-columns:64px 56px 1fr}
+    .tl-body{padding-left:14px}
+    .tl-body h3{font-size:28px}
+    .tl-more .in{flex-direction:column}
+    .staff-div{margin-bottom:70px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .rv{opacity:1;transform:none;transition:none}
+    .staff-div line{stroke-dashoffset:0;transition:none}.staff-div .n{opacity:1;transform:none;transition:none}
+  }
 </style>
 </head>
 <body>
 
 <header class="top">
   <div class="wrap">
-    <nav><a href="#muziek">Muziek</a><a href="#catalogus">Catalogus</a><a href="#bio">Biografie</a><a href="#pers">Pers</a><a href="#contact">Contact</a></nav>
+    <nav><a href="#muziek">Muziek</a><a href="#catalogus">Catalogus</a><a href="#tijdlijn">Tijdlijn</a><a href="#bio">Biografie</a><a href="#pers">Pers</a><a href="#contact">Contact</a></nav>
     <a class="wordmark" href="#">Ernst Vranckx</a>
     <div class="lang"><b>NL</b><a href="#">FR</a><a href="#">DE</a><a href="#">EN</a></div>
   </div>
@@ -213,9 +284,31 @@
   </div>
 </section>
 
+<section class="sec" id="tijdlijn">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">03</span><h2>Tijdlijn, <i>1966 — 2024</i></h2></div>
+    <div class="tl">
+      <aside class="tl-side">
+        <span class="label">Nu op de partituur</span>
+        <div class="tl-now" id="tlNow">1966</div>
+        <div class="chips" id="chips">
+          <button class="chip on" data-f="alles">Alles</button>
+          <button class="chip" data-f="album">Albums</button>
+          <button class="chip" data-f="samenwerking">Samenwerkingen</button>
+          <button class="chip" data-f="mijlpaal">Mijlpalen</button>
+        </div>
+        <ol class="tl-index" id="tlIndex"></ol>
+      </aside>
+      <ol class="tl-list" id="tlList"><div class="tl-staff"></div><div class="tl-ink" id="tlInk"></div></ol>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><svg class="staff-div" data-melody="2,4,3,5,7,6,4,8,7,5,3,4"></svg></div>
+
 <section class="sec" id="bio">
   <div class="wrap">
-    <div class="sec-head"><span class="no">03</span><h2>Biografie</h2></div>
+    <div class="sec-head"><span class="no">04</span><h2>Biografie</h2></div>
     <div class="bio">
       <div class="facts">
         <div><span class="label">Stijl</span>European Cool, met etnische en klassieke invloeden</div>
@@ -239,7 +332,7 @@
 
 <section class="sec" id="pers">
   <div class="wrap">
-    <div class="sec-head"><span class="no">04</span><h2>Pers</h2></div>
+    <div class="sec-head"><span class="no">05</span><h2>Pers</h2></div>
     <div class="press">
       <figure class="lg"><blockquote>“Ernst Vranckx toont zich een meesterverteller in geladen ballads … Helemaal een rustbaken in deze hectische tijd.”</blockquote><figcaption>Bernard Lefèvre, Jazzhalo<span>Things As They Are</span></figcaption></figure>
       <figure><blockquote>“Ses compositions sont superbes et son univers est subtil, riche harmoniquement et mélodiquement. Beaucoup de raffinement … Un régal!”</blockquote><figcaption>Michel Herr, Jazz in Belgium<span>Album van de week</span></figcaption></figure>
@@ -256,7 +349,7 @@
 <section class="contact" id="contact">
   <div class="wrap">
     <div class="grid">
-      <span class="label" style="color:#8b867f">05 — Contact &amp; boekingen</span>
+      <span class="label" style="color:#8b867f">06 — Contact &amp; boekingen</span>
       <h2>Concerten, pers<br>of een cd? Schrijf naar<br><a href="mailto:listen@ernstvranckx.be">listen@ernstvranckx.be</a></h2>
     </div>
     <div class="row">
@@ -268,5 +361,85 @@
   </div>
 </section>
 
+<script src="../../assets/js/career.js"></script>
+<script src="../../assets/js/piano.js"></script>
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const IMG='../../assets/img/', data=window.CAREER;
+  const list=document.getElementById('tlList'), idx=document.getElementById('tlIndex'), now=document.getElementById('tlNow'), ink=document.getElementById('tlInk');
+  // each event gets a "pitch": its note head sits on a line or space of the vertical staff
+  const pitch=[1,2,4,3,5,6,4,7,5,6,8,7,8];
+  const kindNL={album:'Album',mijlpaal:'Mijlpaal',prijs:'Prijs',samenwerking:'Samenwerking',tournee:'Tournee'};
+  data.forEach((e,i)=>{
+    const li=document.createElement('li'); li.className='tl-item'+(e.type==='album'?' album':''); li.dataset.type=e.type; li.id='tl-'+i;
+    const media=e.cover?'<img src="'+IMG+e.cover+'" alt="Hoes '+e.title+'">':'';
+    li.innerHTML='<div class="yr">'+e.label.replace('Eind jaren','Eind<br>jaren').replace('Jaren','Jaren')+'</div>'+
+      '<div class="tl-head-note"><span class="nh" style="left:'+(pitch[i]*7)+'px"></span></div>'+
+      '<div class="tl-body"><span class="kind">'+kindNL[e.type]+'</span><h3>'+e.title+' <span class="pl">+</span></h3>'+
+      '<div class="tl-more"><div><div class="in">'+media+'<div><p>'+e.text+'</p>'+(e.cat?'<span class="cat">'+e.cat+'</span>':'')+'</div></div></div></div></div>';
+    li.addEventListener('click',()=>{ li.classList.toggle('open'); if(li.classList.contains('open')) Piano.note(pitch[i]+2); });
+    list.appendChild(li);
+    const a=document.createElement('li'); a.innerHTML='<a href="#tl-'+i+'">'+e.y+' · '+e.title+'</a>'; idx.appendChild(a);
+    a.firstChild.addEventListener('click',ev=>{ev.preventDefault(); li.classList.add('open'); li.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'}); Piano.note(pitch[i]+2);});
+  });
+  list.querySelector('.tl-item:last-of-type').classList.add('open');
+  const items=[...list.querySelectorAll('.tl-item')], links=[...idx.querySelectorAll('a')];
+  document.getElementById('chips').addEventListener('click',ev=>{
+    const c=ev.target.closest('.chip'); if(!c) return;
+    document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===c));
+    const f=c.dataset.f;
+    items.forEach((it,i)=>{ const show = f==='alles' || it.dataset.type===f || (f==='mijlpaal' && ['prijs','tournee'].includes(it.dataset.type));
+      it.classList.toggle('hide',!show); links[i].classList.toggle('dim',!show); });
+    Piano.chord([-9,-5,-2]); update();
+  });
+
+  /* keyboard scroll progress */
+  const kp=document.createElement('div'); kp.className='kprog'; kp.setAttribute('aria-hidden','true');
+  const NK=52; for(let i=0;i<NK;i++) kp.appendChild(document.createElement('i'));
+  for(let i=0;i<NK-1;i++) if([1,1,0,1,1,1,0][i%7]){ const b=document.createElement('b'); b.style.left=((i+1)/NK*100)+'%'; kp.appendChild(b); }
+  document.body.appendChild(kp); const keys=[...kp.querySelectorAll('i')];
+
+  /* staff dividers that write a little melody */
+  document.querySelectorAll('.staff-div').forEach(svg=>{
+    const W=1200,H=84, mel=(svg.dataset.melody||'3,5,4,6,8,7,5,4').split(',').map(Number);
+    svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.setAttribute('preserveAspectRatio','none');
+    let h=''; for(let l=0;l<5;l++){ const y=18+l*12; h+='<line x1="0" x2="'+W+'" y1="'+y+'" y2="'+y+'" style="transition-delay:'+(l*90)+'ms"/>'; }
+    h+='<line x1="1" x2="1" y1="18" y2="66"/><line x1="'+(W-1)+'" x2="'+(W-1)+'" y1="18" y2="66"/>';
+    mel.forEach((p,i)=>{ const x=90+i*(W-160)/mel.length, y=66-p*6;
+      h+='<g class="n" style="transition-delay:'+(700+i*110)+'ms"><ellipse cx="'+x+'" cy="'+y+'" rx="7.5" ry="5.5" transform="rotate(-22 '+x+' '+y+')" fill="#151515"/><rect x="'+(x+6)+'" y="'+(y-34)+'" width="1.6" height="34" fill="#151515"/></g>'; });
+    svg.innerHTML=h;
+  });
+  // extra dividers between existing sections
+  ['#catalogus','#pers'].forEach(sel=>{ const s=document.querySelector(sel); if(!s) return; const w=document.createElement('div'); w.className='wrap';
+    w.innerHTML='<svg class="staff-div" data-melody="'+(sel==='#pers'?'5,3,4,2,6,5,7,8,6,4':'1,3,5,8,7,5,6,4,2,3')+'"></svg>'; s.parentNode.insertBefore(w,s); });
+  document.querySelectorAll('.staff-div:not([viewBox])').forEach(svg=>{ const W=1200, mel=svg.dataset.melody.split(',').map(Number);
+    svg.setAttribute('viewBox','0 0 '+W+' 84'); svg.setAttribute('preserveAspectRatio','none'); let h='';
+    for(let l=0;l<5;l++){ const y=18+l*12; h+='<line x1="0" x2="'+W+'" y1="'+y+'" y2="'+y+'" style="transition-delay:'+(l*90)+'ms"/>'; }
+    mel.forEach((p,i)=>{ const x=90+i*(W-160)/mel.length, y=66-p*6; h+='<g class="n" style="transition-delay:'+(700+i*110)+'ms"><ellipse cx="'+x+'" cy="'+y+'" rx="7.5" ry="5.5" transform="rotate(-22 '+x+' '+y+')" fill="#151515"/><rect x="'+(x+6)+'" y="'+(y-34)+'" width="1.6" height="34" fill="#151515"/></g>'; });
+    svg.innerHTML=h; });
+
+  /* reveals */
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }),{threshold:.2});
+  document.querySelectorAll('.staff-div').forEach(s=>io.observe(s));
+  document.querySelectorAll('.statement p,.sec-head,.release>*,.cat tr,.bio>*,.press figure,.contact h2,.contact .row').forEach((el,i)=>{ if(!reduce){el.classList.add('rv'); el.style.transitionDelay=((i%4)*90)+'ms';} io.observe(el); });
+
+  /* scroll-linked */
+  const heroImg=document.querySelector('.hero-img img');
+  let tick=false;
+  function update(){
+    tick=false; const y=scrollY, H=innerHeight, max=document.documentElement.scrollHeight-H;
+    const p=Math.min(1,y/max); keys.forEach((k,i)=>k.classList.toggle('lit',i<=Math.round(p*(NK-1)) && y>4));
+    if(!reduce && heroImg) heroImg.style.transform='translateY('+(y*.12)+'px) scale(1.08)';
+    const r=list.getBoundingClientRect(), mark=H*.55;
+    ink.style.height=Math.max(0,Math.min(r.height,mark-r.top))+'px';
+    let cur=-1; items.forEach((it,i)=>{ if(it.classList.contains('hide')) return; const passed=it.getBoundingClientRect().top+40<mark; it.classList.toggle('passed',passed); if(passed) cur=i; });
+    links.forEach((l,i)=>l.classList.toggle('on',i===cur));
+    if(cur>=0 && now.dataset.i!=cur){ now.dataset.i=cur; now.textContent=data[cur].y==='’80'?'’80':data[cur].y; }
+  }
+  addEventListener('scroll',()=>{ if(!tick){tick=true;requestAnimationFrame(update)} },{passive:true});
+  addEventListener('resize',update); update();
+})();
+</script>
 </body>
 </html>
