@@ -17,6 +17,7 @@ window.SITE = {
     'a-childs-blessing':  { apple: 'https://music.apple.com/be/album/a-childs-blessing/1513079355', buy: null },
     'aquarelle':          { apple: null, buy: null }
   },
+  listenAll: null,     // page or smart link with every streaming service
   pressAll: null,      // page with the full press archive
   pressKit: null,      // zip/page with hi-res photos, bios and technical rider
   socials: { instagram: null, facebook: null, youtube: null },
@@ -46,7 +47,7 @@ SITE.bookingMail = 'mailto:' + SITE.email + '?subject=' + encodeURIComponent('Bo
     });
     /* Language switch: only languages that exist are shown; with one language the switch disappears */
     document.querySelectorAll('[data-langs]').forEach(box=>{
-      box.querySelectorAll('[data-lang]').forEach(a=>{ const u = SITE.langs[a.dataset.lang]; if(!u) a.remove(); });
+      box.querySelectorAll('[data-lang]').forEach(a=>{ const u = SITE.langs[a.dataset.lang]; if(!u) a.remove(); else a.href = u; });
       if (box.querySelectorAll('[data-lang]').length < 2) box.remove();
     });
   }
@@ -72,17 +73,21 @@ SITE.bookingMail = 'mailto:' + SITE.email + '?subject=' + encodeURIComponent('Bo
   function initNewsletter(){
     document.querySelectorAll('form[data-newsletter]').forEach(form=>{
       const input = form.querySelector('input[type=email]'), msg = form.querySelector('[data-msg]');
+      /* data-formal on the form switches the messages to 'u/uw' (design A's tone of voice) */
+      const T = form.hasAttribute('data-formal')
+        ? { bad:'Dit e-mailadres klopt niet. Controleer het even.', empty:'Vul uw e-mailadres in.', ok:'Dank u! Bevestig uw inschrijving via de mail die u ontvangt.' }
+        : { bad:'Dit e-mailadres klopt niet. Controleer het even.', empty:'Vul je e-mailadres in.', ok:'Bedankt! Bevestig je inschrijving via de mail die je ontvangt.' };
       if (SITE.newsletter) { form.action = SITE.newsletter; form.method = 'post'; }
       form.addEventListener('submit', e=>{
         if (!input.checkValidity()) {
           e.preventDefault();
-          msg.textContent = input.value ? 'Dit e-mailadres klopt niet. Controleer het even.' : 'Vul je e-mailadres in.';
+          msg.textContent = input.value ? T.bad : T.empty;
           msg.dataset.state = 'error'; input.setAttribute('aria-invalid','true'); input.focus(); return;
         }
         if (SITE.newsletter) return;
         e.preventDefault();
         input.removeAttribute('aria-invalid');
-        msg.textContent = 'Bedankt! Bevestig je inschrijving via de mail die je ontvangt.';
+        msg.textContent = T.ok;
         msg.dataset.state = 'ok'; form.reset();
       });
       input.addEventListener('input', ()=>{ if (msg.dataset.state === 'error') { msg.textContent=''; msg.dataset.state=''; input.removeAttribute('aria-invalid'); } });

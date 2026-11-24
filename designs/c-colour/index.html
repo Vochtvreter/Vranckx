@@ -4,20 +4,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ernst Vranckx — Jazz piano</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/fonts/c-colour.css">
 <style>
   :root{
     --blue:#2ea6df; --blue-d:#1d86bd; --blue-l:#8fd2f1;
     --black:#0b0b0c; --white:#fbfaf6; --cream:#efece3;
     --display:"Fraunces", Georgia, serif;
     --sans:"Space Grotesk", system-ui, sans-serif;
+    --hdr:72px;            /* compact sticky header height: anchors land below it */
+    --focus:var(--blue-d); /* focus ring; swapped per background below */
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--white);color:var(--black);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  img{display:block;max-width:100%}
+  img{display:block;max-width:100%;height:auto}
+  picture{display:contents}
+  picture source{display:none}
   a{color:inherit;text-decoration:none}
+  html.menu-open{overflow:hidden}
+  main section[id],footer[id]{scroll-margin-top:var(--hdr)}
+
+  /* focus: blue on black, black on blue, deep blue on white/cream */
+  .hero,.press,footer,.bar,.menu,.tcard.album{--focus:var(--black)}
+  .bio,.live-txt,.marquee,.tcard.on{--focus:var(--blue)}
+  a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+  .skip{position:fixed;left:16px;top:16px;z-index:100;background:var(--black);color:var(--blue);font-weight:700;font-size:15px;padding:12px 22px;border-radius:99px;transform:translateY(-200%);transition:transform .2s}
+  .skip:focus{transform:none}
+  .skip:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+  .micro{font-size:13px;font-weight:500;line-height:1.4;opacity:.75;margin-top:12px}
   .wrap{max-width:1360px;margin:0 auto;padding:0 40px}
   .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:6px 12px;border:2px solid currentColor;border-radius:99px}
 
@@ -29,14 +42,33 @@
   .live .duo img{filter:grayscale(1) contrast(1.1) brightness(2.1)}
 
   /* header */
-  .bar{position:absolute;inset:0 0 auto 0;z-index:10;padding:24px 40px;display:flex;justify-content:space-between;align-items:center;color:var(--black)}
-  .logo{font-family:var(--display);font-weight:900;font-size:26px;letter-spacing:-.03em;line-height:1}
+  .bar{position:fixed;inset:0 0 auto 0;z-index:50;padding:24px 40px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;color:var(--black);transition:padding .3s,background-color .3s,box-shadow .3s}
+  .bar.scrolled{padding-top:10px;padding-bottom:10px;background:var(--blue);box-shadow:0 2px 0 var(--black)}
+  .logo{font-family:var(--display);font-weight:900;font-size:26px;letter-spacing:-.03em;line-height:1;justify-self:start;padding:9px 0}
   .bar nav{display:flex;gap:2px;font-weight:500;font-size:15px;background:var(--white);border-radius:99px;padding:5px}
   .bar nav a{padding:8px 16px;border-radius:99px;transition:.2s}
   .bar nav a:hover{background:var(--black);color:var(--blue)}
-  .bar .lang{display:flex;gap:4px;font-size:13px;font-weight:700}
-  .bar .lang a{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;border:2px solid var(--black);background:var(--white)}
-  .bar .lang a.on{background:var(--black);color:var(--blue)}
+  .lang{display:flex;gap:4px;font-size:13px;font-weight:700}
+  .lang a{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;border:2px solid var(--black);background:var(--white);transition:.2s}
+  .lang a:hover{background:var(--black);color:var(--white)}
+  .lang a[aria-current]{background:var(--black);color:var(--blue)}
+  .bar .lang{justify-self:end}
+  .menu-btn{display:none;justify-self:end;align-items:center;gap:10px;height:44px;padding:0 9px 0 20px;border:0;border-radius:99px;background:var(--black);color:var(--white);font:700 15px/1 var(--sans);cursor:pointer}
+  .menu-btn .ico{width:26px;height:26px;border-radius:50%;background:var(--blue);position:relative}
+  .menu-btn .ico::before,.menu-btn .ico::after{content:"";position:absolute;left:7px;right:7px;height:2px;background:var(--black);border-radius:2px;transition:transform .25s,top .25s}
+  .menu-btn .ico::before{top:9px}.menu-btn .ico::after{top:15px}
+  .menu-btn[aria-expanded="true"] .ico::before{top:12px;transform:rotate(45deg)}
+  .menu-btn[aria-expanded="true"] .ico::after{top:12px;transform:rotate(-45deg)}
+
+  /* mobile menu panel */
+  .menu{position:fixed;inset:0;z-index:40;background:var(--blue);color:var(--black);padding:96px 20px 32px;display:flex;flex-direction:column;gap:30px;overflow-y:auto;overscroll-behavior:contain;visibility:hidden;opacity:0;transform:translateY(-16px);transition:opacity .25s,transform .25s,visibility 0s .25s}
+  .menu.open{visibility:visible;opacity:1;transform:none;transition:opacity .25s,transform .25s}
+  .menu nav{border-top:2px solid var(--black)}
+  .menu nav a{display:flex;justify-content:space-between;align-items:center;min-height:44px;padding:10px 0;border-bottom:2px solid var(--black);font-family:var(--display);font-weight:900;font-size:clamp(32px,9vw,46px);line-height:1;letter-spacing:-.045em}
+  .menu nav a::after{content:"→";font-family:var(--sans);font-weight:500;font-size:20px;letter-spacing:0;transition:transform .2s}
+  .menu nav a:hover::after{transform:translateX(4px)}
+  .menu .micro{margin-top:10px}
+  @media (min-width:981px){.menu{display:none}}
 
   /* hero */
   .hero{background:var(--blue);min-height:100vh;position:relative;overflow:hidden;display:grid;grid-template-columns:1.1fr .9fr}
@@ -45,9 +77,17 @@
   .hero h1{font-family:var(--display);font-weight:900;font-size:clamp(90px,14vw,230px);line-height:.78;letter-spacing:-.06em;margin-left:-.04em}
   .hero h1 span{display:block}
   .hero h1 span:nth-child(2){padding-left:.5em}
-  .hero .sub{display:flex;gap:40px;align-items:end;margin-top:40px;flex-wrap:wrap}
-  .hero .sub p{font-family:var(--display);font-weight:300;font-size:28px;line-height:1.2;max-width:420px}
-  .hero .sub p i{font-weight:600}
+  .hero .sub{margin-top:40px}
+  .hero .sub .tagline{font-family:var(--display);font-weight:300;font-size:28px;line-height:1.2;max-width:460px}
+  .hero .sub .tagline i{font-weight:600}
+  .hero-album{display:flex;flex-direction:column;align-items:flex-start;gap:22px;margin-top:30px}
+  .ha-id{display:flex;align-items:center;gap:16px;border-radius:6px}
+  .ha-id img{width:64px;height:64px;border-radius:3px;transform:rotate(-3deg);box-shadow:5px 5px 0 var(--black);transition:transform .25s}
+  .ha-id:hover img{transform:rotate(0)}
+  .ha-id small{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px}
+  .ha-id b{display:block;font-family:var(--display);font-weight:600;font-size:21px;line-height:1.05;letter-spacing:-.02em}
+  .ha-btns{display:flex;gap:10px;flex-wrap:wrap}
+  .hero .micro{margin-top:10px;padding-left:4px}
   .hero-img{position:relative;z-index:1}
   .hero-img .duo{position:absolute;inset:0}
   .hero-img .duo img{object-position:20% 30%}
@@ -55,7 +95,7 @@
   .hero-img .note small{color:var(--blue);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:11px}
   .hero-img .note p{font-family:var(--display);font-size:20px;line-height:1.25;margin:6px 0 8px}
   .hero-img .note span{font-size:13px;opacity:.6}
-  .btn{display:inline-flex;align-items:center;gap:12px;padding:18px 28px;border-radius:99px;font-weight:700;font-size:15px;transition:.2s}
+  .btn{display:inline-flex;align-items:center;gap:12px;padding:18px 28px;border-radius:99px;font-weight:700;font-size:15px;transition:.2s;border:0;font-family:var(--sans);cursor:pointer;min-height:44px}
   .btn-black{background:var(--black);color:var(--white)}
   .btn-black:hover{background:var(--white);color:var(--black)}
   .btn-line{border:2px solid var(--black)}
@@ -63,17 +103,24 @@
   .btn .arr{width:26px;height:26px;border-radius:50%;background:var(--blue);color:var(--black);display:grid;place-items:center;font-size:14px}
 
   /* marquee */
-  .marquee{background:var(--black);color:var(--white);overflow:hidden;white-space:nowrap;padding:22px 0;font-family:var(--display);font-style:italic;font-weight:300;font-size:30px}
+  .marquee{position:relative;background:var(--black);color:var(--white);overflow:hidden;white-space:nowrap;padding:22px 0;font-family:var(--display);font-style:italic;font-weight:300;font-size:30px}
   .marquee div{display:inline-block;animation:m 50s linear infinite}
   .marquee b{font-style:normal;color:var(--blue);font-weight:900;margin:0 28px}
   @keyframes m{to{transform:translateX(-50%)}}
+  .marquee::after{content:"";position:absolute;top:0;right:0;bottom:0;width:130px;background:linear-gradient(90deg,rgba(11,11,12,0),var(--black) 55%);pointer-events:none}
+  .mq-btn{position:absolute;right:24px;top:50%;z-index:1;width:44px;height:44px;margin-top:-22px;border:0;border-radius:50%;background:var(--blue);color:var(--black);display:grid;place-items:center;cursor:pointer;transition:background .2s,color .2s}
+  .mq-btn:hover{background:var(--white)}
+  .mq-btn svg{width:16px;height:16px;fill:currentColor}
+  .mq-btn .i-play,.marquee.paused .mq-btn .i-pause{display:none}
+  .marquee.paused .mq-btn .i-play{display:block}
+  .mq-btn[hidden],.marquee.static::after{display:none}
 
   /* release */
   .release{padding:140px 0;background:var(--white)}
   .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
   .rel-cover{position:relative}
   .rel-cover img{width:100%;border-radius:6px;transform:rotate(-3deg);box-shadow:30px 30px 0 var(--black)}
-  .rel-cover .sticker{position:absolute;right:-24px;top:-24px;width:130px;height:130px;border-radius:50%;background:var(--black);color:var(--blue);display:grid;place-items:center;text-align:center;font-family:var(--display);font-weight:900;font-size:22px;line-height:1;transform:rotate(12deg)}
+  .rel-cover .sticker{position:absolute;right:-24px;top:-24px;width:130px;height:130px;border-radius:50%;background:var(--black);color:var(--blue);display:grid;place-items:center;text-align:center;font-family:var(--display);font-weight:900;font-size:19px;line-height:1;letter-spacing:-.02em;transform:rotate(12deg)}
   .release h2{font-family:var(--display);font-weight:900;font-size:clamp(54px,6.5vw,104px);line-height:.85;letter-spacing:-.05em;margin:22px 0 30px}
   .release h2 i{font-weight:300;font-style:italic;letter-spacing:-.03em;color:var(--blue-d)}
   .release p.lead{font-size:20px;max-width:540px;margin-bottom:34px}
@@ -84,6 +131,7 @@
   .lineup div.feat{background:var(--blue)}
   .lineup div.feat span{opacity:.8}
   .rel-btns{display:flex;gap:12px;flex-wrap:wrap}
+  .release .micro{padding-left:4px}
 
   /* bio */
   .bio{background:var(--black);color:var(--white);padding:140px 0;position:relative;overflow:hidden}
@@ -104,8 +152,11 @@
   .head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:56px;flex-wrap:wrap}
   .head h2{font-family:var(--display);font-weight:900;font-size:clamp(54px,7vw,110px);line-height:.85;letter-spacing:-.05em}
   .shelf{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
-  .rec{background:var(--white);border-radius:8px;padding:14px 14px 20px;transition:transform .25s,box-shadow .25s}
-  .rec:hover{transform:translateY(-6px) rotate(-1deg);box-shadow:8px 8px 0 var(--black)}
+  .rec{position:relative;background:var(--white);border-radius:8px;padding:14px 14px 20px;transition:transform .25s,box-shadow .25s}
+  .rec:has(a):hover{transform:translateY(-6px) rotate(-1deg);box-shadow:8px 8px 0 var(--black)}
+  .rec h3 a::after{content:"";position:absolute;inset:0;border-radius:8px}
+  .rec h3 a:focus-visible{outline:0}
+  .rec:has(a:focus-visible){outline:3px solid var(--focus);outline-offset:3px}
   .rec img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px}
   .rec .yr{display:inline-block;margin:16px 0 8px;font-size:11px;font-weight:700;letter-spacing:.12em;background:var(--blue);padding:3px 8px;border-radius:99px}
   .rec h3{font-family:var(--display);font-weight:600;font-size:22px;line-height:1.05;letter-spacing:-.02em}
@@ -133,24 +184,55 @@
   .live-txt p{opacity:.75;max-width:440px;margin-bottom:34px}
   .live-txt .btn-black{background:var(--blue);color:var(--black)}
   .live-txt .btn-black .arr{background:var(--black);color:var(--blue)}
+  .live-cta{display:flex;align-items:center;flex-wrap:wrap;gap:14px 28px}
+  .txt-link{font-weight:700;font-size:15px;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px;padding:12px 0}
+  .live-txt .txt-link{text-decoration-color:var(--blue)}
+  .txt-link:hover{color:var(--blue)}
 
   /* footer */
   footer{background:var(--blue);padding:100px 0 40px}
   .f-big{font-family:var(--display);font-weight:900;font-size:clamp(44px,8.5vw,150px);line-height:.85;letter-spacing:-.06em;display:block;word-break:break-word}
   .f-big:hover{color:var(--white)}
-  .f-row{margin-top:70px;display:grid;grid-template-columns:repeat(4,1fr);gap:30px;border-top:2px solid var(--black);padding-top:26px;font-size:15px}
-  .f-row small{display:block;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:11px;margin-bottom:6px;opacity:.65}
+  .f-row{margin-top:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;border-top:2px solid var(--black);padding-top:26px;font-size:15px}
+  .f-row small,.nl small,.nl label{display:block;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:11px;margin-bottom:6px;opacity:.75}
+  .f-row a,.nl-consent a{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+  .f-row a:hover,.nl-consent a:hover{color:var(--white)}
+  .f-links{display:flex;flex-wrap:wrap;gap:0 16px}
+
+  /* newsletter */
+  .nl{margin-top:70px;display:grid;grid-template-columns:5fr 7fr;gap:30px 60px;border-top:2px solid var(--black);padding-top:26px}
+  .nl h2{font-family:var(--display);font-weight:900;font-size:clamp(34px,3.6vw,52px);line-height:.92;letter-spacing:-.045em;margin-top:6px}
+  .nl h2 i{font-weight:300;letter-spacing:-.03em}
+  .nl-field{display:flex;gap:10px}
+  .nl input{flex:1 1 auto;min-width:0;height:62px;padding:0 26px;border:2px solid var(--black);border-radius:99px;background:var(--white);color:var(--black);font:500 17px var(--sans)}
+  .nl input::placeholder{color:#6b6b6b}
+  .nl input[aria-invalid="true"]{box-shadow:inset 0 0 0 2px var(--black);background:#fff3f1}
+  .nl-field .btn{flex:none}
+  .nl-consent{font-size:13px;margin-top:12px;line-height:1.45;max-width:560px}
+  .nl-msg{font-size:14px;font-weight:700;margin-top:12px}
+  .nl-msg:empty{display:none}
+  .nl-msg[data-state]:not(:empty){display:inline-flex;align-items:center;gap:10px;padding:8px 16px 8px 8px;border-radius:99px}
+  .nl-msg[data-state="error"]{background:var(--black);color:var(--white)}
+  .nl-msg[data-state="ok"]{background:var(--white);color:var(--black)}
+  .nl-msg[data-state]::before{width:24px;height:24px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:13px;background:var(--blue);color:var(--black)}
+  .nl-msg[data-state="error"]::before{content:"!"}
+  .nl-msg[data-state="ok"]::before{content:"✓"}
   .f-copy{margin-top:60px;font-size:13px;opacity:.6}
 
   @media (max-width:980px){
     .wrap{padding:0 20px}
-    .bar{padding:18px 20px}
-    .bar nav{display:none}
+    :root{--hdr:66px}
+    .bar{padding:18px 20px;display:flex;justify-content:space-between}
+    .bar.scrolled{padding-top:10px;padding-bottom:10px}
+    .bar nav,.bar .lang{display:none}
+    .menu-btn{display:inline-flex}
     .hero{grid-template-columns:1fr}
     .hero-type{padding:110px 20px 40px}
     .hero-img{min-height:60vh}
     .hero-img .note{left:20px;right:20px;bottom:20px;max-width:none}
     .rel-grid,.bio-grid,.live{grid-template-columns:1fr;gap:56px}
+    .live{gap:0}
+    .nl{grid-template-columns:1fr;gap:24px}
     .lineup{grid-template-columns:repeat(2,1fr)}
     .bio .cols{columns:1}
     .shelf{grid-template-columns:repeat(2,1fr)}
@@ -158,7 +240,17 @@
     .live-txt{padding:70px 20px}
     .f-row{grid-template-columns:1fr 1fr}
     .release,.bio,.disco,.press{padding:90px 0}
-    .rel-cover .sticker{right:-6px;width:100px;height:100px;font-size:17px}
+    .rel-cover .sticker{right:-6px;width:100px;height:100px;font-size:15px}
+    .hero .sub{margin-top:32px}
+    .hero .sub .tagline{font-size:25px}
+    .hero-album{gap:18px;margin-top:24px}
+    .hero-album .btn{padding:16px 22px}
+    .hero-album .btn-line{padding:14px 22px}
+    .mq-btn{right:12px}
+  }
+  @media (max-width:560px){
+    .nl-field{flex-direction:column}
+    .nl-field .btn{justify-content:center}
   }
 
   /* ===== Timeline: draggable record shelf ===== */
@@ -180,6 +272,7 @@
   .tcard.album.on{background:var(--black)}
   .tcard .yr{font-family:var(--display);font-weight:900;font-size:110px;line-height:.8;letter-spacing:-.06em}
   .tcard.on .yr{color:var(--blue)}
+  .tcard .yr small{font-size:.4em;font-weight:300;font-style:italic;letter-spacing:-.02em;margin-right:.06em}
   .tcard .tp{align-self:start;margin:18px 0 12px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;border:2px solid currentColor;border-radius:99px}
   .tcard h3{font-family:var(--display);font-weight:600;font-size:30px;line-height:1;letter-spacing:-.03em;margin-bottom:12px}
   .tcard p{font-size:15px;opacity:.75}
@@ -193,6 +286,8 @@
   .scrub .line{position:absolute;left:0;right:0;top:20px;height:2px;background:var(--black)}
   .scrub .fill{position:absolute;left:0;top:19px;height:4px;background:var(--blue);border-radius:2px;transition:width .45s}
   .scrub button{position:absolute;top:13px;width:16px;height:16px;border-radius:50%;border:2px solid var(--black);background:var(--white);transform:translateX(-50%);cursor:pointer;padding:0;transition:.25s}
+  .scrub button::before{content:"";position:absolute;left:50%;top:50%;width:44px;height:44px;transform:translate(-50%,-50%)}
+  .scrub button.on::before{width:28px;height:28px}
   .scrub button.al{background:var(--blue)}
   .scrub button.on{transform:translateX(-50%) scale(1.6);background:var(--black)}
   .scrub button span{position:absolute;top:22px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;white-space:nowrap}
@@ -234,24 +329,45 @@
   }
 </style>
 </head>
-<body>
+<body id="top">
+<a class="skip" href="#inhoud">Naar inhoud</a>
 
 <header class="bar">
-  <a class="logo" href="#">E.V.</a>
-  <nav><a href="#nieuw">Nieuw album</a><a href="#bio">Over Ernst</a><a href="#tijdlijn">Tijdlijn</a><a href="#platen">Platen</a><a href="#pers">Pers</a><a href="#live">Live</a><a href="#contact">Contact</a></nav>
-  <div class="lang"><a class="on" href="#">NL</a><a href="#">FR</a><a href="#">DE</a><a href="#">EN</a></div>
+  <a class="logo" href="#top" aria-label="Ernst Vranckx, naar boven">E.V.</a>
+  <nav aria-label="Hoofdmenu"><a href="#nieuw">Nieuw album</a><a href="#bio">Over Ernst</a><a href="#tijdlijn">Tijdlijn</a><a href="#platen">Platen</a><a href="#pers">Pers</a><a href="#live">Live</a><a href="#contact">Contact</a></nav>
+  <div class="lang" data-langs aria-label="Taal"><a data-lang="nl" href="#" aria-current="true" lang="nl">NL</a><a data-lang="fr" lang="fr">FR</a><a data-lang="de" lang="de">DE</a><a data-lang="en" lang="en">EN</a></div>
+  <button class="menu-btn" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu"><span data-menu-label>Menu</span><span class="ico" aria-hidden="true"></span></button>
 </header>
 
+<div class="menu" id="menu" data-menu>
+  <nav aria-label="Menu"><a href="#nieuw">Nieuw album</a><a href="#bio">Over Ernst</a><a href="#tijdlijn">Tijdlijn</a><a href="#platen">Platen</a><a href="#pers">Pers</a><a href="#live">Live</a><a href="#contact">Contact</a></nav>
+  <div><a class="btn btn-black" data-link="buyCd">Koop de cd · €22 <span class="arr">→</span></a><p class="micro">Afrekenen via PayPal · verzendkosten zie je vóór je betaalt.</p></div>
+  <div class="lang" data-langs aria-label="Taal"><a data-lang="nl" href="#" aria-current="true" lang="nl">NL</a><a data-lang="fr" lang="fr">FR</a><a data-lang="de" lang="de">DE</a><a data-lang="en" lang="en">EN</a></div>
+</div>
+
+<main id="inhoud">
 <section class="hero">
   <div class="hero-type">
     <h1><span>Ernst</span><span>Vranckx</span></h1>
     <div class="sub">
-      <p>Jazzpianist en componist uit Leuven. <i>European cool</i> met een verhaal.</p>
-      <a class="btn btn-black" href="#nieuw">Nieuw album <span class="arr">↓</span></a>
+      <p class="tagline">Jazzpianist en componist uit Leuven. <i>European cool</i> met een verhaal.</p>
+      <div class="hero-album">
+        <a class="ha-id" href="#nieuw">
+          <picture><source type="image/webp" srcset="../../assets/img/web/cover-black-is-the-colour-600.webp"><img src="../../assets/img/cover-black-is-the-colour.jpg" alt="" width="952" height="952" decoding="async"></picture>
+          <span><small>Nieuwste album</small><b>Black Is The Colour</b></span>
+        </a>
+        <div>
+          <div class="ha-btns">
+            <a class="btn btn-black" data-link="buyCd">Koop de cd · €22 <span class="arr">→</span></a>
+            <a class="btn btn-line" data-link="listen.apple">▶ Beluister</a>
+          </div>
+          <p class="micro">Afrekenen via PayPal · verzendkosten zie je vóór je betaalt.</p>
+        </div>
+      </div>
     </div>
   </div>
   <div class="hero-img">
-    <div class="duo"><img src="../../assets/img/portrait-2.jpg" alt="Ernst Vranckx aan de vleugel"></div>
+    <div class="duo"><picture><source type="image/webp" srcset="../../assets/img/web/portrait-2-800.webp 800w, ../../assets/img/web/portrait-2-1600.webp 1600w" sizes="(max-width:980px) 100vw, 45vw"><img src="../../assets/img/portrait-2.jpg" alt="Ernst Vranckx aan de vleugel" width="2000" height="1335" fetchpriority="high" decoding="async"></picture></div>
     <div class="note">
       <small>Kenny Wheeler</small>
       <p>“Ernst is één van de goede. Ik hou van zijn songs, ze vertellen me iets.”</p>
@@ -260,16 +376,16 @@
   </div>
 </section>
 
-<div class="marquee"><div>
+<div class="marquee" role="region" aria-label="Uit de pers"><div>
   “Un disque mélancolique mais envoûtant” <b>✦</b> “Nice storytelling!” <b>✦</b> “Een meesterverteller in geladen ballads” <b>✦</b> “Des brumes à la Turner” <b>✦</b> “Eén van onze meest inventieve componisten” <b>✦</b>
   “Un disque mélancolique mais envoûtant” <b>✦</b> “Nice storytelling!” <b>✦</b> “Een meesterverteller in geladen ballads” <b>✦</b> “Des brumes à la Turner” <b>✦</b> “Eén van onze meest inventieve componisten” <b>✦</b>
-</div></div>
+</div><button class="mq-btn" type="button" aria-label="Pauzeer" title="Pauzeer"><svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="3.5" height="12" rx="1"/><rect x="9.5" y="2" width="3.5" height="12" rx="1"/></svg><svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.2v11.6a.8.8 0 0 0 1.2.7l9.3-5.8a.8.8 0 0 0 0-1.4L5.2 1.5A.8.8 0 0 0 4 2.2z"/></svg></button></div>
 
 <section class="release" id="nieuw">
   <div class="wrap rel-grid">
     <div class="rel-cover">
-      <img src="../../assets/img/cover-black-is-the-colour.jpg" alt="Black Is The Colour — albumhoes">
-      <div class="sticker">Nu<br>uit!</div>
+      <picture><source type="image/webp" srcset="../../assets/img/web/cover-black-is-the-colour-600.webp 600w, ../../assets/img/web/cover-black-is-the-colour.webp 952w" sizes="(max-width:980px) 90vw, 600px"><img src="../../assets/img/cover-black-is-the-colour.jpg" alt="Black Is The Colour — albumhoes" width="952" height="952" loading="lazy" decoding="async"></picture>
+      <div class="sticker">Nieuwste<br>album</div>
     </div>
     <div>
       <span class="tag">Eden River Records · ERR-CD-25</span>
@@ -282,17 +398,18 @@
         <div class="feat"><b>Hayden Chisholm</b><span>sax &amp; zang</span></div>
       </div>
       <div class="rel-btns">
-        <a class="btn btn-black" href="https://www.paypal.com/cgi-bin/webscr?business=ernst.vranckx%40hotmail.com&cmd=_xclick&amount=22.00&item_name=Ernst%20Vranckx%20Trio%20-%20Black%20Is%20The%20Colour%20(CD)&currency_code=EUR&add=1">Koop de cd · €22 <span class="arr">→</span></a>
-        <a class="btn btn-line" href="https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000">▶ Apple Music</a>
-        <a class="btn btn-line" href="#">▶ Spotify</a>
+        <a class="btn btn-black" data-link="buyCd">Koop de cd · €22 <span class="arr">→</span></a>
+        <a class="btn btn-line" data-link="listen.apple">▶ Apple Music</a>
+        <a class="btn btn-line" data-link="listen.spotify">▶ Spotify</a>
       </div>
+      <p class="micro">Afrekenen via PayPal · verzendkosten zie je vóór je betaalt.</p>
     </div>
   </div>
 </section>
 
 <section class="bio" id="bio">
   <div class="wrap bio-grid">
-    <div class="duo black"><img src="../../assets/img/trio-2.jpg" alt="Ernst Vranckx live aan de vleugel"></div>
+    <div class="duo black"><picture><source type="image/webp" srcset="../../assets/img/web/trio-2-800.webp 800w" sizes="(max-width:980px) 100vw, 40vw"><img src="../../assets/img/trio-2.jpg" alt="Ernst Vranckx live aan de vleugel" width="1385" height="897" loading="lazy" decoding="async"></picture></div>
     <div>
       <span class="tag" style="color:var(--blue)">Over Ernst</span>
       <h2>Van Leuven tot <b>China</b> — al drie decennia songs die <b>iets vertellen</b>.</h2>
@@ -314,7 +431,7 @@
 <section class="tl" id="tijdlijn">
   <div class="wrap tl-top">
     <div><span class="tag">Tijdlijn</span><h2>Van ’66<br><i>tot nu</i></h2></div>
-    <div class="tl-nav"><button id="tlPrev" aria-label="Vorige">←</button><span class="tl-count" id="tlCount">13 / 13</span><button id="tlNext" aria-label="Volgende">→</button></div>
+    <div class="tl-nav"><button type="button" id="tlPrev" aria-label="Vorige">←</button><span class="tl-count" id="tlCount">13 / 13</span><button type="button" id="tlNext" aria-label="Volgende">→</button></div>
   </div>
   <div class="track" id="track" aria-label="Tijdlijn van Ernst Vranckx"></div>
   <div class="scrub" id="scrub"><div class="line"></div><div class="fill" id="fill"></div></div>
@@ -324,13 +441,13 @@
 
 <section class="disco" id="platen">
   <div class="wrap">
-    <div class="head"><h2>De platen</h2><a class="btn btn-line" href="#">Alle luisterlinks <span class="arr">→</span></a></div>
+    <div class="head"><h2>De platen</h2><a class="btn btn-line" data-link="listenAll">Alle luisterlinks <span class="arr">→</span></a></div>
     <div class="shelf">
-      <a class="rec" href="https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000"><img src="../../assets/img/cover-black-is-the-colour.jpg" alt=""><span class="yr">2024</span><h3>Black Is The Colour</h3><p>Trio ft. Hayden Chisholm</p></a>
-      <a class="rec" href="https://music.apple.com/be/album/things-as-they-are-feat-paul-g-ulrich-kris-duerinckx/1498624574"><img src="../../assets/img/cover-things-as-they-are.jpg" alt=""><span class="yr">2020</span><h3>Things As They Are</h3><p>Trio met Ulrich &amp; Duerinckx</p></a>
-      <a class="rec" href="https://music.apple.com/be/album/songs-dances/1512898739"><img src="../../assets/img/cover-songs-dances.jpg" alt=""><span class="yr">W.E.R.F.</span><h3>Songs &amp; Dances</h3><p>Ernst Vranckx Quintet</p></a>
-      <a class="rec" href="https://music.apple.com/be/album/a-childs-blessing/1513079355"><img src="../../assets/img/cover-a-childs-blessing.jpg" alt=""><span class="yr">W.E.R.F.</span><h3>A Child’s Blessing</h3><p>feat. Kenny Wheeler</p></a>
-      <a class="rec" href="#"><img src="../../assets/img/cover-aquarelle.png" alt=""><span class="yr">Lyrae</span><h3>Aquarelle</h3><p>met Stefan Bracaval</p></a>
+      <article class="rec"><picture><source type="image/webp" srcset="../../assets/img/web/cover-black-is-the-colour-600.webp 600w, ../../assets/img/web/cover-black-is-the-colour.webp 952w" sizes="(max-width:980px) 45vw, 250px"><img src="../../assets/img/cover-black-is-the-colour.jpg" alt="" width="952" height="952" loading="lazy" decoding="async"></picture><span class="yr">2024</span><h3><a data-link="albums.black-is-the-colour.apple">Black Is The Colour</a></h3><p>Trio ft. Hayden Chisholm</p></article>
+      <article class="rec"><picture><source type="image/webp" srcset="../../assets/img/web/cover-things-as-they-are-600.webp 600w, ../../assets/img/web/cover-things-as-they-are.webp 952w" sizes="(max-width:980px) 45vw, 250px"><img src="../../assets/img/cover-things-as-they-are.jpg" alt="" width="952" height="952" loading="lazy" decoding="async"></picture><span class="yr">2020</span><h3><a data-link="albums.things-as-they-are.apple">Things As They Are</a></h3><p>Trio met Ulrich &amp; Duerinckx</p></article>
+      <article class="rec"><picture><source type="image/webp" srcset="../../assets/img/web/cover-songs-dances.webp 500w" sizes="(max-width:980px) 45vw, 250px"><img src="../../assets/img/cover-songs-dances.jpg" alt="" width="500" height="500" loading="lazy" decoding="async"></picture><span class="yr">W.E.R.F.</span><h3><a data-link="albums.songs-dances.apple">Songs &amp; Dances</a></h3><p>Ernst Vranckx Quintet</p></article>
+      <article class="rec"><picture><source type="image/webp" srcset="../../assets/img/web/cover-a-childs-blessing.webp 500w" sizes="(max-width:980px) 45vw, 250px"><img src="../../assets/img/cover-a-childs-blessing.jpg" alt="" width="500" height="500" loading="lazy" decoding="async"></picture><span class="yr">W.E.R.F.</span><h3><a data-link="albums.a-childs-blessing.apple">A Child’s Blessing</a></h3><p>feat. Kenny Wheeler</p></article>
+      <article class="rec"><picture><source type="image/webp" srcset="../../assets/img/web/cover-aquarelle.webp 498w" sizes="(max-width:980px) 45vw, 250px"><img src="../../assets/img/cover-aquarelle.png" alt="" width="498" height="498" loading="lazy" decoding="async"></picture><span class="yr">Lyrae</span><h3><a data-link="albums.aquarelle.apple">Aquarelle</a></h3><p>met Stefan Bracaval</p></article>
     </div>
   </div>
 </section>
@@ -350,29 +467,49 @@
 </section>
 
 <section class="live" id="live">
-  <div class="duo"><img src="../../assets/img/trio-wide.jpg" alt="Het kwartet live op het podium" style="object-position:35% 50%"></div>
+  <div class="duo"><picture><source type="image/webp" srcset="../../assets/img/web/trio-wide-800.webp 800w, ../../assets/img/web/trio-wide-1600.webp 1600w" sizes="(max-width:980px) 100vw, 50vw"><img src="../../assets/img/trio-wide.jpg" alt="Het kwartet live op het podium" width="1938" height="933" loading="lazy" decoding="async" style="object-position:35% 50%"></picture></div>
   <div class="live-txt">
     <span class="tag" style="color:var(--blue);align-self:start">Live</span>
     <h2>Boek het <i>trio</i> of kwartet</h2>
     <p>Voor clubs, cultuurcentra, festivals en privé-concerten. Neem contact op voor beschikbaarheid, bezetting en technische fiche.</p>
-    <a class="btn btn-black" href="#contact" style="align-self:start">Vraag een concert aan <span class="arr">→</span></a>
+    <div class="live-cta">
+      <a class="btn btn-black" data-booking href="mailto:listen@ernstvranckx.be">Vraag een concert aan <span class="arr">→</span></a>
+      <a class="txt-link" data-link="pressKit">Presskit &amp; technische fiche</a>
+    </div>
   </div>
 </section>
+</main>
 
 <footer id="contact">
   <div class="wrap">
     <span class="tag">Contact</span>
     <a class="f-big" href="mailto:listen@ernstvranckx.be" style="margin-top:30px">listen@<br>ernstvranckx.be</a>
+    <div class="nl">
+      <div>
+        <small>Nieuwsbrief</small>
+        <h2>Blijf op <i>de hoogte</i></h2>
+      </div>
+      <form class="nl-form" data-newsletter novalidate>
+        <label for="nl-email">Je e-mailadres</label>
+        <div class="nl-field">
+          <input id="nl-email" name="email" type="email" autocomplete="email" required placeholder="naam@voorbeeld.be">
+          <button class="btn btn-black" type="submit">Inschrijven <span class="arr">→</span></button>
+        </div>
+        <p class="nl-consent">Een paar keer per jaar: nieuwe releases en concerten. Uitschrijven kan altijd. <a data-link="privacy">Privacy</a></p>
+        <p class="nl-msg" data-msg role="status" aria-live="polite"></p>
+      </form>
+    </div>
     <div class="f-row">
-      <div><small>Telefoon</small>+32 496 51 28 42</div>
+      <div><small>Telefoon</small><a href="tel:+32496512842">+32 496 51 28 42</a></div>
       <div><small>Adres</small>Leopoldvest 65, 3300 Tienen</div>
-      <div><small>Luister</small>Apple Music · Spotify</div>
-      <div><small>Volg</small>Socials (in te vullen)</div>
+      <div data-link-group><small>Luister</small><div class="f-links"><a data-link="listen.apple">Apple Music</a><a data-link="listen.spotify">Spotify</a></div></div>
+      <div data-link-group><small>Volg</small><div class="f-links"><a data-link="socials.instagram">Instagram</a><a data-link="socials.facebook">Facebook</a><a data-link="socials.youtube">YouTube</a></div></div>
     </div>
     <div class="f-copy">© 2026 Ernst Vranckx</div>
   </div>
 </footer>
 
+<script src="../../assets/js/site.js"></script>
 <script src="../../assets/js/career.js"></script>
 <script src="../../assets/js/piano.js"></script>
 <script>
@@ -383,15 +520,30 @@
   const BEAM='<svg viewBox="0 0 38 32"><ellipse cx="7" cy="27" rx="6.3" ry="4.5" transform="rotate(-22 7 27)"/><ellipse cx="29" cy="23" rx="6.3" ry="4.5" transform="rotate(-22 29 23)"/><rect x="11.4" y="5" width="2.2" height="22"/><rect x="33.4" y="1" width="2.2" height="22"/><path d="M11.4 5 35.4 1v5l-24 4z"/></svg>';
   const kindNL={album:'Album',mijlpaal:'Mijlpaal',prijs:'Prijs',samenwerking:'Samenwerking',tournee:'Tournee'};
 
+  /* ---------- Sticky header: compact once scrolled ---------- */
+  const bar=document.querySelector('.bar');
+  const setBar=()=>bar.classList.toggle('scrolled',scrollY>24);
+  addEventListener('scroll',setBar,{passive:true}); setBar();
+
+  /* ---------- Footer link groups: hide a column when all its links are still null ---------- */
+  document.querySelectorAll('[data-link-group]').forEach(g=>{ SiteLinks.apply(g); if(!g.querySelector('a')) g.remove(); });
+
+  /* Cover with WebP source (covers: 952px or ~500px originals) */
+  const COVER={'cover-black-is-the-colour.jpg':952,'cover-things-as-they-are.jpg':952,'cover-aquarelle.png':498};
+  function cover(file,alt){ const px=COVER[file]||500, web=IMG+'web/'+file.replace(/\.\w+$/,'')+(px===952?'-600':'')+'.webp';
+    return '<picture><source type="image/webp" srcset="'+web+'"><img src="'+IMG+file+'" alt="'+alt+'" width="'+px+'" height="'+px+'" loading="lazy" decoding="async"></picture>'; }
+  /* "na ’96": small italic prefix, big year */
+  function year(y){ const i=y.indexOf(' '); return i<0?y:'<small>'+y.slice(0,i)+'</small>'+y.slice(i+1); }
+
   /* ---------- Timeline ---------- */
   const track=document.getElementById('track'), scrub=document.getElementById('scrub'), fill=document.getElementById('fill'), count=document.getElementById('tlCount');
   data.forEach((e,i)=>{
     const c=document.createElement('article'); c.className='tcard'+(e.type==='album'?' album':''); c.tabIndex=0;
-    c.innerHTML='<div class="yr">'+e.y+'</div><span class="tp">'+kindNL[e.type]+' · '+e.label+'</span><h3>'+e.title+'</h3><p>'+e.text+'</p>'+
-      (e.cover?'<div class="sleeve"><div class="disc"></div><img src="'+IMG+e.cover+'" alt="Hoes '+e.title+'"></div>':'');
+    c.innerHTML='<div class="yr">'+year(e.y)+'</div><span class="tp">'+kindNL[e.type]+' · '+e.label+'</span><h3>'+e.title+'</h3><p>'+e.text+'</p>'+
+      (e.cover?'<div class="sleeve"><div class="disc"></div>'+cover(e.cover,'Hoes '+e.title)+'</div>':'');
     c.addEventListener('click',()=>{ if(!moved) go(i,true); });
     track.appendChild(c);
-    const d=document.createElement('button'); d.className=e.type==='album'?'al':''; d.style.left=(i/(data.length-1)*100)+'%';
+    const d=document.createElement('button'); d.type='button'; d.className=e.type==='album'?'al':''; d.style.left=(i/(data.length-1)*100)+'%';
     d.setAttribute('aria-label',e.label+' '+e.title); d.innerHTML='<span>'+e.y+'</span>'; d.onclick=()=>go(i,true); scrub.appendChild(d);
   });
   const cards=[...track.children], dots=[...scrub.querySelectorAll('button')];
@@ -439,25 +591,50 @@
   const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }),{threshold:.15});
   document.querySelectorAll('.rec,.press-cards figure,.lineup div,.stats div,.release h2,.bio h2,.head h2,.tl-top h2,.live-txt h2,.f-big').forEach((el,i)=>{ if(!reduce){el.classList.add('pop'); el.style.transitionDelay=((i%5)*90)+'ms';} io.observe(el); });
 
-  /* ---------- Scroll loop ---------- */
-  const mq=document.querySelector('.marquee div'), heroSpans=[...document.querySelectorAll('.hero h1 span')];
-  let lastY=scrollY, vel=0, mx=0;
+  /* ---------- Marquee: pause button, pause on hover / keyboard focus ---------- */
+  const mqBox=document.querySelector('.marquee'), mq=mqBox.querySelector('div'), mqBtn=mqBox.querySelector('.mq-btn');
+  let mqPaused=false;
+  mqBtn.addEventListener('click',()=>{ mqPaused=!mqPaused; mqBox.classList.toggle('paused',mqPaused);
+    const l=mqPaused?'Speel af':'Pauzeer'; mqBtn.setAttribute('aria-label',l); mqBtn.title=l; kick(); });
+  ['mouseenter','mouseleave','focusin','focusout'].forEach(t=>mqBox.addEventListener(t,()=>kick()));
+  const mqHeld=()=>mqBox.matches(':hover')||!!mqBox.querySelector(':focus-visible');
+
+  /* ---------- Animation loop: runs only while something visible moves ---------- */
+  const hero=document.querySelector('.hero'), heroSpans=[...hero.querySelectorAll('h1 span')];
+  let lastY=scrollY, vel=0, mx=0, running=false, force=true;
+  const vis=new Set();
   function prog(el){ const r=el.getBoundingClientRect(); return (innerHeight-r.top)/(innerHeight+r.height); }
+  function kick(){ if(reduce||running) return; running=true; requestAnimationFrame(loop); }
   function loop(){
-    const y=scrollY, dy=y-lastY; lastY=y; vel=vel*.9+dy*.1;
+    const y=scrollY, dy=y-lastY; lastY=y; vel=vel*.9+dy*.1; if(Math.abs(vel)<.02) vel=0;
+    const moving=force||dy!==0||vel!==0; force=false;
     // marquee: base drift plus scroll velocity
-    if(!reduce){ mx-= .6 + Math.abs(vel)*.35; const half=mq.scrollWidth/2; if(-mx>half) mx+=half; mq.style.transform='translateX('+mx+'px) skewX('+Math.max(-12,Math.min(12,-vel*.4))+'deg)'; }
-    if(!reduce){ heroSpans.forEach((s,i)=>s.style.transform='translateX('+(y*(i?-.25:.18))+'px)'); }
-    bands.forEach(b=>{ const p=prog(b.el); if(p<-.1||p>1.1) return; const x=b.dir*(p*900)-(b.dir>0?900:0);
-      if(!reduce) b.strip.style.transform='translateX('+(x-100)+'px)';
-      const centre=(innerWidth/2 - (x-100))/b.ww; b.keys.forEach((k,i)=>k.classList.toggle('hit',Math.abs(i-centre)<1.2 && Math.abs(vel)>.3)); });
-    const pr=prog(rc); if(!reduce) vin.style.transform='translateX('+(Math.max(0,Math.min(1,pr*1.8-.2))*17)+'%) rotate('+(y*.4)+'deg)';
-    const pp=prog(press); if(pp>-.1&&pp<1.1&&!reduce) fnotes.forEach(n=>n.el.style.transform='translateY('+(-(pp-.5)*400*n.sp)+'px) rotate('+(n.r+pp*30)+'deg)');
-    const t=performance.now()/1000, energy=Math.min(1,.25+Math.abs(vel)*.08);
-    bars.forEach((b,i)=>b.style.height=(15+(reduce?40:Math.abs(Math.sin(t*3+i*.7)*Math.cos(t*1.7+i*.3))*85*energy))+'%');
-    requestAnimationFrame(loop);
+    const mqRun=vis.has(mqBox)&&!mqPaused&&!mqHeld();
+    if(mqRun){ mx-= .6 + Math.abs(vel)*.35; const half=mq.scrollWidth/2; if(-mx>half) mx+=half; mq.style.transform='translateX('+mx+'px) skewX('+Math.max(-12,Math.min(12,-vel*.4))+'deg)'; }
+    if(moving){
+      if(vis.has(hero)) heroSpans.forEach((s,i)=>s.style.transform='translateX('+(y*(i?-.25:.18))+'px)');
+      bands.forEach(b=>{ if(!vis.has(b.el)) return; const p=prog(b.el); const x=b.dir*(p*900)-(b.dir>0?900:0);
+        b.strip.style.transform='translateX('+(x-100)+'px)';
+        const centre=(innerWidth/2 - (x-100))/b.ww; b.keys.forEach((k,i)=>k.classList.toggle('hit',Math.abs(i-centre)<1.2 && Math.abs(vel)>.3)); });
+      if(vis.has(rc)){ const pr=prog(rc); vin.style.transform='translateX('+(Math.max(0,Math.min(1,pr*1.8-.2))*17)+'%) rotate('+(y*.4)+'deg)'; }
+      if(vis.has(press)){ const pp=prog(press); fnotes.forEach(n=>n.el.style.transform='translateY('+(-(pp-.5)*400*n.sp)+'px) rotate('+(n.r+pp*30)+'deg)'); }
+    }
+    const eqRun=vis.has(eq);
+    if(eqRun){ const t=performance.now()/1000, energy=Math.min(1,.25+Math.abs(vel)*.08);
+      bars.forEach((b,i)=>b.style.height=(15+Math.abs(Math.sin(t*3+i*.7)*Math.cos(t*1.7+i*.3))*85*energy)+'%'); }
+    if(mqRun||eqRun||moving) requestAnimationFrame(loop); else running=false;
   }
-  loop();
+  if(reduce){
+    // static states, set once; nothing animates
+    mqBtn.hidden=true; mqBox.classList.add('static');
+    vin.style.transform='translateX(14%)';
+    bars.forEach((b,i)=>b.style.height=(20+Math.abs(Math.sin(i*.9))*65)+'%');
+  } else {
+    const vio=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){ vis.add(e.target); force=true; } else vis.delete(e.target); }); kick(); },{rootMargin:'80px 0px'});
+    [mqBox,hero,b1,document.getElementById('band2'),rc,press,eq].forEach(el=>vio.observe(el));
+    addEventListener('scroll',kick,{passive:true});
+    addEventListener('resize',()=>{ force=true; kick(); });
+  }
 })();
 </script>
 </body>
