@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Nocturne · scheidingslijnen</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&amp;family=Manrope:wght@300;400;500&amp;family=Noto+Music&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0d0a08}
+.sep-board{width:1440px;box-sizing:border-box;background:#0d0a08;color:#f1e8dc;font-family:"Manrope",system-ui,sans-serif;padding:72px 0 40px}
+.sep-board *{box-sizing:border-box}
+.opt{padding:0 0 64px}
+.opt-head{display:flex;align-items:baseline;gap:18px;padding:0 96px 28px}
+.opt-head b{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:40px;color:#e09a52;line-height:1}
+.opt-head h2{margin:0;font-family:"Cormorant Garamond",serif;font-weight:400;font-size:30px;line-height:1}
+.opt-head p{margin:0;font-size:14px;color:#a8998a;max-width:640px}
+.stage{position:relative;height:200px;background:linear-gradient(#15100c 0 50%,#0d0a08 50% 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;border-top:1px solid rgba(241,232,220,.08);border-bottom:1px solid rgba(241,232,220,.08)}
+.stage .end{position:absolute;left:96px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#7d6f62}
+.stage .end.top{top:18px}
+.stage .end.bot{bottom:18px}
+/* A: chord interludes */
+.chords{display:flex;flex-direction:column;gap:0;width:100%}
+.interlude{display:flex;align-items:center;justify-content:center;gap:28px;width:100%;padding:0 96px}
+.rule{flex:1;height:1px;background:rgba(224,154,82,.55);transform-origin:right;animation:grow 4.5s cubic-bezier(.2,.7,.2,1) infinite}
+.rule.r{transform-origin:left}
+.sym{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:64px;line-height:1;color:#e09a52;white-space:nowrap;animation:fade 4.5s ease infinite}
+.sym sup{font-size:.5em;margin-left:2px}
+@keyframes grow{0%{transform:scaleX(0)}35%,85%{transform:scaleX(1)}100%{transform:scaleX(1);opacity:0}}
+@keyframes fade{0%,10%{opacity:0;transform:translateY(8px)}35%,85%{opacity:1;transform:none}100%{opacity:0}}
+.prog{display:flex;justify-content:center;gap:40px;margin-top:22px;font-family:"Cormorant Garamond",serif;font-style:italic;font-size:22px;color:#7d6f62}
+.prog span.on{color:#e09a52}
+/* B: stave */
+.stave{width:calc(100% - 192px);height:auto}
+.stave .ln,.stave .bl{fill:rgba(241,232,220,.35)}
+.stave .nn{fill:#e09a52;opacity:0;animation:ink 6s ease infinite}
+@keyframes ink{0%{opacity:0;transform:translateY(-6px)}12%,80%{opacity:1;transform:none}100%{opacity:0}}
+/* C: decay */
+.decay{width:calc(100% - 192px);height:90px}
+.decay path{fill:none;stroke:#e09a52;stroke-width:1.5;stroke-dasharray:4000;stroke-dashoffset:4000;animation:draw 5s cubic-bezier(.3,.6,.2,1) infinite}
+@keyframes draw{0%{stroke-dashoffset:4000}60%,85%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+/* 4: fermata */
+.rule.soft{background:rgba(241,232,220,.22);animation-duration:6s}
+.ferm{font-family:"Noto Music",serif;font-size:72px;line-height:1;color:#e09a52;animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.5;transform:scale(.96)}50%{opacity:1;transform:scale(1.04)}}
+/* 5: count-in */
+.count{display:flex;align-items:baseline;gap:30px;font-family:"Cormorant Garamond",serif;font-style:italic;color:#e09a52}
+.count span{font-size:58px;line-height:1;opacity:0;animation:cnt 5s ease infinite}
+.count span.sm{font-size:34px;color:#a8998a}
+.count .gap{width:30px}
+@keyframes cnt{0%{opacity:0;transform:translateY(8px)}5%{opacity:1;transform:none}72%{opacity:1}88%,100%{opacity:0}}
+/* 6: spotlight */
+.spot{position:absolute;inset:0}
+.beam{position:absolute;left:50%;top:0;width:560px;height:200px;margin-left:-280px;background:radial-gradient(ellipse 60% 100% at 50% 0%,rgba(224,154,82,.32),rgba(224,154,82,0) 75%);clip-path:polygon(43% 0,57% 0,100% 100%,0 100%);animation:lamp 6s ease-in-out infinite}
+.floor{position:absolute;left:50%;bottom:44px;width:620px;margin-left:-310px;height:14px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(224,154,82,.55),rgba(224,154,82,0) 70%);animation:lamp 6s ease-in-out infinite}
+@keyframes lamp{0%,100%{opacity:.4}50%{opacity:1}}
+.spot i{position:absolute;bottom:60px;width:2px;height:2px;border-radius:50%;background:#f3c48c;opacity:0;animation:dust 7s linear infinite}
+@keyframes dust{0%{opacity:0;transform:translate(0,0)}20%{opacity:.85}100%{opacity:0;transform:translate(14px,-120px)}}
+/* 7: piano strings */
+.strings{width:calc(100% - 192px);display:flex;flex-direction:column;gap:9px}
+.strings i{display:block;height:1px;background:rgba(241,232,220,.28)}
+.strings i.hit{animation:vib 3.6s ease-out infinite}
+@keyframes vib{0%{background:rgba(241,232,220,.28);box-shadow:none;transform:none}2%{background:#f0ad68;box-shadow:0 0 12px rgba(224,154,82,.85);transform:translateY(-1.6px)}5%{transform:translateY(1.4px)}8%{transform:translateY(-1.1px)}11%{transform:translateY(.9px)}15%{transform:translateY(-.6px)}20%{transform:translateY(.4px)}26%{transform:none}60%{background:rgba(224,154,82,.5);box-shadow:0 0 6px rgba(224,154,82,.3)}100%{background:rgba(241,232,220,.28);box-shadow:none}}
+/* 8: vinyl groove */
+.groove{position:relative;width:calc(100% - 192px);height:44px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.groove i{display:block;height:1px;background:rgba(241,232,220,.14)}
+.groove i:nth-child(odd){background:rgba(241,232,220,.24)}
+.glint{position:absolute;top:-10px;bottom:-10px;width:220px;left:-240px;background:radial-gradient(ellipse at center,rgba(243,196,140,.6),rgba(243,196,140,0) 70%);mix-blend-mode:screen;animation:glint 5s cubic-bezier(.45,.05,.55,.95) infinite}
+@keyframes glint{0%{left:-240px}100%{left:100%}}
+@media (prefers-reduced-motion:reduce){.rule,.sym,.stave .nn,.decay path,.ferm,.count span,.beam,.floor,.spot i,.strings i.hit,.glint{animation:none;opacity:1;transform:none;stroke-dashoffset:0}.glint{left:40%}}
+</style>
+</helmet>
+<div class="sep-board">
+
+  <section class="opt">
+    <div class="opt-head"><b>1</b><h2>ii–V–I-intermezzo’s</h2><p>Eén akkoordsymbool tussen twee lijnen die uit het midden groeien. Van boven naar beneden speelt de pagina Dm9 → G13 → Cmaj9 en lost op net voor Contact.</p></div>
+    <div class="stage">
+      <span class="end top">einde sectie</span>
+      <div class="chords">
+        <div class="interlude"><span class="rule"></span><span class="sym">Dm<sup>9</sup></span><span class="rule r"></span></div>
+        <div class="prog"><span class="on">Dm9</span><span>G13</span><span>Cmaj9</span></div>
+      </div>
+      <span class="end bot">volgende sectie</span>
+    </div>
+  </section>
+
+  <section class="opt">
+    <div class="opt-head"><b>2</b><h2>Notenbalk</h2><p>Een zachte notenbalk over de volle breedte. Bij het scrollen schrijft een bebop-frase in D Dorisch zichzelf, in gebalkte achtsten, als echo van de tijdlijn-partituur.</p></div>
+    <div class="stage">
+      <span class="end top">einde sectie</span>
+      <svg class="stave" viewBox="0 -25 1200 100" aria-hidden="true"><rect class="ln" x="20" y="15" width="1160" height="1"></rect><rect class="ln" x="20" y="25" width="1160" height="1"></rect><rect class="ln" x="20" y="35" width="1160" height="1"></rect><rect class="ln" x="20" y="45" width="1160" height="1"></rect><rect class="ln" x="20" y="55" width="1160" height="1"></rect><rect class="bl" x="334" y="15" width="1" height="40"></rect><rect class="bl" x="590" y="15" width="1" height="40"></rect><rect class="bl" x="846" y="15" width="1" height="40"></rect><rect class="bl" x="1176" y="15" width="1.2" height="41"></rect><g class="nn" style="animation-delay:0.00s"><ellipse cx="110" cy="60" rx="7" ry="5" transform="rotate(-20 110 60)"></ellipse><rect x="115.2" y="20" width="1.6" height="40.0"></rect><ellipse cx="174" cy="50" rx="7" ry="5" transform="rotate(-20 174 50)"></ellipse><rect x="179.2" y="20" width="1.6" height="30.0"></rect><rect x="115.2" y="20" width="65.6" height="5"></rect></g><g class="nn" style="animation-delay:0.36s"><ellipse cx="238" cy="40" rx="7" ry="5" transform="rotate(-20 238 40)"></ellipse><rect x="243.2" y="0" width="1.6" height="40.0"></rect><ellipse cx="302" cy="30" rx="7" ry="5" transform="rotate(-20 302 30)"></ellipse><rect x="307.2" y="0" width="1.6" height="30.0"></rect><rect x="243.2" y="0" width="65.6" height="5"></rect></g><g class="nn" style="animation-delay:0.72s"><ellipse cx="366" cy="20" rx="7" ry="5" transform="rotate(-20 366 20)"></ellipse><rect x="371.2" y="-10" width="1.6" height="30.0"></rect><ellipse cx="430" cy="25" rx="7" ry="5" transform="rotate(-20 430 25)"></ellipse><rect x="435.2" y="-10" width="1.6" height="35.0"></rect><rect x="371.2" y="-10" width="65.6" height="5"></rect></g><g class="nn" style="animation-delay:1.08s"><ellipse cx="494" cy="30" rx="7" ry="5" transform="rotate(-20 494 30)"></ellipse><rect x="499.2" y="0" width="1.6" height="30.0"></rect><ellipse cx="558" cy="35" rx="7" ry="5" transform="rotate(-20 558 35)"></ellipse><rect x="563.2" y="0" width="1.6" height="35.0"></rect><rect x="499.2" y="0" width="65.6" height="5"></rect></g><g class="nn" style="animation-delay:1.44s"><ellipse cx="622" cy="40" rx="7" ry="5" transform="rotate(-20 622 40)"></ellipse><rect x="627.2" y="10" width="1.6" height="30.0"></rect><ellipse cx="686" cy="45" rx="7" ry="5" transform="rotate(-20 686 45)"></ellipse><rect x="691.2" y="10" width="1.6" height="35.0"></rect><rect x="627.2" y="10" width="65.6" height="5"></rect></g><g class="nn" style="animation-delay:1.80s"><ellipse cx="750" cy="50" rx="7" ry="5" transform="rotate(-20 750 50)"></ellipse><rect x="755.2" y="20" width="1.6" height="30.0"></rect><ellipse cx="814" cy="55" rx="7" ry="5" transform="rotate(-20 814 55)"></ellipse><rect x="819.2" y="20" width="1.6" height="35.0"></rect><rect x="755.2" y="20" width="65.6" height="5"></rect></g><g class="nn" style="animation-delay:2.16s"><ellipse cx="878" cy="45" rx="7" ry="5" transform="rotate(-20 878 45)"></ellipse><rect x="883.2" y="5" width="1.6" height="40.0"></rect><ellipse cx="942" cy="35" rx="7" ry="5" transform="rotate(-20 942 35)"></ellipse><rect x="947.2" y="5" width="1.6" height="30.0"></rect><rect x="883.2" y="5" width="65.6" height="5"></rect></g><g class="nn" style="animation-delay:2.52s"><ellipse cx="1006" cy="25" rx="7" ry="5" transform="rotate(-20 1006 25)"></ellipse><rect x="1011.2" y="-15" width="1.6" height="40.0"></rect><ellipse cx="1070" cy="15" rx="7" ry="5" transform="rotate(-20 1070 15)"></ellipse><rect x="1075.2" y="-15" width="1.6" height="30.0"></rect><rect x="1011.2" y="-15" width="65.6" height="5"></rect></g></svg>
+      <span class="end bot">volgende sectie</span>
+    </div>
+  </section>
+
+  <section class="opt">
+    <div class="opt-head"><b>3</b><h2>Uitklinken</h2><p>Eén dunne lijn in de vorm van een pianotoon die uitsterft: een heldere aanslag die wegebt tot stilte. Tekent zich bij het scrollen van links naar rechts.</p></div>
+    <div class="stage">
+      <span class="end top">einde sectie</span>
+      <svg class="decay" viewBox="0 0 1200 80" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0,40.00 L2,40.34 L4,41.31 L6,42.80 L8,44.58 L10,46.40 L12,47.95 L14,48.93 L16,49.08 L18,48.21 L20,46.21 L22,43.11 L24,39.04 L26,34.27 L28,29.16 L30,24.16 L32,19.75 L34,16.42 L36,14.60 L38,14.64 L40,16.75 L42,24.58 L44,30.15 L46,36.38 L48,42.81 L50,49.00 L52,54.49 L54,58.91 L56,61.96 L58,63.43 L60,63.23 L62,61.39 L64,58.07 L66,53.51 L68,48.05 L70,42.08 L72,36.05 L74,30.37 L76,25.45 L78,21.62 L80,19.13 L82,18.16 L84,18.73 L86,20.80 L88,24.18 L90,28.63 L92,33.80 L94,39.31 L96,44.78 L98,49.81 L100,54.07 L102,57.25 L104,59.16 L106,59.68 L108,58.82 L110,56.64 L112,53.35 L114,49.18 L116,44.46 L118,39.53 L120,34.74 L122,30.43 L124,26.89 L126,24.36 L128,22.98 L130,22.82 L132,23.88 L134,26.04 L136,29.12 L138,32.89 L140,37.06 L142,41.33 L144,45.40 L146,48.98 L148,51.83 L150,53.78 L152,54.71 L154,54.59 L156,53.45 L158,51.40 L160,48.61 L162,45.29 L164,41.70 L166,38.09 L168,34.71 L170,31.80 L172,29.55 L174,28.09 L176,27.51 L178,27.81 L180,28.96 L182,30.84 L184,33.32 L186,36.19 L188,39.24 L190,42.26 L192,45.04 L194,47.39 L196,49.16 L198,50.24 L200,50.58 L202,50.17 L204,49.06 L206,47.35 L208,45.17 L210,42.68 L212,40.07 L214,37.53 L216,35.22 L218,33.29 L220,31.89 L222,31.08 L224,30.91 L226,31.38 L228,32.44 L230,34.01 L232,35.96 L234,38.15 L236,40.43 L238,42.64 L240,44.62 L242,46.24 L244,47.40 L246,48.02 L248,48.07 L250,47.55 L252,46.52 L254,45.04 L256,43.23 L258,41.22 L260,39.16 L262,37.17 L264,35.41 L266,33.98 L268,33.00 L270,32.51 L272,32.56 L274,33.12 L276,34.17 L278,35.61 L280,37.35 L282,39.27 L284,41.23 L286,43.08 L288,44.71 L290,46.00 L292,46.86 L294,47.24 L296,47.10 L298,46.47 L300,45.38 L302,43.91 L304,42.18 L306,40.29 L308,38.39 L310,36.61 L312,35.07 L314,33.89 L316,33.13 L318,32.87 L320,33.10 L322,33.83 L324,34.98 L326,36.49 L328,38.25 L330,40.13 L332,41.99 L334,43.71 L336,45.16 L338,46.25 L340,46.89 L342,47.04 L344,46.69 L346,45.88 L348,44.65 L350,43.09 L352,41.32 L354,39.47 L356,37.66 L358,36.02 L360,34.67 L362,33.71 L364,33.19 L366,33.16 L368,33.61 L370,34.51 L372,35.79 L374,37.36 L376,39.11 L378,40.90 L380,42.62 L382,44.15 L384,45.36 L386,46.19 L388,46.57 L390,46.49 L392,45.94 L394,44.99 L396,43.69 L398,42.15 L400,40.47 L402,38.78 L404,37.20 L406,35.83 L408,34.78 L410,34.11 L412,33.86 L414,34.05 L416,34.65 L418,35.62 L420,36.89 L422,38.35 L424,39.91 L426,41.45 L428,42.85 L430,44.04 L432,44.91 L434,45.43 L436,45.55 L438,45.28 L440,44.65 L442,43.70 L444,42.51 L446,41.17 L448,39.78 L450,38.43 L452,37.22 L454,36.23 L456,35.54 L458,35.17 L460,35.15 L462,35.47 L464,36.10 L466,36.98 L468,38.06 L470,39.25 L472,40.46 L474,41.60 L476,42.61 L478,43.40 L480,43.94 L482,44.18 L484,44.13 L486,43.79 L488,43.19 L490,42.39 L492,41.44 L494,40.41 L496,39.39 L498,38.44 L500,37.62 L502,37.00 L504,36.60 L506,36.45 L508,36.55 L510,36.89 L512,37.44 L514,38.15 L516,38.97 L518,39.84 L520,40.70 L522,41.48 L524,42.14 L526,42.63 L528,42.92 L530,43.00 L532,42.87 L534,42.54 L536,42.05 L538,41.42 L540,40.71 L542,39.97 L544,39.25 L546,38.60 L548,38.07 L550,37.68 L552,37.47 L554,37.43 L556,37.58 L558,37.89 L560,38.34 L562,38.90 L564,39.52 L566,40.16 L568,40.78 L570,41.34 L572,41.78 L574,42.10 L576,42.26 L578,42.26 L580,42.11 L582,41.81 L584,41.39 L586,40.87 L588,40.31 L590,39.72 L592,39.17 L594,38.68 L596,38.29 L598,38.03 L600,37.90 L602,37.92 L604,38.09 L606,38.39 L608,38.80 L610,39.30 L612,39.83 L614,40.38 L616,40.89 L618,41.34 L620,41.69 L622,41.93 L624,42.02 L626,41.97 L628,41.79 L630,41.47 L632,41.06 L634,40.57 L636,40.05 L638,39.52 L640,39.03 L642,38.60 L644,38.28 L646,38.08 L648,38.01 L650,38.09 L652,38.30 L654,38.63 L656,39.06 L658,39.55 L660,40.07 L662,40.59 L664,41.06 L666,41.46 L668,41.75 L670,41.92 L672,41.96 L674,41.85 L676,41.62 L678,41.27 L680,40.83 L682,40.34 L684,39.82 L686,39.32 L688,38.86 L690,38.49 L692,38.23 L694,38.10 L696,38.09 L698,38.23 L700,38.49 L702,38.85 L704,39.29 L706,39.78 L708,40.29 L710,40.76 L712,41.18 L714,41.52 L716,41.74 L718,41.84 L720,41.81 L722,41.65 L724,41.38 L726,41.01 L728,40.57 L730,40.10 L732,39.63 L734,39.19 L736,38.81 L738,38.52 L740,38.34 L742,38.27 L744,38.33 L746,38.51 L748,38.79 L750,39.15 L752,39.57 L754,40.00 L756,40.43 L758,40.83 L760,41.16 L762,41.40 L764,41.54 L766,41.56 L768,41.48 L770,41.30 L772,41.02 L774,40.68 L776,40.30 L778,39.91 L780,39.53 L782,39.19 L784,38.92 L786,38.73 L788,38.63 L790,38.63 L792,38.73 L794,38.91 L796,39.16 L798,39.47 L800,39.81 L802,40.15 L804,40.48 L806,40.76 L808,40.98 L810,41.12 L812,41.19 L814,41.17 L816,41.07 L818,40.89 L820,40.66 L822,40.39 L824,40.10 L826,39.81 L828,39.54 L830,39.31 L832,39.14 L834,39.03 L836,38.99 L838,39.02 L840,39.13 L842,39.28 L844,39.49 L846,39.72 L848,39.97 L850,40.21 L852,40.43 L854,40.62 L856,40.75 L858,40.83 L860,40.85 L862,40.81 L864,40.71 L866,40.57 L868,40.39 L870,40.19 L872,39.98 L874,39.78 L876,39.59 L878,39.44 L880,39.34 L882,39.28 L884,39.27 L886,39.32 L888,39.41 L890,39.54 L892,39.70 L894,39.88 L896,40.06 L898,40.23 L900,40.39 L902,40.51 L904,40.60 L906,40.64 L908,40.64 L910,40.59 L912,40.50 L914,40.38 L916,40.23 L918,40.07 L920,39.91 L922,39.76 L924,39.62 L926,39.51 L928,39.44 L930,39.41 L932,39.42 L934,39.47 L936,39.56 L938,39.67 L940,39.81 L942,39.96 L944,40.12 L946,40.26 L948,40.38 L950,40.48 L952,40.54 L954,40.56 L956,40.55 L958,40.49 L960,40.40 L962,40.29 L964,40.15 L966,40.00 L968,39.86 L970,39.72 L972,39.60 L974,39.52 L976,39.46 L978,39.45 L980,39.47 L982,39.53 L984,39.63 L986,39.75 L988,39.88 L990,40.03 L992,40.17 L994,40.30 L996,40.41 L998,40.49 L1000,40.54 L1002,40.54 L1004,40.51 L1006,40.44 L1008,40.35 L1010,40.22 L1012,40.08 L1014,39.94 L1016,39.80 L1018,39.68 L1020,39.57 L1022,39.50 L1024,39.47 L1026,39.47 L1028,39.51 L1030,39.58 L1032,39.69 L1034,39.81 L1036,39.95 L1038,40.09 L1040,40.22 L1042,40.34 L1044,40.43 L1046,40.49 L1048,40.52 L1050,40.50 L1052,40.46 L1054,40.38 L1056,40.27 L1058,40.15 L1060,40.02 L1062,39.89 L1064,39.76 L1066,39.66 L1068,39.58 L1070,39.53 L1072,39.52 L1074,39.53 L1076,39.59 L1078,39.67 L1080,39.77 L1082,39.89 L1084,40.01 L1086,40.13 L1088,40.24 L1090,40.33 L1092,40.40 L1094,40.43 L1096,40.44 L1098,40.42 L1100,40.36 L1102,40.28 L1104,40.19 L1106,40.08 L1108,39.97 L1110,39.86 L1112,39.77 L1114,39.69 L1116,39.64 L1118,39.61 L1120,39.61 L1122,39.64 L1124,39.70 L1126,39.77 L1128,39.86 L1130,39.95 L1132,40.05 L1134,40.14 L1136,40.22 L1138,40.28 L1140,40.32 L1142,40.34 L1144,40.33 L1146,40.30 L1148,40.25 L1150,40.18 L1152,40.11 L1154,40.02 L1156,39.94 L1158,39.86 L1160,39.80 L1162,39.75 L1164,39.72 L1166,39.71 L1168,39.72 L1170,39.75 L1172,39.80 L1174,39.86 L1176,39.93 L1178,40.00 L1180,40.07 L1182,40.13 L1184,40.18 L1186,40.22 L1188,40.24 L1190,40.24 L1192,40.23 L1194,40.20 L1196,40.16 L1198,40.11 L1200,40.05"></path></svg>
+      <span class="end bot">volgende sectie</span>
+    </div>
+  </section>
+
+  <section class="opt">
+    <div class="opt-head"><b>4</b><h2>Fermate</h2><p>Het muzikale teken voor ‘aanhouden’: een ademhaling tussen twee secties. Eén rustig ademend teken tussen twee haarlijnen, zonder verdere uitleg.</p></div>
+    <div class="stage">
+      <span class="end top">einde sectie</span>
+      <div class="interlude"><span class="rule soft"></span><span class="ferm" aria-hidden="true">𝄐</span><span class="rule soft r"></span></div>
+      <span class="end bot">volgende sectie</span>
+    </div>
+  </section>
+
+  <section class="opt">
+    <div class="opt-head"><b>5</b><h2>Aftellen</h2><p>De count-in van een band: “één … twee … één, twee, drie, vier” in swingritme. Elke nieuwe sectie begint zoals een nummer begint.</p></div>
+    <div class="stage">
+      <span class="end top">einde sectie</span>
+      <div class="count" aria-hidden="true">
+        <span class="sm" style="animation-delay: 0s">1</span>
+        <span class="sm" style="animation-delay: .8s">2</span>
+        <span class="gap"></span>
+        <span style="animation-delay: 1.6s">1</span>
+        <span style="animation-delay: 2s">2</span>
+        <span style="animation-delay: 2.4s">3</span>
+        <span style="animation-delay: 2.8s">4</span>
+      </div>
+      <span class="end bot">volgende sectie</span>
+    </div>
+  </section>
+
+  <section class="opt">
+    <div class="opt-head"><b>6</b><h2>Spot</h2><p>Een zachte podiumspot die op een leeg podium valt, met wat zwevend stof in het licht. Sluit aan bij de amberkleurige concertfoto’s; het licht gaat aan terwijl je de sectie in scrolt.</p></div>
+    <div class="stage">
+      <span class="end top">einde sectie</span>
+      <div class="spot" aria-hidden="true">
+        <span class="beam"></span><span class="floor"></span>
+        <i style="left: 47%; animation-delay: 0s"></i><i style="left: 51%; animation-delay: 1.4s"></i><i style="left: 49%; animation-delay: 2.9s"></i><i style="left: 53%; animation-delay: 4.1s"></i><i style="left: 45%; animation-delay: 5.3s"></i>
+      </div>
+      <span class="end bot">volgende sectie</span>
+    </div>
+  </section>
+
+  <section class="opt">
+    <div class="opt-head"><b>7</b><h2>Snaren</h2><p>Een blik in de vleugel: zeven snaren over de volle breedte. Drie ervan, samen een D-mineurakkoord, worden na elkaar aangeslagen en trillen zichtbaar uit.</p></div>
+    <div class="stage">
+      <span class="end top">einde sectie</span>
+      <div class="strings" aria-hidden="true">
+        <i></i><i class="hit" style="animation-delay: 0s"></i><i></i><i class="hit" style="animation-delay: .18s"></i><i></i><i class="hit" style="animation-delay: .36s"></i><i></i>
+      </div>
+      <span class="end bot">volgende sectie</span>
+    </div>
+  </section>
+
+  <section class="opt">
+    <div class="opt-head"><b>8</b><h2>Groef</h2><p>Fijne groeven van een vinylplaat, met een glans van licht die eroverheen glijdt, zoals bij een plaat die onder een lamp draait.</p></div>
+    <div class="stage">
+      <span class="end top">einde sectie</span>
+      <div class="groove" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="glint"></span></div>
+      <span class="end bot">volgende sectie</span>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2850}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

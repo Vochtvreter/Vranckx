@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>A – Nocturne · Ernst Vranckx</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Manrope:wght@300;400;500;600&amp;family=Noto+Music&amp;display=swap" rel="stylesheet">
+<style>
+  :root{--sy:0;--pc:1;--at1:-10;--at2:-10;--at3:-10}
+  body{margin:0;background:#0d0a08}
+  a{color:inherit;text-decoration:none}
+  a:hover{color:#e09a52}
+  .ev-a{
+    --bg:#0d0a08; --bg-2:#15100c; --bg-3:#1c1510;
+    --ink:#f1e8dc; --muted:#a8998a; --faint:#7d6f62;
+    --amber:#e09a52; --ember:#c4622d; --line:rgba(241,232,220,.14);
+    --serif:"Cormorant Garamond", Georgia, serif; --sans:"Manrope", system-ui, sans-serif;
+    position:relative;overflow:hidden;background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .ev-a *{box-sizing:border-box}
+  .ev-a img{display:block;max-width:100%}
+  .ev-a h1,.ev-a h2,.ev-a h3,.ev-a p,.ev-a figure,.ev-a blockquote,.ev-a dl,.ev-a dd{margin:0}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+  .eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--amber);font-weight:500}
+  .h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5vw,68px);line-height:1.02;letter-spacing:-.01em}
+  .h2 em{color:var(--amber);font-style:italic}
+  .nav{position:fixed;left:0;right:0;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:26px 40px;background:linear-gradient(#0d0a08 0%,rgba(13,10,8,0) 100%);transition:background .4s,padding .4s}
+  html[data-scrolled] .nav{background:rgba(13,10,8,.92);backdrop-filter:blur(10px);padding:16px 40px;border-bottom:1px solid var(--line)}
+  .brand{font-family:var(--serif);font-size:24px;letter-spacing:.04em}
+  .brand span{color:var(--amber)}
+  .menu{display:flex;gap:30px;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+  .lang{display:flex;gap:12px;font-size:12px;letter-spacing:.14em;color:var(--muted)}
+  .lang b{color:var(--ink);font-weight:500;border-bottom:1px solid var(--amber)}
+  .hero{position:relative;min-height:880px;display:flex;align-items:flex-end;overflow:hidden}
+  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% 40%;filter:saturate(.85) contrast(1.05);transform:translateY(calc(var(--sy) * .3px)) scale(calc(1 + var(--sy) * .0002))}
+  .hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,10,8,0) 25%,rgba(13,10,8,.55) 55%,rgba(13,10,8,.95) 85%),linear-gradient(0deg,#0d0a08 0%,rgba(13,10,8,0) 35%)}
+  .hero-copy{position:relative;z-index:2;margin-left:auto;width:min(560px,100%);padding:0 56px 130px 0}
+  .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(64px,9vw,132px);line-height:.88;letter-spacing:-.02em;margin:18px 0 34px}
+  .hero h1 i{display:block;color:var(--amber);padding-left:.6em}
+  .hero blockquote{font-family:var(--serif);font-style:italic;font-size:24px;line-height:1.4;color:#e8dccd;border-left:1px solid var(--amber);padding-left:22px}
+  .cite{display:block;margin-top:12px;font-family:var(--sans);font-style:normal;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .sec{padding:140px 0}
+  .release{background:radial-gradient(ellipse at 20% 30%,rgba(196,98,45,.18),transparent 60%),var(--bg);overflow:hidden}
+  .release-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:90px;align-items:center}
+  .cover{position:relative}
+  .cover img{position:relative;z-index:2;width:100%;box-shadow:0 40px 90px -20px rgba(0,0,0,.8)}
+  .vinyl{position:absolute;top:4%;right:-14%;width:92%;aspect-ratio:1;border-radius:50%;z-index:1;background:radial-gradient(circle,#c4622d 0 15%,#111 15.5% 17%,#0a0a0a 17.5% 100%);box-shadow:inset 0 0 0 1px #222;transform:translateX(calc(-38% + min(1, var(--pc) * 1.6) * 38%)) rotate(calc(var(--sy) * .35deg))}
+  .vinyl::before{content:"";position:absolute;inset:6%;border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 3px,rgba(255,255,255,.03) 3px 4px)}
+  .vinyl::after{content:"";position:absolute;left:50%;top:9%;width:4%;height:10%;background:rgba(255,255,255,.12);border-radius:2px}
+  .lead{font-size:19px;color:#d9ccbd;max-width:520px;margin-top:28px}
+  .credits{margin:34px 0;display:grid;grid-template-columns:auto 1fr;gap:6px 28px;font-size:15px;border-top:1px solid var(--line);padding-top:26px}
+  .credits dt{font-family:var(--serif);font-size:20px}
+  .credits dd{color:var(--muted)}
+  .tracks{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
+  .tracks span{font-size:13px;padding:6px 14px;border:1px solid var(--line);border-radius:99px;color:#cfc2b3}
+  .btns{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:14px 28px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;border-radius:2px;font-family:var(--sans)}
+  .btn-primary{background:var(--amber);color:#1a0f07}
+  .btn-primary:hover{background:#f0ad68;color:#1a0f07}
+  .btn-ghost{border:1px solid rgba(241,232,220,.35);color:var(--ink);background:none}
+  .player{margin-top:48px;padding:22px 24px 18px;background:var(--bg-3);border:1px solid var(--line)}
+  .pl-top{display:flex;align-items:center;gap:18px}
+  .pl-play{width:52px;height:52px;flex:none;display:grid;place-items:center;border:0;border-radius:50%;background:var(--amber);color:#1a0f07;cursor:pointer;transition:transform .2s,background .2s}
+  .pl-play:hover{background:#f0ad68;transform:scale(1.05)}
+  .pl-play svg{width:16px;height:18px;fill:currentColor}
+  .pl-play.sm{width:44px;height:44px}
+  .pl-now{flex:1;min-width:0}
+  .pl-now b{display:block;font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pl-now small{display:block;font-size:12px;color:var(--muted);letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pl-skip{display:flex;gap:6px}
+  .pl-skip button{width:44px;height:44px;display:grid;place-items:center;background:none;border:1px solid var(--line);border-radius:50%;color:var(--ink);cursor:pointer}
+  .pl-skip button:hover{border-color:var(--amber);color:var(--amber)}
+  .pl-skip svg{width:14px;height:14px;fill:currentColor}
+  .pl-wave{display:flex;align-items:center;gap:3px;width:100%;height:46px;margin:18px 0 6px;padding:0;background:none;border:0;cursor:pointer}
+  .pl-wave i{flex:1;min-width:2px;background:#4a3f36;border-radius:2px;transform:scaleY(.6);transition:background .3s}
+  .pl-wave i.on{background:var(--amber)}
+  .player.playing .pl-wave i{animation:eq 1.1s ease-in-out infinite alternate}
+  @keyframes eq{from{transform:scaleY(.35)}to{transform:scaleY(1)}}
+  .pl-time{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.12em;color:var(--muted);font-variant-numeric:tabular-nums}
+  .pl-list{list-style:none;margin:16px 0 0;padding:14px 0 0;border-top:1px solid var(--line);columns:2;column-gap:24px}
+  .pl-list li{break-inside:avoid}
+  .pl-list button{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:baseline;width:100%;min-height:36px;padding:6px 4px;background:none;border:0;border-radius:3px;color:#cfc2b3;font-family:var(--sans);font-size:14px;text-align:left;cursor:pointer}
+  .pl-list button:hover{background:rgba(241,232,220,.05);color:var(--ink)}
+  .pl-list button.on{color:var(--amber)}
+  .pl-list .n,.pl-list .d{font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
+  .pl-list button.on .n{color:var(--amber)}
+  .pl-list .tt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pl-foot{display:flex;justify-content:flex-end;margin-top:16px}
+  .pl-foot img,.mini img{display:block;height:40px;width:auto}
+  .cover-wrap{position:relative}
+  .cover-play{position:absolute;right:10px;bottom:10px;width:46px;height:46px;display:grid;place-items:center;border:0;border-radius:50%;background:var(--amber);color:#1a0f07;cursor:pointer;box-shadow:0 8px 20px -6px #000;transition:transform .2s}
+  .cover-play:hover{transform:scale(1.08)}
+  .cover-play svg{width:14px;height:16px;fill:currentColor}
+  .mini{position:fixed;left:50%;bottom:18px;z-index:40;transform:translateX(-50%);display:flex;align-items:center;gap:14px;width:min(580px,calc(100% - 28px));padding:10px 12px 12px;background:rgba(21,16,12,.95);border:1px solid rgba(224,154,82,.35);border-radius:8px;backdrop-filter:blur(10px);box-shadow:0 20px 50px -20px #000;overflow:hidden}
+  .mini .pl-now b{font-size:18px}
+  .mini-bar{position:absolute;left:0;bottom:0;height:2px;background:var(--amber);transition:width .5s linear}
+  .bio{background:var(--bg-2)}
+  .bio-grid{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:start}
+  .bio-img img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:35% 50%}
+  .bio-img figcaption{margin-top:14px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+  .bio .h2{margin:20px 0 40px}
+  .bio p{color:#d4c7b8;margin-bottom:22px}
+  .drop{font-family:var(--serif);float:left;font-size:88px;line-height:.8;padding:8px 12px 0 0;color:var(--amber)}
+  .tl{background:radial-gradient(ellipse at 80% 0%,rgba(196,98,45,.16),transparent 55%),var(--bg);overflow:hidden}
+  .tl-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;margin-bottom:50px}
+  .tl-head .h2{margin-top:20px}
+  .tl-ctrl{display:flex;gap:10px;flex-wrap:wrap}
+  .ctl{display:inline-flex;align-items:center;gap:10px;min-height:48px;font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;padding:12px 20px;background:none;color:var(--ink);border:1px solid rgba(241,232,220,.3);cursor:pointer}
+  .ctl:hover,.ctl.on{border-color:var(--amber);color:var(--amber)}
+  .tl-stack{display:grid;padding:0 0 46px}
+  .tl-card{grid-area:1 / 1;display:grid;grid-template-columns:240px minmax(0,1fr) 220px;gap:50px;align-items:center;min-height:250px;visibility:hidden;opacity:0}
+  .tl-card.on{visibility:visible;opacity:1;animation:tlA .55s cubic-bezier(.2,.7,.2,1)}
+  .tl-year{font-family:var(--serif);font-size:128px;line-height:.8;color:var(--amber);letter-spacing:-.03em;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+  .tl-type{display:inline-block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:5px 10px;margin-bottom:16px}
+  .tl-type.album{color:#1a0f07;background:var(--amber);border-color:var(--amber)}
+  .tl-title{font-family:var(--serif);font-size:44px;line-height:1.05;margin-bottom:12px}
+  .tl-text{color:#d4c7b8;max-width:560px}
+  .tl-cat{margin-top:12px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+  .tl-media{aspect-ratio:1;position:relative}
+  .tl-media img{width:100%;height:100%;object-fit:cover;box-shadow:0 30px 60px -20px #000}
+  .ph{position:absolute;inset:0;border:1px solid var(--line);display:grid;place-items:center;color:rgba(224,154,82,.55)}
+  .ph svg{width:40%;fill:currentColor}
+  .ta{animation:tlA .55s cubic-bezier(.2,.7,.2,1)}
+  .tb{animation:tlB .55s cubic-bezier(.2,.7,.2,1)}
+  @keyframes tlA{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes tlB{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .score-scroll{overflow-x:auto;padding-bottom:6px}
+  .score{position:relative;min-width:860px;height:290px;background:linear-gradient(#17110d,#100c09);border:1px solid var(--line);border-radius:6px;box-shadow:0 40px 80px -30px #000;outline:none}
+  .score:focus-visible{box-shadow:0 0 0 2px var(--amber)}
+  .staff-lines{position:absolute;left:24px;right:24px;top:110px;height:65px}
+  .staff-lines i{position:absolute;left:0;right:0;height:1px;background:rgba(241,232,220,.45)}
+  .staff-lines i:nth-child(2){top:16px} .staff-lines i:nth-child(3){top:32px} .staff-lines i:nth-child(4){top:48px} .staff-lines i:nth-child(5){top:64px}
+  .clef{position:absolute;left:26px;top:68px;width:60px;height:150px;display:grid;place-items:center;font-family:"Noto Music",serif;font-size:96px;line-height:1;color:var(--ink)}
+  .meter{position:absolute;left:92px;top:110px;height:64px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;font-family:var(--serif);font-weight:600;font-size:38px;line-height:32px;color:var(--ink)}
+  .meter b{display:block;height:32px}
+  .score-notes{position:absolute;left:150px;right:44px;top:0;bottom:0}
+  .barline{position:absolute;top:110px;width:1px;height:65px;background:rgba(241,232,220,.45)}
+  .endbar{position:absolute;right:-20px;top:110px;width:8px;height:65px;border-left:1px solid rgba(241,232,220,.45);border-right:4px solid rgba(241,232,220,.85)}
+  .chord{position:absolute;top:44px;transform:translateX(-9px);font-family:var(--serif);font-style:italic;font-size:26px;line-height:1;color:var(--amber);white-space:nowrap}
+  .chord sup{font-size:.6em;margin-left:1px}
+  .playhead{position:absolute;top:84px;width:2px;height:118px;margin-left:-1px;background:linear-gradient(rgba(224,154,82,0),rgba(224,154,82,.75),rgba(224,154,82,0));transition:left .5s cubic-bezier(.2,.8,.2,1)}
+  .sn{position:absolute;top:0;bottom:0;width:52px;margin-left:-26px;padding:0;border:0;background:none;cursor:pointer;color:var(--ink)}
+  .sn.album{color:var(--amber)}
+  .sn .hd{position:absolute;left:50%;width:19px;height:13px;margin:-6.5px 0 0 -9.5px;border-radius:50%;border:2.5px solid currentColor;background:transparent;transform:rotate(-20deg);transition:transform .25s,box-shadow .25s}
+  .sn.q .hd{background:currentColor}
+  .sn .st{position:absolute;width:2px;height:52px;background:currentColor}
+  .sn .acc{position:absolute;left:calc(50% - 30px);width:16px;margin-top:-13px;text-align:center;font-family:"Noto Music",serif;font-size:22px;line-height:26px}
+  .sn .yr{position:absolute;left:50%;top:214px;transform:translateX(-50%);font-family:var(--serif);font-size:18px;font-weight:600;color:var(--muted);white-space:nowrap;transition:color .25s}
+  .sn:hover .hd{transform:rotate(-20deg) scale(1.2)}
+  .sn.on .hd{transform:rotate(-20deg) scale(1.35);box-shadow:0 0 0 6px rgba(224,154,82,.16),0 0 28px rgba(224,154,82,.65)}
+  .sn.on .yr{color:var(--amber)}
+  .sn:focus-visible{outline:2px solid var(--amber);outline-offset:-2px}
+  .legend{display:flex;gap:22px;margin-top:12px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+  .legend i{display:inline-block;width:9px;height:7px;border-radius:50%;margin-right:7px;border:1.5px solid var(--muted);transform:rotate(-20deg)}
+  .legend i.a{background:var(--amber);border-color:var(--amber)}
+  .auto-badge{position:absolute;top:12px;right:16px;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border:1px solid rgba(224,154,82,.45);border-radius:99px;background:rgba(13,10,8,.8);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);pointer-events:none}
+  .auto-badge i{width:7px;height:7px;border-radius:50%;background:var(--amber);animation:blink 1.1s ease-in-out infinite}
+  @keyframes blink{50%{opacity:.25}}
+  .score.auto .sn.on .hd{animation:ring 1.1s ease-in-out infinite}
+  @keyframes ring{0%,100%{box-shadow:0 0 0 6px rgba(224,154,82,.16),0 0 28px rgba(224,154,82,.65)}50%{box-shadow:0 0 0 14px rgba(224,154,82,.05),0 0 40px rgba(224,154,82,.85)}}
+  .hint{margin-top:14px;font-size:13px;color:var(--faint);letter-spacing:.04em}
+  .vsep{display:flex;justify-content:center;padding:56px 22px;background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .voice{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
+  .vsym{font-family:var(--serif);font-style:italic;font-size:30px;line-height:1;color:var(--amber);min-height:30px;white-space:nowrap}
+  .vsym sup{font-size:.6em;margin-left:1px}
+  .kbd{position:relative;display:flex;width:min(420px,100%);height:96px}
+  .kbd .w{position:relative;flex:1;margin:0 1px;background:#efe6d8;border-radius:0 0 4px 4px;transition:transform .2s}
+  .kbd .w::after,.kbd .k::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--amber);opacity:0;transition:opacity .35s}
+  .kbd .k{position:absolute;top:0;width:18px;height:58px;margin-left:-9px;background:#0b0b0b;border:1px solid #000;border-radius:0 0 3px 3px;z-index:2;transition:transform .2s}
+  .kbd .on::after{opacity:1}
+  .kbd .w.on{transform:translateY(3px)}
+  .kbd .k.on{transform:translateY(2px)}
+  .notes-layer{position:absolute;inset:0;pointer-events:none;z-index:15;overflow:hidden;mix-blend-mode:screen}
+  .fn{position:absolute;fill:#e09a52;transform:translate(calc(sin(var(--sy) * .004 + var(--ph)) * var(--amp)), calc(var(--sy) * var(--sp) * -1px)) rotate(calc(var(--rot) + sin(var(--sy) * .003 + var(--ph)) * 15deg))}
+  .still .fn,.still .hero img,.still .vinyl{transform:none}
+  .still .pl-wave i{animation:none}
+  .disco-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:60px;gap:40px}
+  .disco-head p{max-width:380px;color:var(--muted)}
+  .albums{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:26px}
+  .album img{width:100%;aspect-ratio:1;object-fit:cover;transition:transform .5s}
+  .album:hover img{transform:translateY(-8px)}
+  .album .y{margin-top:18px;font-size:12px;letter-spacing:.2em;color:var(--amber)}
+  .album h3{font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.15;margin:4px 0}
+  .album p{font-size:13px;color:var(--muted);line-height:1.5}
+  .album .y{letter-spacing:.14em}
+  .credits-list{list-style:none;margin:10px 0 14px;padding:0;font-size:12.5px;line-height:1.6;color:var(--muted)}
+  .album-links{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+  .album-links a{display:inline-block;padding:8px 0;color:var(--amber);border-bottom:1px solid rgba(224,154,82,.4)}
+  .album-links a:hover{border-color:var(--amber)}
+  .lang a.on{color:var(--ink);font-weight:500;border-bottom:1px solid var(--amber)}
+  .bio-tabs{display:flex;gap:6px;margin:-14px 0 28px}
+  .bio-tabs button{font-family:var(--sans);font-size:12px;letter-spacing:.16em;min-width:44px;min-height:36px;padding:6px 10px;background:none;border:1px solid var(--line);color:var(--muted);cursor:pointer}
+  .bio-tabs button.on{border-color:var(--amber);color:var(--amber)}
+  .bio-text p:first-child::first-letter{font-family:var(--serif);float:left;font-size:88px;line-height:.8;padding:8px 12px 0 0;color:var(--amber)}
+  .archive{margin-top:60px;border-top:1px solid var(--line);text-align:left}
+  .arch-group{display:grid;grid-template-columns:260px minmax(0,1fr);gap:40px;padding:40px 0;border-bottom:1px solid var(--line)}
+  .arch-group h3{margin:0;font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.1;color:var(--amber)}
+  .arch-item{margin-bottom:30px}
+  .arch-meta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .arch-meta b{color:var(--ink);font-weight:500}
+  .arch-item h4{margin:0 0 8px;font-family:var(--serif);font-style:italic;font-weight:400;font-size:22px;line-height:1.2}
+  .arch-item p{margin:0 0 10px;color:#d4c7b8;font-size:15.5px}
+  .press{background:var(--bg-2);position:relative;overflow:hidden}
+  .bigq{font-family:var(--serif);position:absolute;font-size:620px;line-height:1;top:-60px;left:-30px;color:rgba(224,154,82,.06)}
+  .big-quote{position:relative;font-family:var(--serif);font-size:clamp(30px,3.6vw,50px);line-height:1.22;max-width:1000px;margin:26px 0 30px}
+  .quotes{margin-top:90px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line)}
+  .quotes figure{background:var(--bg-2);padding:40px 36px}
+  .quotes blockquote{font-family:var(--serif);font-size:21px;line-height:1.45;font-style:italic;color:#e3d7c8}
+  .quotes figcaption{margin-top:22px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+  .quotes figcaption span{display:block;color:var(--faint);margin-top:4px;letter-spacing:.1em}
+  .more{margin-top:50px;text-align:center}
+  .live{position:relative;min-height:640px;display:flex;align-items:center;overflow:hidden}
+  .live img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .live-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,10,8,.92) 0%,rgba(13,10,8,.55) 45%,rgba(13,10,8,.1) 100%)}
+  .live .wrap{position:relative;z-index:2;width:100%}
+  .live-box{max-width:500px}
+  .live .h2{margin:20px 0 24px}
+  .live p{color:#d9ccbd;margin-bottom:34px}
+  .formations{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+  .formations span{font-family:var(--serif);font-size:18px;padding:8px 18px;border:1px solid rgba(224,154,82,.45);color:var(--amber)}
+  .contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:90px}
+  .contact-grid>*{min-width:0}
+  .contact .h2{margin:20px 0 30px}
+  .clist{border-top:1px solid var(--line)}
+  .crow{display:flex;justify-content:space-between;align-items:baseline;padding:24px 0;border-bottom:1px solid var(--line);gap:20px}
+  .crow small{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .crow strong{font-family:var(--serif);font-weight:400;font-size:26px;text-align:right;overflow-wrap:anywhere}
+  .newsletter{background:var(--bg-3);padding:44px;border:1px solid var(--line);align-self:start}
+  .newsletter h3{font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.1;margin:0 0 12px}
+  .newsletter p{color:var(--muted);font-size:15px;margin-bottom:26px}
+  .field{display:flex;border-bottom:1px solid var(--amber)}
+  .field input{flex:1;min-width:0;background:none;border:0;color:var(--ink);font:inherit;padding:14px 0;outline:none}
+  .field button{background:none;border:0;color:var(--amber);font:inherit;font-size:13px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;min-height:44px}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .foot{padding:40px 0;border-top:1px solid var(--line);font-size:13px;color:var(--faint)}
+  .foot .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  @media (max-width:980px){
+    .menu{display:none}
+    .nav,html[data-scrolled] .nav{padding:18px 22px}
+    .wrap{padding:0 22px}
+    .sec{padding:90px 0}
+    .hero{min-height:760px}
+    .hero-shade{background:linear-gradient(0deg,#0d0a08 8%,rgba(13,10,8,.6) 50%,rgba(13,10,8,.2) 100%)}
+    .hero-copy{padding:0 22px 90px}
+    .release-grid,.bio-grid,.contact-grid{grid-template-columns:minmax(0,1fr);gap:56px}
+    .cover{max-width:440px}
+    .albums{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .arch-group{grid-template-columns:minmax(0,1fr);gap:18px}
+    .quotes{grid-template-columns:minmax(0,1fr)}
+    .disco-head{flex-direction:column;align-items:start}
+    .pl-list{columns:1}
+    .pl-now b{font-size:19px}
+    .tl-card{grid-template-columns:minmax(0,1fr);gap:18px}
+    .tl-year{font-size:84px}
+    .tl-media{max-width:200px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .fn,.hero img,.vinyl{transform:none}
+    .pl-wave i,.ta,.tb{animation:none}
+  }
+</style>
+</helmet>
+<div class="ev-a {{rootCls}}">
+
+  <div class="notes-layer" aria-hidden="true">
+    <sc-for list="{{notes}}" as="n" hint-placeholder-count="20">
+      <svg class="fn" viewBox="0 0 24 32" style="{{n.style}}"><ellipse cx="8" cy="26" rx="6.5" ry="4.6" transform="rotate(-22 8 26)"></ellipse><rect x="12.6" y="3" width="2" height="23"></rect><path d="M14.6 3c0 6 7.5 7 7.5 14.5-1.2-4.4-4.4-6.3-7.5-6.3z"></path></svg>
+    </sc-for>
+  </div>
+
+  <nav class="nav" aria-label="Hoofdmenu">
+    <a class="brand" href="#top">Ernst <span>Vranckx</span></a>
+    <div class="menu">
+      <a href="#muziek">Muziek</a><a href="#bio">Bio</a><a href="#tijdlijn">Tijdlijn</a><a href="#disco">Discografie</a><a href="#pers">Pers</a><a href="#live">Live</a><a href="#contact">Contact</a>
+    </div>
+    <div class="lang"><sc-for list="{{langs}}" as="l" hint-placeholder-count="4"><a class="{{l.cls}}" href="#bio" onClick="{{l.pick}}">{{l.label}}</a></sc-for></div>
+  </nav>
+
+  <header class="hero" id="top">
+    <img src="/_blob/5c7edcbcb82928b877b376fbb99acb71" alt="Ernst Vranckx aan de vleugel">
+    <div class="hero-shade"></div>
+    <div class="hero-copy">
+      <div class="eyebrow">Jazzpianist &amp; componist · Leuven</div>
+      <h1>Ernst <i>Vranckx</i></h1>
+      <blockquote>“Er zijn weinig goede componisten. Ernst is één van de goede. Ik hou van zijn songs, ze vertellen me iets.”<span class="cite">Kenny Wheeler — De Standaard</span></blockquote>
+    </div>
+  </header>
+
+  <section class="sec release" id="muziek">
+    <div class="wrap release-grid">
+      <div class="cover">
+        <div class="vinyl" aria-hidden="true"></div>
+        <img src="/_blob/dc91ef266b099fdf66c737a7c62edb12" alt="Black Is The Colour, albumhoes">
+      </div>
+      <div>
+        <div class="eyebrow">Nieuw album · Eden River Records</div>
+        <h2 class="h2" style="margin-top: 20px">Black Is<br>The <em>Colour</em></h2>
+        <p class="lead">Opgenomen in mei 2022 in de Riverside Studio’s in Keulen. Een integer coloriet van cooljazz — fris en bezield — met de Nieuw-Zeelandse saxofonist Hayden Chisholm als gast en crooner.</p>
+        <dl class="credits">
+          <dt>Ernst Vranckx</dt><dd>piano</dd>
+          <dt>David Helm</dt><dd>contrabas</dd>
+          <dt>Kris Duerinckx</dt><dd>drums</dd>
+          <dt>Hayden Chisholm</dt><dd>sax &amp; vocals</dd>
+        </dl>
+        <div class="btns">
+          <a class="btn btn-primary" href="https://www.paypal.com/cgi-bin/webscr?business=ernst.vranckx%40hotmail.com&amp;cmd=_xclick&amp;amount=22.00&amp;item_name=Ernst%20Vranckx%20Trio%20-%20Black%20Is%20The%20Colour%20(CD)&amp;currency_code=EUR&amp;add=1">Koop de cd · € 22</a>
+          <a class="btn btn-ghost" href="https://music.apple.com/be/album/black-is-the-colour/1735852999">Beluister</a>
+        </div>
+        <div class="player {{plCls}}" role="region" aria-label="Fragmenten">
+          <div class="pl-top">
+            <button class="pl-play" type="button" onClick="{{togglePlay}}" aria-label="{{playAria}}">
+              <sc-if value="{{playing}}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 16 18" aria-hidden="true"><rect x="2" y="1" width="4" height="16" rx="1"></rect><rect x="10" y="1" width="4" height="16" rx="1"></rect></svg></sc-if>
+              <sc-if value="{{paused}}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 16 18" aria-hidden="true"><path d="M2 1l13 8-13 8z"></path></svg></sc-if>
+            </button>
+            <div class="pl-now"><b>{{nowTitle}}</b><small>{{nowAlbum}}</small></div>
+            <div class="pl-skip">
+              <button type="button" onClick="{{prevTrack}}" aria-label="Vorig nummer"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2h2v12H3zM14 2 6 8l8 6z"></path></svg></button>
+              <button type="button" onClick="{{nextTrack}}" aria-label="Volgend nummer"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11 2h2v12h-2zM2 2l8 6-8 6z"></path></svg></button>
+            </div>
+          </div>
+          <button class="pl-wave" type="button" onClick="{{seek}}" aria-label="Spoel door in het fragment">
+            <sc-for list="{{bars}}" as="b" hint-placeholder-count="44"><i class="{{b.cls}}" style="{{b.style}}"></i></sc-for>
+          </button>
+          <div class="pl-time"><span>{{tNow}}</span><span>0:30</span></div>
+          <ol class="pl-list">
+            <sc-for list="{{trackList}}" as="t" hint-placeholder-count="9">
+              <li><button type="button" class="{{t.cls}}" onClick="{{t.pick}}" aria-current="{{t.current}}"><span class="n">{{t.n}}</span><span class="tt">{{t.title}}</span><span class="d">{{t.dur}}</span></button></li>
+            </sc-for>
+          </ol>
+          <div class="pl-foot"><a href="{{appleUrl}}"><img src="/_blob/b710563ab4d88a497108e1477a9b67ad" alt="Beluister op Apple Music"></a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="vsep" aria-hidden="true">
+    <div class="voice">
+      <div class="kbd">
+        <sc-for list="{{vs1.whites}}" as="k" hint-placeholder-count="14"><span class="{{k.cls}}"></span></sc-for>
+        <sc-for list="{{vs1.blacks}}" as="k" hint-placeholder-count="10"><span class="{{k.cls}}" style="{{k.style}}"></span></sc-for>
+      </div>
+    </div>
+  </div>
+
+  <section class="sec bio" id="bio">
+    <div class="wrap bio-grid">
+      <figure class="bio-img">
+        <img src="/_blob/647107982d1c0d8149eb35d647c15103" alt="Ernst Vranckx live aan de vleugel">
+        <figcaption>Live met het kwartet</figcaption>
+      </figure>
+      <div>
+        <div class="eyebrow">Biografie</div>
+        <h2 class="h2">European cool,<br>met <em>etnische</em> en klassieke kleuren</h2>
+        <div class="bio-text" lang="{{bioLang}}"><sc-for list="{{bio}}" as="p" hint-placeholder-count="6"><p>{{p.t}}</p></sc-for></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec tl" id="tijdlijn">
+    <div class="wrap">
+      <div class="tl-head">
+        <div><div class="eyebrow">Tijdlijn</div><h2 class="h2">Een carrière in<br><em>dertien noten</em></h2></div>
+      </div>
+      <div class="tl-stack" aria-live="polite">
+        <sc-for list="{{slides}}" as="s" hint-placeholder-count="13">
+          <div class="{{s.cls}}" aria-hidden="{{s.hidden}}">
+            <div class="tl-year">{{s.big}}</div>
+            <div>
+              <span class="{{s.typeCls}}">{{s.kind}} · {{s.label}}</span>
+              <div class="tl-title">{{s.title}}</div>
+              <p class="tl-text">{{s.text}}</p>
+              <sc-if value="{{s.cat}}" hint-placeholder-val="{{ true }}"><div class="tl-cat">{{s.cat}}</div></sc-if>
+            </div>
+            <div class="tl-media">
+              <sc-if value="{{s.cover}}" hint-placeholder-val="{{ true }}"><img src="{{s.cover}}" alt="{{s.alt}}"></sc-if>
+              <sc-if value="{{s.noCover}}" hint-placeholder-val="{{ false }}"><div class="ph" aria-hidden="true"><svg viewBox="0 0 38 32"><ellipse cx="7" cy="27" rx="6.3" ry="4.5" transform="rotate(-22 7 27)"></ellipse><ellipse cx="29" cy="23" rx="6.3" ry="4.5" transform="rotate(-22 29 23)"></ellipse><rect x="11.4" y="5" width="2" height="22"></rect><rect x="33.4" y="1" width="2" height="22"></rect><path d="M11.4 5 35.4 1v5l-24 4z"></path></svg></div></sc-if>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div class="score-scroll">
+        <div class="score {{scoreCls}}" tabindex="0" role="group" aria-label="Tijdlijn als partituur: gebruik de pijltjestoetsen" onKeyDown="{{onKey}}" onPointerDown="{{onScoreDown}}">
+          <div class="staff-lines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <span class="clef" aria-hidden="true">𝄞</span>
+          <span class="meter" aria-hidden="true"><b>4</b><b>4</b></span>
+          <div class="score-notes">
+            <span class="playhead" style="{{playheadStyle}}" aria-hidden="true"></span>
+            <sc-for list="{{barlines}}" as="b" hint-placeholder-count="3"><span class="barline" style="{{b.style}}" aria-hidden="true"></span></sc-for>
+            <span class="endbar" aria-hidden="true"></span>
+            <sc-for list="{{chords}}" as="c" hint-placeholder-count="7"><span class="chord" style="{{c.style}}" aria-hidden="true">{{c.root}}<sup>{{c.ext}}</sup></span></sc-for>
+            <sc-for list="{{scoreNotes}}" as="n" hint-placeholder-count="13">
+              <button type="button" class="{{n.cls}}" style="{{n.style}}" onClick="{{n.pick}}" aria-label="{{n.aria}}" aria-pressed="{{n.on}}"><span class="acc" style="{{n.accStyle}}" aria-hidden="true">{{n.acc}}</span><span class="hd" style="{{n.headStyle}}"></span><span class="st" style="{{n.stemStyle}}"></span><span class="yr">{{n.y}}</span></button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="vsep" aria-hidden="true">
+    <div class="voice">
+      <div class="kbd">
+        <sc-for list="{{vs2.whites}}" as="k" hint-placeholder-count="14"><span class="{{k.cls}}"></span></sc-for>
+        <sc-for list="{{vs2.blacks}}" as="k" hint-placeholder-count="10"><span class="{{k.cls}}" style="{{k.style}}"></span></sc-for>
+      </div>
+    </div>
+  </div>
+
+  <section class="sec" id="disco">
+    <div class="wrap">
+      <div class="disco-head">
+        <div><div class="eyebrow">Discografie</div><h2 class="h2" style="margin-top: 20px">Vijf albums,<br><em>één stem</em></h2></div>
+        <p>Van het lyrische Aquarelle tot het intieme Black Is The Colour — beluister elk album of bestel de cd rechtstreeks bij Ernst.</p>
+      </div>
+      <div class="albums">
+        <sc-for list="{{albums}}" as="a" hint-placeholder-count="5">
+          <article class="album">
+            <div class="cover-wrap">
+              <img src="{{a.cover}}" alt="{{a.alt}}">
+              <sc-if value="{{a.hasPl}}" hint-placeholder-val="{{ true }}"><button class="cover-play" type="button" onClick="{{a.play}}" aria-label="{{a.playAria}}"><sc-if value="{{a.isOn}}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 16 18" aria-hidden="true"><rect x="2" y="1" width="4" height="16" rx="1"></rect><rect x="10" y="1" width="4" height="16" rx="1"></rect></svg></sc-if><sc-if value="{{a.isOff}}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 16 18" aria-hidden="true"><path d="M2 1l13 8-13 8z"></path></svg></sc-if></button></sc-if>
+            </div>
+            <div class="y">{{a.year}} · {{a.cat}}</div>
+            <h3>{{a.title}}</h3>
+            <p>{{a.band}}</p>
+            <ul class="credits-list"><sc-for list="{{a.credits}}" as="c" hint-placeholder-count="4"><li>{{c.t}}</li></sc-for></ul>
+            <div class="album-links">
+              <sc-if value="{{a.listen}}" hint-placeholder-val="{{ true }}"><a href="{{a.listen}}">Beluister</a></sc-if>
+              <sc-if value="{{a.buy}}" hint-placeholder-val="{{ false }}"><a href="{{a.buy}}">Koop cd · € {{a.price}}</a></sc-if>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec press" id="pers">
+    <div class="bigq" aria-hidden="true">“</div>
+    <div class="wrap" style="position: relative">
+      <div class="eyebrow">Pers</div>
+      <p class="big-quote">“Refined playing, interesting choice of compositions, a sense of space and economy when needed, intimate atmospheres… a delicate, sometimes fragile but touching music, always rich, inspired and with great harmonic sense. Nice storytelling!”</p>
+      <span class="cite">Michel Herr · 2024</span>
+      <div class="quotes">
+        <figure><blockquote>“Hoe meer we de plaat laten rijpen, hoe minder het ons verbaast dat Ernst Vranckx zo goed als elk continent heeft weten verblijden met zijn muziek.”</blockquote><figcaption>Da Music<span>Things As They Are</span></figcaption></figure>
+        <figure><blockquote>“Les thèmes évanescents du Flandrien qui peint des brumes à la Turner.”</blockquote><figcaption>Jazz Hot (FR)<span>A Child’s Blessing</span></figcaption></figure>
+        <figure><blockquote>“Vranckx lijkt mij een volbloed romanticus, wiens soms opvallend sterke composities vast ook in de smaak zouden vallen bij Manfred Eicher van ECM.”</blockquote><figcaption>Jazz Nu (NL)<span>A Child’s Blessing</span></figcaption></figure>
+      </div>
+      <div class="more"><button type="button" class="btn btn-ghost" onClick="{{togglePress}}" aria-expanded="{{pressOpen}}">{{pressLabel}}</button></div>
+      <sc-if value="{{pressOpen}}" hint-placeholder-val="{{ false }}">
+        <div class="archive">
+          <sc-for list="{{press}}" as="g" hint-placeholder-count="6">
+            <section class="arch-group">
+              <h3>{{g.album}}</h3>
+              <div>
+                <sc-for list="{{g.items}}" as="it" hint-placeholder-count="3">
+                  <article class="arch-item">
+                    <div class="arch-meta"><b>{{it.source}}</b><span>{{it.date}}</span></div>
+                    <sc-if value="{{it.headline}}" hint-placeholder-val="{{ false }}"><h4>{{it.headline}}</h4></sc-if>
+                    <sc-for list="{{it.paras}}" as="p" hint-placeholder-count="1"><p>{{p.t}}</p></sc-for>
+                  </article>
+                </sc-for>
+              </div>
+            </section>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <div class="vsep" aria-hidden="true">
+    <div class="voice">
+      <div class="kbd">
+        <sc-for list="{{vs3.whites}}" as="k" hint-placeholder-count="14"><span class="{{k.cls}}"></span></sc-for>
+        <sc-for list="{{vs3.blacks}}" as="k" hint-placeholder-count="10"><span class="{{k.cls}}" style="{{k.style}}"></span></sc-for>
+      </div>
+    </div>
+  </div>
+
+  <section class="live" id="live">
+    <img src="/_blob/b66394487f04d2686d08bceafba8addd" alt="Ernst Vranckx en zijn kwartet op het podium">
+    <div class="live-shade"></div>
+    <div class="wrap">
+      <div class="live-box">
+        <div class="eyebrow">Live &amp; boekingen</div>
+        <h2 class="h2">Breng het <em>trio</em><br>naar uw zaal</h2>
+        <p>Clubs, cultuurcentra en festivals — in België en daarbuiten. Ernst speelde al in heel Europa, Zuidelijk Afrika en China.</p>
+        <div class="formations"><span>Trio</span><span>Kwartet ft. Hayden Chisholm</span></div>
+        <a class="btn btn-primary" href="#contact">Boekingsaanvraag</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec contact" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="eyebrow">Contact</div>
+        <h2 class="h2">Laten we <em>praten</em></h2>
+        <div class="clist">
+          <a class="crow" href="mailto:listen@ernstvranckx.be"><small>E-mail</small><strong>listen@ernstvranckx.be</strong></a>
+          <a class="crow" href="tel:+32496512842"><small>Telefoon</small><strong>+32 496 51 28 42</strong></a>
+          <div class="crow"><small>Adres</small><strong>Leopoldvest 65, 3300 Tienen</strong></div>
+        </div>
+      </div>
+      <div class="newsletter">
+        <h3>Blijf op de hoogte</h3>
+        <p>Nieuwe releases en concertdata, een paar keer per jaar in uw mailbox.</p>
+        <div class="field"><label class="sr" for="nl-mail">E-mailadres</label><input id="nl-mail" type="email" placeholder="uw e-mailadres"><button type="button">Inschrijven</button></div>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{showMini}}" hint-placeholder-val="{{ false }}">
+    <div class="mini" role="region" aria-label="Nu aan het spelen">
+      <button class="pl-play sm" type="button" onClick="{{togglePlay}}" aria-label="{{playAria}}"><svg viewBox="0 0 16 18" aria-hidden="true"><rect x="2" y="1" width="4" height="16" rx="1"></rect><rect x="10" y="1" width="4" height="16" rx="1"></rect></svg></button>
+      <div class="pl-now"><b>{{nowTitle}}</b><small>{{nowAlbum}}</small></div>
+      <a href="{{appleUrl}}"><img src="/_blob/b710563ab4d88a497108e1477a9b67ad" alt="Beluister op Apple Music"></a>
+      <span class="mini-bar" style="{{miniProgress}}"></span>
+    </div>
+  </sc-if>
+
+  <footer class="foot">
+    <div class="wrap"><span>© 2026 Ernst Vranckx</span><span>Apple Music</span></div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"motion":{"editor":"boolean","default":true,"section":"Animatie"},"$preview":{"width":1440,"height":7700}}'>
+const CAREER = [
+  { y:"1966", label:"1966", type:"mijlpaal", title:"Geboren in Leuven", text:"Ernst Vranckx wordt geboren op 3 april 1966 in Leuven." },
+  { y:"1987", label:"1987", type:"mijlpaal", title:"Jazz Studio Antwerpen", text:"Op zijn 21e kiest hij voluit voor jazz: eerst de Jazz Studio in Antwerpen, daarna het conservatorium in Brussel, waar hij twee jaar later een eerste prijs jazzpiano behaalt." },
+  { y:"1994", label:"1994", type:"prijs", title:"Prix Nicolas Dor", text:"Wint samen met fluitist Stefan Bracaval de Prix Nicolas Dor." },
+  { y:"1996", label:"1996", type:"album", title:"Aquarelle", text:"Debuutalbum met Stefan Bracaval op Lyrae, met gasten Bert Joris, John Ruocco en Chris Joris.", cover:"/_blob/a8e5398607768b0ec22b68b002f7b9ee", cat:"Lyrae 9609006" },
+  { y:"1997", label:"1997", type:"samenwerking", title:"Chris Joris Experience", text:"Live opgenomen op Jazz Middelheim en in Stockholm, met zijn eigen song “The Miner’s Tale”, die later wordt opgepikt in de VS en Canada. Het album “Live” verschijnt in 1998 op W.E.R.F.", cat:"W.E.R.F. 012" },
+  { y:"1998", label:"1998", type:"album", title:"A Child’s Blessing", text:"Kwartet-album met de legendarische trompettist Kenny Wheeler, uitgebracht door W.E.R.F.", cover:"/_blob/b20194943d238ff1b36a887a1fa9099f", cat:"W.E.R.F. 013" },
+  { y:"2000", label:"2000", type:"tournee", title:"Tournee door China", text:"Concertreeks in China met zijn kwintet. Ernst speelt doorheen de jaren in heel Europa, Zuidelijk Afrika en China." },
+  { y:"2001", label:"2001", type:"album", title:"Songs & Dances", text:"Kwintet-album, opgenomen kort na de Chinese tournee, met Laurent Blondiau en Bart Defoort.", cover:"/_blob/9852da1b3a9ff3936e00c4e16e025604", cat:"W.E.R.F. 023" },
+  { y:"2015", label:"2015", type:"samenwerking", title:"Met producer Ralf Kemper", text:"Start van de samenwerking met de Duitse producer Ralf Kemper (Alan Broadbent, Arturo Sandoval, Jimmy Scott) en zijn label Eden River Records." },
+  { y:"2019", label:"2019", type:"samenwerking", title:"Kwartet met Hayden Chisholm", text:"Vormt een kwartet met de Nieuw-Zeelandse saxofonist Hayden Chisholm, David Helm en Kris Duerinckx." },
+  { y:"2020", label:"2020", type:"album", title:"Things As They Are", text:"Trio-album met Paul G. Ulrich en Kris Duerinckx. “Album van de week” bij Jazz in Belgium.", cover:"/_blob/24fa57a9492c285a54c1bdbd07a54581", cat:"ERR-DD-06" },
+  { y:"2022", label:"2022", type:"mijlpaal", title:"Opname in Keulen", text:"In mei 2022 neemt het kwartet een nieuw album op in de Riverside Studio’s in Keulen." },
+  { y:"2024", label:"2024", type:"album", title:"Black Is The Colour", text:"Het nieuwste album, met Hayden Chisholm als saxofonist én crooner. Eden River Records.", cover:"/_blob/dc91ef266b099fdf66c737a7c62edb12", cat:"ERR-CD-25" }
+];
+const KIND = { album:"Album", mijlpaal:"Mijlpaal", prijs:"Prijs", samenwerking:"Samenwerking", tournee:"Tournee" };
+/* Content from the current ernstvranckx.be, word for word. The bios in FR/DE/EN and the full press archive
+   load from content.json; the Dutch bio is here too so it shows before that file arrives. */
+const CONTENT_URL = "/_blob/c0dd2d9f8130f9e0fa3fca46db688601";
+const NL_BIO = [
+  "Ernst Vranckx, geboren te Leuven 3 april 1966, begint zijn muzikale carrière eind jaren ‘80. In 1994 wint hij de Prix Nicolas Dor met fluitist Stefan Bracaval. Samen nemen ze het album “Aquarelle” op.",
+  "Hierop volgt zijn werk met de Chris Joris Experience waar hij een deel van de composities en arrangementen voor zijn rekening neemt. Hun album “Live” kent veel succes.",
+  "De muziek van Ernst Vranckx wordt omschreven als European Cool met Etnische en Klassieke invloeden. Deze blend vindt ook weerklank ver buiten de grenzen. Zo wordt zijn song “The Miner’s Tale” opgepikt in de States en Canada (David Lewis CFMU).",
+  "Nadien volgt er een samenwerking met trompettist Kenny Wheeler. Dit resulteert in het album “ A Child’s Blessing” voor WERF. Hetzelfde label brengt zijn kwintet album “Songs & Dances” uit.",
+  "Doorheen de jaren speelde Ernst Vranckx concerten, festivals, radio- en TV sessies in heel Europa, Zuidelijk Afrika en China.",
+  "De afgelopen jaren werkt hij samen met de Duitse producer Ralf Kemper (Alan Broadbent, Arturo Sandoval, Jimmy Scott …). Voor diens label, Eden River Records, neemt hij met contrabassist Paul G. Ulrich en drummer Kris Duerinckx “Things as they Are” op. In 2022 volgt het project met de Nieuw-Zeelandse saxofonist Hayden Chisholm. Met hem, begeleid door contrabassist David Helm en opnieuw Kris Duerinckx aan de drums, is er vervolgens de release van “Black is the Colour”."
+];
+const LANGS = [["nl","NL"],["fr","FR"],["de","DE"],["en","EN"]];
+const ALBUMS = [
+  { title: "Black Is The Colour", year: "2024", cat: "Eden River Records ERR-CD-25", band: "Ernst Vranckx Trio featuring Hayden Chisholm", cover: "/_blob/dc91ef266b099fdf66c737a7c62edb12",
+    credits: ["Ernst Vranckx / piano", "David Helm / bas", "Kris Duerinckx / drums", "Hayden Chisholm / sax & vocals"],
+    listen: "https://music.apple.com/be/album/black-is-the-colour/1735852999?i=1735853000",
+    buy: "https://www.paypal.com/cgi-bin/webscr?business=ernst.vranckx%40hotmail.com&cmd=_xclick&amount=22.00&item_name=Ernst%20Vranckx%20Trio%20-%20Black%20Is%20The%20Colour%20(CD)&currency_code=EUR&add=1", price: "22" },
+  { title: "Things As They Are", year: "2020", cat: "Eden River Records ERR-DD-06", band: "Ernst Vranckx Trio", cover: "/_blob/24fa57a9492c285a54c1bdbd07a54581",
+    credits: ["Ernst Vranckx / piano", "Paul G. Ulrich / bas", "Kris Duerinckx / drums"],
+    listen: "https://music.apple.com/be/album/things-as-they-are-feat-paul-g-ulrich/1790845880",
+    buy: "https://www.paypal.com/cgi-bin/webscr?business=ernst.vranckx%40hotmail.com&cmd=_xclick&amount=18&item_name=Ernst+Vranckx+Trio+-+Things+As+They+Are+(CD)&currency_code=EUR", price: "18" },
+  { title: "Songs & Dances", year: "2001", cat: "W.E.R.F. 023", band: "Ernst Vranckx Quintet", cover: "/_blob/9852da1b3a9ff3936e00c4e16e025604",
+    credits: ["Laurent Blondiau / trompet", "Bart Defoort / saxen", "Ernst Vranckx / piano & compositie", "Stefan Lievestro / bas", "Herman Pardon / drums"],
+    listen: "https://music.apple.com/be/album/songs-dances/1512898739", buy: "", price: "" },
+  { title: "A Child’s Blessing", year: "1998", cat: "W.E.R.F. 013", band: "Ernst Vranckx Quartet feat. Kenny Wheeler", cover: "/_blob/b20194943d238ff1b36a887a1fa9099f",
+    credits: ["Kenny Wheeler / flugelhorn", "Bart Defoort / saxen", "Ernst Vranckx / piano & compositie", "Stefan Lievestro / bas", "Hans Van Oosterhout / drums"],
+    listen: "https://music.apple.com/be/album/a-childs-blessing/1513079355", buy: "", price: "" },
+  { title: "Aquarelle", year: "1996", cat: "Lyrae 9609006", band: "Ernst Vranckx & Stefan Bracaval", cover: "/_blob/a8e5398607768b0ec22b68b002f7b9ee",
+    credits: ["Stefan Bracaval / fluit & compositie", "Ernst Vranckx / piano & compositie", "Stefan Lievestro / bas", "Herman Pardon / drums", "Gasten: Bert Joris / flugelhorn, John Ruocco / basclarinet, Chris Joris / percussie"],
+    listen: "",
+    buy: "https://www.paypal.com/cgi-bin/webscr?business=ernst.vranckx%40hotmail.com&cmd=_xclick&amount=15.00&item_name=Ernst+Vranckx+&currency_code=EUR", price: "15" }
+];
+/* The timeline as a lead sheet in 4/4, one note per career moment:
+   | Dm9 | G13 | Em7  A7♭9 | Dm9  G13  Cmaj9 |   (ii–V, then iii–VI7–ii–V–I in C)
+   Colour marks the albums only; the notehead fill is the rhythm (filled = quarter, hollow = half),
+   so every bar adds up to four beats. p = staff position (0 = bottom line E4, one step per line or space). */
+const SCORE = [
+  { p: -1, d: 2 }, { p: 1, d: 1 }, { p: 3, d: 1 },                                     /* D4 F4 A4      over Dm9 */
+  { p: 4, d: 1 }, { p: 6, d: 1 }, { p: 8, d: 2 },                                       /* B4 D5 F5      over G13 */
+  { p: 7, d: 1 }, { p: 9, d: 1 }, { p: 4, d: 1, acc: "♭" }, { p: 5, d: 1, acc: "♯" },   /* E5 G5 | B♭4 C♯5 over Em7 | A7♭9 */
+  { p: 7, d: 1 }, { p: 4, d: 1 }, { p: 5, d: 2 }                                        /* E5 | B4 | C5  over Dm9 | G13 | Cmaj9 */
+];
+const MEASURES = [3,3,4,3];
+const CHORDS = [[0,"Dm","9"],[3,"G","13"],[6,"Em","7"],[8,"A","7♭9"],[10,"Dm","9"],[11,"G","13"],[12,"C","maj9"]];
+const LAYOUT = (() => {
+  const GAP = 0.8, xs = [], bars = []; let u = 0, n = 0;
+  MEASURES.forEach((len, m) => {
+    for (let k = 0; k < len; k++, n++) { xs.push(u + 0.5); u += SCORE[n].d === 2 ? 1.5 : 1; }
+    if (m < MEASURES.length - 1) { bars.push(u + GAP / 2); u += GAP; }
+  });
+  const pct = (v) => (v / u * 100).toFixed(3) + "%";
+  return { x: xs.map(pct), bars: bars.map((b) => ({ style: "left: " + pct(b) })) };
+})();
+const SCORE_NOTES = SCORE.map(({ p, d, acc }) => {
+  const y = 174 - p * 8, up = p < 4;
+  return {
+    dur: d === 2 ? " h" : " q", acc: acc || "", accStyle: "top: " + y + "px",
+    headStyle: "top: " + y + "px",
+    stemStyle: up ? "left: calc(50% + 7.5px); top: " + (y - 51) + "px" : "left: calc(50% - 9.5px); top: " + y + "px"
+  };
+});
+const CHORD_MARKS = CHORDS.map(([i, root, ext]) => ({ root, ext, style: "left: " + LAYOUT.x[i] }));
+const BLACK = [1,1,0,1,1,1,0];
+function rnd(i){ const x = Math.sin(i * 12.9898 + 78.233) * 43758.5453; return x - Math.floor(x); }
+/* A real chromatic keyboard starting on C. While you scroll past it, it plays a jazz phrase in one scale,
+   one note per step: runs, 1-3-5-7 arpeggios, enclosures and turns, working its way up the keyboard.
+   The played key lights up, the three notes before it fade out behind it, and the octave of the scale
+   around the played key glows softly, so the scale's own pattern of white and black keys shows. */
+const WHITE_MIDI = [48,50,52,53,55,57,59,60,62,64,65,67,69,71];
+const BLACK_KEYS = [[0,49],[1,51],[3,54],[4,56],[5,58],[7,61],[8,63],[10,66],[11,68],[12,70]];
+const V = {
+  Dm9:   { root: "Dm", ext: "9",    notes: [53,57,60,64] },   /* F A C E */
+  G13:   { root: "G",  ext: "13",   notes: [53,59,64,69] },   /* F B E A */
+  Em7:   { root: "Em", ext: "7",    notes: [55,59,62,64] },   /* G B D E */
+  A7b9:  { root: "A",  ext: "7♭9",  notes: [55,58,61,64] },   /* G B♭ C♯ E */
+  Cmaj9: { root: "C",  ext: "maj9", notes: [52,55,59,62] }    /* E G B D */
+};
+const SEPS = [[V.Dm9, V.G13], [V.Em7, V.A7b9], [V.Dm9, V.G13, V.Cmaj9]];
+function voicing(v) {
+  return {
+    root: v.root, ext: v.ext,
+    whites: WHITE_MIDI.map((m) => ({ cls: "w" + (v.notes.includes(m) ? " on" : "") })),
+    blacks: BLACK_KEYS.map(([j, m]) => ({ cls: "k" + (v.notes.includes(m) ? " on" : ""), style: "left: " + ((j + 1) / 14 * 100).toFixed(3) + "%" }))
+  };
+}
+const NOTES = Array.from({ length: 22 }, (_, i) => ({
+  style: "left: " + (rnd(i) * 96).toFixed(1) + "%; top: " + (8 + rnd(i + 40) * 90).toFixed(1) + "%; width: " + (14 + rnd(i + 80) * 26).toFixed(0) + "px; opacity: " + (0.14 + rnd(i + 120) * 0.3).toFixed(2) +
+    "; --sp: " + (0.12 + rnd(i + 160) * 0.45).toFixed(2) + "; --ph: " + (rnd(i + 200) * 6.28).toFixed(2) + "; --amp: " + (10 + rnd(i + 240) * 30).toFixed(0) + "px; --rot: " + (-20 + rnd(i + 280) * 40).toFixed(0) + "deg"
+}));
+/* Preview player. On the live site each album's 30-second previews are looked up once with
+   https://itunes.apple.com/lookup?id=<id>&entity=song&country=be and the previewUrl is played in an <audio> element,
+   with the "Beluister op Apple Music" badge linking to the album. In this design the clip is simulated. */
+const PLAYLIST = [
+  { album: "Black Is The Colour", artist: "Ernst Vranckx Trio ft. Hayden Chisholm", id: 1735852999, url: "https://music.apple.com/be/album/black-is-the-colour/1735852999",
+    tracks: [["Black Is The Colour",267],["Basil’s Hopscotch",277],["Sketches of Pain",374],["Gorgeous Tree",299],["The Nearness of You",483],["Aeolian Five",305],["A Child’s Blessing",263],["Gallantry",348],["Aura Lee",345]] },
+  { album: "Things As They Are", artist: "Ernst Vranckx Trio", id: 1790845880, url: "https://music.apple.com/be/album/things-as-they-are-feat-paul-g-ulrich/1790845880",
+    tracks: [["Things As They Are",397],["Stay Away and Meet Me",315],["In Love in Vain",299],["Nymphony",513],["Lullaby",346],["Rousing",313],["Song for Baba",425],["Frail",260],["Canción",332],["Danny Boy",431]] },
+  { album: "Songs & Dances", artist: "Ernst Vranckx Quintet", id: 1512898739, url: "https://music.apple.com/be/album/songs-dances/1512898739",
+    tracks: [["Song for An",558],["Cancion",487],["Nymphony",672],["August 13",556],["Waltz",631],["Perpetuum",481]] },
+  { album: "A Child’s Blessing", artist: "Ernst Vranckx Quartet feat. Kenny Wheeler", id: 1513079355, url: "https://music.apple.com/be/album/a-childs-blessing/1513079355",
+    tracks: [["A Child’s Blessing",634],["Triangle",492],["The Miner’s Tale",480],["Two Women, One Heart",558],["Aeoleo",454],["Exodus",590]] }
+];
+const CLIP = 30;
+const mmss = (s) => Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+const BARS = Array.from({ length: 44 }, (_, i) => ({
+  cls: i < 10 ? "on" : "",
+  style: "height: " + (18 + Math.abs(Math.sin(i * 0.55) * 60 + Math.sin(i * 1.7) * 22)).toFixed(0) + "%; animation-delay: " + ((i * 47) % 900) + "ms"
+}));
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { cur: CAREER.length - 1, flip: false, auto: false, lang: "nl", pressOpen: false, content: null,
+                   pAlbum: 0, pTrack: 0, pT: 0, playing: false, plVisible: true };
+  }
+  playTrack(a, i) {
+    this.setState({ pAlbum: a, pTrack: i, pT: 0, playing: true });
+    this.startTick();
+  }
+  startTick() {
+    clearInterval(this.pTimer);
+    this.pTimer = setInterval(() => {
+      const t = this.state.pT + 0.5;
+      if (t < CLIP) { this.setState({ pT: t }); return; }
+      const n = PLAYLIST[this.state.pAlbum].tracks.length;
+      this.setState({ pTrack: (this.state.pTrack + 1) % n, pT: 0 });
+    }, 500);
+  }
+  stopTick() { clearInterval(this.pTimer); this.pTimer = null; }
+  componentDidMount() {
+    this.reduce = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    this.onScroll = () => { if (!this.ticking) { this.ticking = true; requestAnimationFrame(() => this.frame()); } };
+    window.addEventListener("scroll", this.onScroll, { passive: true, capture: true });
+    window.addEventListener("resize", this.onScroll);
+    this.frame();
+    fetch(CONTENT_URL).then((r) => r.json()).then((content) => this.setState({ content })).catch(() => {});
+    /* The score plays itself while it is on screen. Clicking a note holds it on that note;
+       once the score has left the screen completely, it plays on by itself again when it comes back. */
+    const score = document.querySelector(".score");
+    if (score && !this.reduce && window.IntersectionObserver) {
+      this.io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (!en.isIntersecting) this.held = false;
+          if (en.isIntersecting && en.intersectionRatio >= 0.5) this.startAuto(); else this.pauseAuto();
+        });
+      }, { threshold: [0, 0.5, 1] });
+      this.io.observe(score);
+    }
+  }
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll, { capture: true });
+    window.removeEventListener("resize", this.onScroll);
+    clearInterval(this.timer);
+    clearInterval(this.autoTimer);
+    clearInterval(this.pTimer);
+    if (this.io) this.io.disconnect();
+  }
+  startAuto() {
+    if (this.autoTimer || this.held) return;
+    if (!this.autoStarted) { this.autoStarted = true; this.select(0); }
+    this.setState({ auto: true });
+    this.autoTimer = setInterval(() => this.select(this.state.cur + 1), 2200);
+  }
+  pauseAuto() {
+    clearInterval(this.autoTimer); this.autoTimer = null;
+    if (this.state.auto) this.setState({ auto: false });
+  }
+  takeOver() {
+    this.held = true; this.pauseAuto();
+  }
+  frame() {
+    this.ticking = false;
+    const root = document.querySelector(".ev-a"); if (!root) return;
+    const H = window.innerHeight, s = document.documentElement.style;
+    const still = this.reduce || this.props.motion === false;
+    const sy = Math.max(0, -root.getBoundingClientRect().top);
+    const prog = (el) => { if (!el) return 1; const r = el.getBoundingClientRect(); return Math.min(1, Math.max(0, (H - r.top) / (H + r.height))); };
+    s.setProperty("--sy", still ? "0" : sy.toFixed(1));
+    s.setProperty("--pc", still ? "1" : prog(root.querySelector(".cover")).toFixed(3));
+    /* Each voicing separator moves to its next chord as it passes through the middle of the screen. */
+    const vs = [];
+    root.querySelectorAll(".vsep").forEach((d, i) => {
+      const seq = SEPS[i]; if (!seq) return;
+      const p = prog(d), n = seq.length;
+      vs.push(still ? 0 : Math.min(n - 1, Math.max(0, Math.floor((p - 0.25) / 0.5 * n))));
+    });
+    const prev = this.state.vs || [];
+    if (vs.some((v, i) => v !== prev[i])) this.setState({ vs });
+    const pl = root.querySelector(".player");
+    if (pl) { const r = pl.getBoundingClientRect(), vis = r.bottom > 0 && r.top < H; if (vis !== this.state.plVisible) this.setState({ plVisible: vis }); }
+    document.documentElement.toggleAttribute("data-scrolled", sy > 60);
+  }
+  select(i) {
+    const cur = (i + CAREER.length) % CAREER.length;
+    this.setState({ cur, flip: !this.state.flip });
+    const sc = document.querySelector(".score-scroll"), key = sc && sc.querySelectorAll(".sn")[cur];
+    if (sc && key && sc.scrollWidth > sc.clientWidth) sc.scrollTo({ left: key.offsetLeft - sc.clientWidth / 2 + key.offsetWidth / 2, behavior: "smooth" });
+  }
+  renderVals() {
+    const cur = this.state.cur, e = CAREER[cur];
+    const big = e.label.replace("Eind jaren ", "").replace("Jaren ", "");
+    return {
+      rootCls: this.props.motion === false ? "still" : "",
+      notes: NOTES,
+      ...(() => {
+        const al = PLAYLIST[this.state.pAlbum], tr = al.tracks[this.state.pTrack], pT = this.state.pT, playing = this.state.playing;
+        const go = (d) => { const n = al.tracks.length; this.setState({ pTrack: (this.state.pTrack + d + n) % n, pT: 0 }); };
+        return {
+          plCls: playing ? "playing" : "", playing, paused: !playing,
+          playAria: playing ? "Pauzeer" : "Speel fragment",
+          nowTitle: tr[0], nowAlbum: al.album + " · " + al.artist, appleUrl: al.url,
+          tNow: mmss(pT),
+          bars: BARS.map((b, i) => ({ style: b.style, cls: pT > 0 && (i + 0.5) / BARS.length <= pT / CLIP ? "on" : "" })),
+          trackList: al.tracks.map(([title, sec], i) => ({
+            n: i + 1, title, dur: mmss(sec), current: i === this.state.pTrack, cls: i === this.state.pTrack ? "on" : "",
+            pick: () => this.playTrack(this.state.pAlbum, i)
+          })),
+          togglePlay: () => { if (this.state.playing) { this.stopTick(); this.setState({ playing: false }); } else { this.setState({ playing: true }); this.startTick(); } },
+          prevTrack: () => go(-1), nextTrack: () => go(1),
+          seek: (ev) => { const r = ev.currentTarget.getBoundingClientRect(); const f = Math.min(1, Math.max(0, (ev.clientX - r.left) / r.width)); this.setState({ pT: f * CLIP, playing: true }); this.startTick(); },
+          showMini: playing && !this.state.plVisible,
+          miniProgress: "width: " + (pT / CLIP * 100).toFixed(1) + "%"
+        };
+      })(),
+      vs1: voicing(SEPS[0][(this.state.vs || [])[0] || 0]),
+      vs2: voicing(SEPS[1][(this.state.vs || [])[1] || 0]),
+      vs3: voicing(SEPS[2][(this.state.vs || [])[2] || 0]),
+      ...(() => {
+        const content = this.state.content || {};
+        const bios = Object.assign({ nl: NL_BIO }, content.bios || {});
+        const lang = bios[this.state.lang] ? this.state.lang : "nl";
+        return {
+          bio: bios[lang].map((t) => ({ t })), bioLang: lang,
+          langs: LANGS.map(([id, label]) => ({ label, on: id === lang, cls: id === lang ? "on" : "", pick: () => this.setState({ lang: id }) })),
+          press: (content.press || []).map((g) => ({ album: g.album, items: g.items.map((it) => ({ source: it.source, date: it.date || "", headline: it.headline || "", paras: it.text.map((t) => ({ t })) })) }))
+        };
+      })(),
+      albums: ALBUMS.map((a) => {
+        const pl = PLAYLIST.findIndex((p) => p.album === a.title);
+        const on = pl >= 0 && this.state.playing && this.state.pAlbum === pl;
+        return Object.assign({}, a, {
+          alt: "Hoes " + a.title, credits: a.credits.map((t) => ({ t })),
+          hasPl: pl >= 0, isOn: on, isOff: pl >= 0 && !on,
+          playAria: (on ? "Pauzeer " : "Speel fragmenten van ") + a.title,
+          play: () => {
+            if (on) { this.stopTick(); this.setState({ playing: false }); }
+            else if (this.state.pAlbum === pl && this.state.pT > 0) { this.setState({ playing: true }); this.startTick(); }
+            else this.playTrack(pl, 0);
+          }
+        });
+      }),
+      pressOpen: this.state.pressOpen,
+      pressLabel: this.state.pressOpen ? "Minder persberichten" : "Alle persberichten",
+      togglePress: () => this.setState({ pressOpen: !this.state.pressOpen }),
+      anim: this.state.flip ? "ta" : "tb",
+      ev: { big, label: e.label, kind: KIND[e.type], typeCls: e.type === "album" ? "album" : "", title: e.title, text: e.text,
+            cat: e.cat || "", cover: e.cover || "", noCover: !e.cover, alt: "Hoes " + e.title },
+      /* Every moment is rendered in the same grid cell and only the selected one is visible,
+         so the card always keeps the height of its longest entry and nothing below it moves. */
+      slides: CAREER.map((s, i) => ({
+        cls: "tl-card" + (i === cur ? " on" : ""), hidden: i !== cur,
+        big: s.label, label: s.label, kind: KIND[s.type], typeCls: "tl-type" + (s.type === "album" ? " album" : ""),
+        title: s.title, text: s.text, cat: s.cat || "", cover: s.cover || "", noCover: !s.cover, alt: "Hoes " + s.title
+      })),
+      scoreNotes: CAREER.map((k, i) => ({
+        y: k.y, on: i === cur, aria: k.label + ": " + k.title,
+        cls: "sn" + SCORE_NOTES[i].dur + (k.type === "album" ? " album" : "") + (i === cur ? " on" : ""),
+        style: "left: " + LAYOUT.x[i],
+        headStyle: SCORE_NOTES[i].headStyle, stemStyle: SCORE_NOTES[i].stemStyle,
+        acc: SCORE_NOTES[i].acc, accStyle: SCORE_NOTES[i].accStyle,
+        pick: () => { this.takeOver(); this.select(i); }
+      })),
+      barlines: LAYOUT.bars, chords: CHORD_MARKS,
+      playheadStyle: "left: " + LAYOUT.x[cur],
+      auto: this.state.auto,
+      scoreCls: this.state.auto ? "auto" : "",
+      onScoreDown: () => this.takeOver(),
+      onKey: (ev) => {
+        if (ev.key === "ArrowRight") { this.takeOver(); this.select(cur + 1); ev.preventDefault(); }
+        if (ev.key === "ArrowLeft") { this.takeOver(); this.select(cur - 1); ev.preventDefault(); }
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
