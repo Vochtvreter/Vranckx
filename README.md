@@ -11,6 +11,9 @@ Open `index.html` in a browser for the overview, or open a design directly:
 | B | [`designs/b-liner-notes`](designs/b-liner-notes/index.html) | Light, editorial, ECM-style restraint |
 | C | [`designs/c-colour`](designs/c-colour/index.html) | Bold graphic blue/black, from the *Black Is The Colour* cover |
 
+The UX audit of the three designs (scores before and after the fixes, before/after screenshots and
+what is still open) is in [`audit/index.html`](audit/index.html).
+
 Static screenshots are in `designs/previews/` (`*-volledig.jpg` = full page, `*-tijdlijn.jpg` = timeline).
 Figma import files (one per design and device) are in `figma/`. They show the first version of
 the designs, before the UX fixes; the screenshots in `designs/previews/` are current.
