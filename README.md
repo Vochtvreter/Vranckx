@@ -1,36 +1,35 @@
-# ernstvranckx.be: redesign proposals
+# ernstvranckx.be
 
-Three homepage design directions for the website of jazz pianist Ernst Vranckx.
-All content, photos and album covers come from the current site.
+Website of Ernst Vranckx, jazz pianist and composer. Design: **Nocturne**.
 
-Open `index.html` in a browser for the overview, or open a design directly:
+A static site with no build step. GitHub Pages publishes the repository root on every push to `main`
+(`.github/workflows/pages.yml`).
 
-| | Direction | Character |
-|---|---|---|
-| A | [`designs/a-nocturne`](designs/a-nocturne/index.html) | Dark, warm stage light, classic serif |
-| B | [`designs/b-liner-notes`](designs/b-liner-notes/index.html) | Light, editorial, ECM-style restraint |
-| C | [`designs/c-colour`](designs/c-colour/index.html) | Bold graphic blue/black, from the *Black Is The Colour* cover |
+```
+index.html             the page
+assets/css/site.css    styles
+assets/js/site.js      timeline, voicing separators, preview player, press archive, bio languages
+assets/data/content.json   bios (NL/FR/DE/EN) and the full press archive
+assets/fonts/          self-hosted Cormorant Garamond, Manrope and a Noto Music subset (clef, ♭, ♯)
+assets/img/            photos, album covers, Apple Music badge, share image
+```
 
-The UX audit of the three designs (scores before and after the fixes, before/after screenshots and
-what is still open) is in [`audit/index.html`](audit/index.html).
+To preview locally: `python3 -m http.server` in this folder, then open http://localhost:8000.
 
-Static screenshots are in `designs/previews/` (`*-volledig.jpg` = full page, `*-tijdlijn.jpg` = timeline).
-Figma import files (one per design and device) are in `figma/`. They show the first version of
-the designs, before the UX fixes; the screenshots in `designs/previews/` are current.
+## How the interactive parts work
 
-Each design has an interactive career timeline (shared data in `assets/js/career.js`) and
-piano/jazz-themed scroll animations. A small synthesized piano sound (`assets/js/piano.js`) plays
-only when the visitor clicks. All motion is switched off for visitors who ask for reduced motion.
+- **Preview player:** 30-second Apple Music previews in our own player. On first play, `site.js` looks up the
+  album with Apple's public catalogue (`itunes.apple.com/lookup`, JSONP) and plays each track's `previewUrl`.
+  The official "Beluister op Apple Music" badge links to the album, as Apple's guidelines ask. If a preview
+  can't be loaded, the album opens on Apple Music instead.
+- **Timeline:** a jazz lead sheet in 4/4 (Dm9 | G13 | Em7 A7♭9 | Dm9 G13 Cmaj9), one note per career
+  moment. It plays by itself while on screen, holds on a clicked note, and plays on again after it has
+  left the screen.
+- **Voicing separators:** small keyboards that play rootless jazz voicings as you scroll past.
+- **Bio languages:** NL/FR/DE/EN at the top switch the biography; the rest of the page is Dutch.
 
-All outbound links live in one place: `SITE` at the top of `assets/js/site.js`. A value of
-`null` means "not available yet", and every button or link that points at it is hidden, so
-the pages never show a dead link. Fill in a URL there and the button appears in all three
-designs. Still empty: Spotify, social media, the press archive, the press kit, the privacy
-statement, the newsletter service and the FR/DE/EN pages (the language switch appears once a
-second language has a URL). Until `SITE.newsletter` is set, the newsletter form only shows
-its success message.
+## Open points
 
-Concert dates go in `SITE.concerts` (date, venue, city, ticket link). Past dates drop off
-automatically; with no upcoming dates the agenda shows an invitation to subscribe or book.
-
-Fonts are self-hosted in `assets/fonts/` and WebP versions of the photos are in `assets/img/web/`.
+- The newsletter form is not connected to a mailing service yet.
+- Aquarelle is not on Apple Music, so it has no previews.
+- Things As They Are moved to a new Apple Music listing (id 1790845880); the site uses the new one.

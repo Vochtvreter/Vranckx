@@ -3,132 +3,198 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nieuwe website — drie richtingen</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<style>
-  :root{--bg:#f6f5f2;--ink:#161616;--muted:#77746e;--line:#dedad2;--card:#fff}
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--ink);font-family:"Inter Tight",system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
-  a{color:inherit}
-  .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
-  header{padding:80px 0 50px}
-  .kicker{font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-  h1{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(44px,6vw,80px);line-height:1;letter-spacing:-.02em;margin:14px 0 20px}
-  h1 i{color:#5a6f7d}
-  .intro{max-width:680px;color:#45423d;font-size:18px}
-  .now{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:center;margin:50px 0 70px;padding:28px;background:var(--card);border:1px solid var(--line);border-radius:12px}
-  .now img{width:100%;border-radius:6px;border:1px solid var(--line)}
-  .now h2{font-size:20px;font-weight:600;margin-bottom:10px}
-  .now ul{padding-left:18px;color:#45423d}
-  .now li{margin-bottom:6px}
-  .options{display:grid;gap:36px;padding-bottom:90px}
-  .opt{display:grid;grid-template-columns:1.5fr 1fr;gap:0;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;text-decoration:none;transition:box-shadow .2s,transform .2s}
-  .opt:hover{box-shadow:0 20px 50px -20px rgba(0,0,0,.25);transform:translateY(-2px)}
-  .shots{position:relative;background:#e9e6df;padding:28px 70px 28px 28px}
-  .shots .desk{width:100%;display:block;border-radius:6px;box-shadow:0 10px 30px -10px rgba(0,0,0,.35)}
-  .shots .mob{position:absolute;right:22px;bottom:22px;width:22%;border-radius:10px;border:4px solid #111;box-shadow:0 10px 30px -8px rgba(0,0,0,.5)}
-  .txt{padding:36px 36px 32px;display:flex;flex-direction:column}
-  .letter{font-family:"Instrument Serif",serif;font-size:64px;line-height:.8;color:var(--muted)}
-  .txt h3{font-family:"Instrument Serif",serif;font-weight:400;font-size:40px;line-height:1.05;margin:14px 0 4px}
-  .txt .sub{color:var(--muted);margin-bottom:18px}
-  .txt p{color:#45423d;margin-bottom:16px}
-  .sw{display:flex;gap:6px;margin:6px 0 20px}
-  .sw span{width:28px;height:28px;border-radius:50%;border:1px solid rgba(0,0,0,.1)}
-  .meta{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:auto}
-  .meta b{color:var(--ink);font-weight:600}
-  .open{margin-top:18px;font-weight:600}
-  .shared{padding:50px;background:var(--ink);color:#eee;border-radius:12px;margin-bottom:90px}
-  .shared h2{font-family:"Instrument Serif",serif;font-weight:400;font-size:40px;margin-bottom:24px}
-  .shared .g{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
-  .shared h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:6px}
-  .shared p{font-size:15px;color:#b9b6b0}
-  @media (max-width:900px){
-    .now,.opt,.shared .g{grid-template-columns:1fr}
-    .shots{padding:20px 60px 20px 20px}
-    .shared{padding:30px}
-  }
-</style>
+<title>Ernst Vranckx · Jazzpianist &amp; componist</title>
+<meta name="description" content="Ernst Vranckx, jazzpianist en componist uit Leuven. Nieuw album Black Is The Colour met Hayden Chisholm, discografie, pers, concerten en contact.">
+<meta name="theme-color" content="#0d0a08">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ernst Vranckx · Jazzpianist &amp; componist">
+<meta property="og:description" content="Nieuw album Black Is The Colour, met Hayden Chisholm. Discografie, pers, concerten en contact.">
+<meta property="og:image" content="assets/img/share.jpg">
+<meta property="og:locale" content="nl_BE">
+<link rel="preload" href="assets/fonts/cormorant-garamond-latin-2fed1d.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/site.js" defer></script>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="kicker">Voorstel · ernstvranckx.be</div>
-    <h1>Een nieuwe website,<br><i>drie richtingen</i></h1>
-    <p class="intro">Drie uitgewerkte ontwerpen voor de homepage, telkens met dezelfde inhoud: het nieuwe album, biografie, discografie, pers, live en contact. Ze verschillen in sfeer en karakter. Klik een ontwerp open om het volledig te bekijken. Elk ontwerp werkt ook op gsm.</p>
-    <p class="intro" style="margin-top:14px"><a href="audit/index.html">Lees de UX-audit</a>: wat we aan elk ontwerp verbeterd hebben, met scores voor en na.</p>
+<a class="skip" href="#muziek">Naar de inhoud</a>
+<div class="page">
+
+  <div class="notes-layer" id="notes" aria-hidden="true"></div>
+
+  <nav class="nav" aria-label="Hoofdmenu">
+    <a class="brand" href="#top">Ernst <span>Vranckx</span></a>
+    <div class="menu">
+      <a href="#muziek">Muziek</a><a href="#bio">Bio</a><a href="#tijdlijn">Tijdlijn</a><a href="#disco">Discografie</a><a href="#pers">Pers</a><a href="#live">Live</a><a href="#contact">Contact</a>
+    </div>
+    <div class="lang" id="langs">
+      <a class="on" href="#bio" data-lang="nl" lang="nl">NL</a><a href="#bio" data-lang="fr" lang="fr">FR</a><a href="#bio" data-lang="de" lang="de">DE</a><a href="#bio" data-lang="en" lang="en">EN</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <img src="assets/img/hero-ernst-vleugel.webp" alt="Ernst Vranckx aan de vleugel" width="1600" height="1068" fetchpriority="high">
+    <div class="hero-shade"></div>
+    <div class="hero-copy">
+      <div class="eyebrow">Jazzpianist &amp; componist · Leuven</div>
+      <h1>Ernst <i>Vranckx</i></h1>
+      <blockquote>“Er zijn weinig goede componisten. Ernst is één van de goede. Ik hou van zijn songs, ze vertellen me iets.”<span class="cite">Kenny Wheeler — De Standaard</span></blockquote>
+    </div>
   </header>
 
-  <section class="now">
-    <img src="designs/previews/huidig.jpg" alt="Huidige website">
-    <div>
-      <div class="kicker">Vandaag</div>
-      <h2>Wat we willen verbeteren</h2>
-      <ul>
-        <li>Het nieuwe album en de cd-verkoop krijgen een duidelijke, prominente plek.</li>
-        <li>Uitgebreide perssectie wordt overzichtelijk: sterkste citaten vooraan.</li>
-        <li>Een eigen visuele identiteit in plaats van een standaard sjabloon.</li>
-        <li>Een uitnodiging tot boekingen en een nieuwsbrief.</li>
-        <li>Snel, toegankelijk en mooi op gsm.</li>
-      </ul>
+  <main>
+  <section class="sec release" id="muziek">
+    <div class="wrap release-grid">
+      <div class="cover">
+        <div class="vinyl" aria-hidden="true"></div>
+        <img src="assets/img/cover-black-is-the-colour.webp" alt="Black Is The Colour, albumhoes" width="600" height="600">
+      </div>
+      <div>
+        <div class="eyebrow">Nieuw album · Eden River Records</div>
+        <h2 class="h2" style="margin-top: 20px">Black Is<br>The <em>Colour</em></h2>
+        <p class="lead">Opgenomen in mei 2022 in de Riverside Studio’s in Keulen. Een integer coloriet van cooljazz — fris en bezield — met de Nieuw-Zeelandse saxofonist Hayden Chisholm als gast en crooner.</p>
+        <dl class="credits">
+          <dt>Ernst Vranckx</dt><dd>piano</dd>
+          <dt>David Helm</dt><dd>contrabas</dd>
+          <dt>Kris Duerinckx</dt><dd>drums</dd>
+          <dt>Hayden Chisholm</dt><dd>sax &amp; vocals</dd>
+        </dl>
+        <div class="btns">
+          <a class="btn btn-primary" href="https://www.paypal.com/cgi-bin/webscr?business=ernst.vranckx%40hotmail.com&amp;cmd=_xclick&amp;amount=22.00&amp;item_name=Ernst%20Vranckx%20Trio%20-%20Black%20Is%20The%20Colour%20(CD)&amp;currency_code=EUR&amp;add=1">Koop de cd · € 22</a>
+          <a class="btn btn-ghost" href="https://music.apple.com/be/album/black-is-the-colour/1735852999">Beluister</a>
+        </div>
+
+        <div class="player" id="player" role="region" aria-label="Fragmenten">
+          <div class="pl-top">
+            <button class="pl-play" type="button" data-act="toggle" aria-label="Speel fragment">
+              <svg class="i-play" viewBox="0 0 16 18" aria-hidden="true"><path d="M2 1l13 8-13 8z"/></svg>
+              <svg class="i-pause" viewBox="0 0 16 18" aria-hidden="true"><rect x="2" y="1" width="4" height="16" rx="1"/><rect x="10" y="1" width="4" height="16" rx="1"/></svg>
+            </button>
+            <div class="pl-now"><b data-now-title></b><small data-now-album></small></div>
+            <div class="pl-skip">
+              <button type="button" data-act="prev" aria-label="Vorig nummer"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2h2v12H3zM14 2 6 8l8 6z"/></svg></button>
+              <button type="button" data-act="next" aria-label="Volgend nummer"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11 2h2v12h-2zM2 2l8 6-8 6z"/></svg></button>
+            </div>
+          </div>
+          <button class="pl-wave" type="button" id="wave" aria-label="Spoel door in het fragment"></button>
+          <div class="pl-time"><span id="time-now">0:00</span><span>0:30</span></div>
+          <ol class="pl-list" id="tracks"></ol>
+          <div class="pl-foot"><a data-apple href="https://music.apple.com/be/album/black-is-the-colour/1735852999"><img src="assets/img/apple-music-badge-nl.svg" alt="Beluister op Apple Music" width="140" height="40"></a></div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <div class="options">
-    <a class="opt" href="designs/a-nocturne/index.html">
-      <div class="shots"><img class="desk" src="designs/previews/a-nocturne.jpg" alt=""><img class="mob" src="designs/previews/a-nocturne-mobile.jpg" alt=""></div>
-      <div class="txt">
-        <span class="letter">A</span>
-        <h3>Nocturne</h3>
-        <div class="sub">Donker, warm, filmisch</div>
-        <p>De sfeer van een jazzclub na middernacht. Diep zwart met het amberkleurige podiumlicht uit de concertfoto’s, en een klassieke serif die het lyrische van de muziek benadrukt.</p>
-        <div class="sw"><span style="background:#0d0a08"></span><span style="background:#1c1510"></span><span style="background:#e09a52"></span><span style="background:#f1e8dc"></span></div>
-        <div class="meta"><b>Tijdlijn:</b> een bespeelbaar klavier: elke toets is een moment uit zijn carrière en speelt een noot. <b>Scroll:</b> enkele zwevende noten in het podiumlicht van de openingsfoto, één glissando over pianotoetsen, een draaiende plaat.</div>
-        <div class="open">Bekijk ontwerp A →</div>
-      </div>
-    </a>
+  <div class="vsep" aria-hidden="true"><div class="kbd" data-sep="0"></div></div>
 
-    <a class="opt" href="designs/b-liner-notes/index.html">
-      <div class="shots"><img class="desk" src="designs/previews/b-liner-notes.jpg" alt=""><img class="mob" src="designs/previews/b-liner-notes-mobile.jpg" alt=""></div>
-      <div class="txt">
-        <span class="letter">B</span>
-        <h3>Liner Notes</h3>
-        <div class="sub">Licht, redactioneel, ingetogen</div>
-        <p>Geïnspireerd op de hoesteksten van een plaat en de sobere esthetiek van labels als ECM. Papierkleur, zwart-witfoto’s, veel witruimte en een catalogus met bezettingen en catalogusnummers.</p>
-        <div class="sw"><span style="background:#f3f0e9"></span><span style="background:#151515"></span><span style="background:#3e5a6b"></span><span style="background:#cfc8bb"></span></div>
-        <div class="meta"><b>Tijdlijn:</b> een verticale partituur: noten vullen zich terwijl je scrolt, met filters (albums, samenwerkingen…) en een klikbare index. <b>Scroll:</b> een dunne leesvoortgangslijn onder de menubalk, notenbalken die zichzelf tekenen.</div>
-        <div class="open">Bekijk ontwerp B →</div>
+  <section class="sec bio" id="bio">
+    <div class="wrap bio-grid">
+      <figure class="bio-img">
+        <img src="assets/img/bio-ernst-live.webp" alt="Ernst Vranckx live aan de vleugel" width="800" height="518" loading="lazy">
+        <figcaption>Live met het kwartet</figcaption>
+      </figure>
+      <div>
+        <div class="eyebrow">Biografie</div>
+        <h2 class="h2">European cool,<br>met <em>etnische</em> en klassieke kleuren</h2>
+        <div class="bio-text" id="bio-text" lang="nl"></div>
       </div>
-    </a>
+    </div>
+  </section>
 
-    <a class="opt" href="designs/c-colour/index.html">
-      <div class="shots"><img class="desk" src="designs/previews/c-colour.jpg" alt=""><img class="mob" src="designs/previews/c-colour-mobile.jpg" alt=""></div>
-      <div class="txt">
-        <span class="letter">C</span>
-        <h3>Colour</h3>
-        <div class="sub">Grafisch, gedurfd, eigentijds</div>
-        <p>Vertrekt van de hoes van <i>Black Is The Colour</i>: helder blauw en zwart, grote letters en duotoonfoto’s. Een eigenzinnige, opvallende identiteit die het nieuwe album meteen centraal zet.</p>
-        <div class="sw"><span style="background:#2ea6df"></span><span style="background:#0b0b0c"></span><span style="background:#efece3"></span><span style="background:#fbfaf6"></span></div>
-        <div class="meta"><b>Tijdlijn:</b> een versleepbare platenkast met jaartallen-schuifbalk; bij albums glijdt de plaat uit de hoes. <b>Scroll:</b> een reuzenklavier dat meeschuift, een quote-band die versnelt met je scrollsnelheid (met pauzeknop), zwevende noten en equalizer.</div>
-        <div class="open">Bekijk ontwerp C →</div>
+  <section class="sec tl" id="tijdlijn">
+    <div class="wrap">
+      <div class="tl-head">
+        <div><div class="eyebrow">Tijdlijn</div><h2 class="h2">Een carrière in<br><em>dertien noten</em></h2></div>
       </div>
-    </a>
+      <div class="tl-stack" id="tl-stack" aria-live="polite"></div>
+      <div class="score-scroll" id="score-scroll">
+        <div class="score" id="score" tabindex="0" role="group" aria-label="Tijdlijn als partituur: gebruik de pijltjestoetsen">
+          <div class="staff-lines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <span class="clef" aria-hidden="true">𝄞</span>
+          <span class="meter" aria-hidden="true"><b>4</b><b>4</b></span>
+          <div class="score-notes" id="score-notes"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="vsep" aria-hidden="true"><div class="kbd" data-sep="1"></div></div>
+
+  <section class="sec" id="disco">
+    <div class="wrap">
+      <div class="disco-head">
+        <div><div class="eyebrow">Discografie</div><h2 class="h2" style="margin-top: 20px">Vijf albums,<br><em>één stem</em></h2></div>
+        <p>Van het lyrische Aquarelle tot het intieme Black Is The Colour — beluister elk album of bestel de cd rechtstreeks bij Ernst.</p>
+      </div>
+      <div class="albums" id="albums"></div>
+    </div>
+  </section>
+
+  <section class="sec press" id="pers">
+    <div class="bigq" aria-hidden="true">“</div>
+    <div class="wrap" style="position: relative">
+      <div class="eyebrow">Pers</div>
+      <p class="big-quote">“Refined playing, interesting choice of compositions, a sense of space and economy when needed, intimate atmospheres… a delicate, sometimes fragile but touching music, always rich, inspired and with great harmonic sense. Nice storytelling!”</p>
+      <span class="cite">Michel Herr · 2024</span>
+      <div class="quotes">
+        <figure><blockquote>“Hoe meer we de plaat laten rijpen, hoe minder het ons verbaast dat Ernst Vranckx zo goed als elk continent heeft weten verblijden met zijn muziek.”</blockquote><figcaption>Da Music<span>Things As They Are</span></figcaption></figure>
+        <figure><blockquote lang="fr">“Les thèmes évanescents du Flandrien qui peint des brumes à la Turner.”</blockquote><figcaption>Jazz Hot (FR)<span>A Child’s Blessing</span></figcaption></figure>
+        <figure><blockquote>“Vranckx lijkt mij een volbloed romanticus, wiens soms opvallend sterke composities vast ook in de smaak zouden vallen bij Manfred Eicher van ECM.”</blockquote><figcaption>Jazz Nu (NL)<span>A Child’s Blessing</span></figcaption></figure>
+      </div>
+      <div class="more"><button type="button" class="btn btn-ghost" id="press-toggle" aria-expanded="false" aria-controls="archive">Alle persberichten</button></div>
+      <div class="archive" id="archive" hidden></div>
+    </div>
+  </section>
+
+  <div class="vsep" aria-hidden="true"><div class="kbd" data-sep="2"></div></div>
+
+  <section class="live" id="live">
+    <img src="assets/img/live-kwartet-podium.webp" alt="Ernst Vranckx en zijn kwartet op het podium" width="1600" height="770" loading="lazy">
+    <div class="live-shade"></div>
+    <div class="wrap">
+      <div class="live-box">
+        <div class="eyebrow">Live &amp; boekingen</div>
+        <h2 class="h2">Breng het <em>trio</em><br>naar uw zaal</h2>
+        <p>Clubs, cultuurcentra en festivals — in België en daarbuiten. Ernst speelde al in heel Europa, Zuidelijk Afrika en China.</p>
+        <div class="formations"><span>Trio</span><span>Kwartet ft. Hayden Chisholm</span></div>
+        <a class="btn btn-primary" href="#contact">Boekingsaanvraag</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec contact" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <div class="eyebrow">Contact</div>
+        <h2 class="h2">Laten we <em>praten</em></h2>
+        <div class="clist">
+          <a class="crow" href="mailto:listen@ernstvranckx.be"><small>E-mail</small><strong>listen@ernstvranckx.be</strong></a>
+          <a class="crow" href="tel:+32496512842"><small>Telefoon</small><strong>+32 496 51 28 42</strong></a>
+          <div class="crow"><small>Adres</small><strong>Leopoldvest 65, 3300 Tienen</strong></div>
+        </div>
+      </div>
+      <div class="newsletter">
+        <h3>Blijf op de hoogte</h3>
+        <p>Nieuwe releases en concertdata, een paar keer per jaar in uw mailbox.</p>
+        <div class="field"><label class="sr" for="nl-mail">E-mailadres</label><input id="nl-mail" type="email" placeholder="uw e-mailadres" autocomplete="email"><button type="button">Inschrijven</button></div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <div class="mini" id="mini" role="region" aria-label="Nu aan het spelen" hidden>
+    <button class="pl-play sm" type="button" data-act="toggle" aria-label="Pauzeer">
+      <svg class="i-play" viewBox="0 0 16 18" aria-hidden="true"><path d="M2 1l13 8-13 8z"/></svg>
+      <svg class="i-pause" viewBox="0 0 16 18" aria-hidden="true"><rect x="2" y="1" width="4" height="16" rx="1"/><rect x="10" y="1" width="4" height="16" rx="1"/></svg>
+    </button>
+    <div class="pl-now"><b data-now-title></b><small data-now-album></small></div>
+    <a data-apple href="https://music.apple.com/be/album/black-is-the-colour/1735852999"><img src="assets/img/apple-music-badge-nl.svg" alt="Beluister op Apple Music" width="140" height="40"></a>
+    <span class="mini-bar" id="mini-bar"></span>
   </div>
 
-  <section class="shared">
-    <h2>In elk ontwerp</h2>
-    <div class="g">
-      <div><h4>Nieuw album vooraan</h4><p>Hoes, bezetting, luisterlinks en een duidelijke knop om de cd te kopen.</p></div>
-      <div><h4>Vier talen</h4><p>NL, FR, DE en EN, zoals nu, met een zichtbare taalkeuze bovenaan.</p></div>
-      <div><h4>Pers, gefilterd</h4><p>De sterkste citaten op de homepage, het volledige persarchief op een aparte pagina.</p></div>
-      <div><h4>Live &amp; boekingen</h4><p>Een uitnodiging voor organisatoren, met ruimte voor concertdata.</p></div>
-      <div><h4>Nieuwsbrief &amp; socials</h4><p>Fans opbouwen voor de volgende release.</p></div>
-      <div><h4>Interactieve tijdlijn</h4><p>Van Leuven 1966 tot <i>Black Is The Colour</i> (2024): prijzen, samenwerkingen, tournees en alle albums.</p></div>
-      <div><h4>Pianobewegingen</h4><p>Subtiele scroll-animaties rond piano en jazz; uitgeschakeld voor wie minder beweging verkiest.</p></div>
-      <div><h4>Eigen beelden</h4><p>Alle foto’s en hoezen komen van de huidige site; nieuwe persfoto’s kunnen er zo in.</p></div>
-    </div>
-  </section>
+  <footer class="foot">
+    <div class="wrap"><span>© 2026 Ernst Vranckx</span><span>Apple Music</span></div>
+  </footer>
 </div>
 </body>
 </html>
